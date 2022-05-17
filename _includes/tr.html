@@ -1,8 +1,28 @@
+{% if {{include.a}} %}<a name="{{include.a}}"></a>{% endif %}
 <tr>
 {% if {{include.ctd1}} %}<td markdown="span">`{{include.ctd1}}`</td>{% endif %}
 {% if {{include.td1}} %}<td markdown="span">{{include.td1}}</td>{% endif %}
 {% if {{include.ctd2}} %}<td markdown="span">`{{include.ctd2}}`</td>{% endif %}
-{% if {{include.td2}} %}<td markdown="span">{{include.td2}}</td>{% endif %}
-{% if {{include.td3}} %}<td markdown="span">{{include.td3}}</td>{% endif %}
-{% if {{include.td4}} %}<td markdown="span">{{include.td4}}</td>{% endif %}
+{% if {{include.td2}} or {{include.td3}} %}
+{% if {{include.td3}} != nil and {{include.td2}} != nil %}
+<td markdown="span">{{include.td2}}</td>
+<td markdown="span">{{include.td3}}
+{% elsif {{include.td3}} != nil and {{include.td2}} == nil %}
+<td markdown="span">{{include.td3}}
+{% else %}
+<td markdown="span">{{include.td2}}
+{% endif %}
+{% if {{include.iref}} %}
+[See here.]({{ site.baseurl }}{{include.iref}})
+{% endif %}
+{% if {{include.below}} %}
+[See below.]({{ site.baseurl }}{{include.below}})
+{% endif %}
+{% if {{include.above}} %}
+[See above.]({{ site.baseurl }}{{include.above}})
+{% endif %}
+{% if include.rtag and include.ref %}
+[{{include.rtag}}]({{ site.baseurl }}{{include.ref}})
+{% endif %}
+</td>{% endif %}
 </tr>

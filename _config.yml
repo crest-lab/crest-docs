@@ -16,10 +16,11 @@
 title: CREST Docs
 description: A documentation for the CREST program
 baseurl: "/crest-docs" # the subpath of your site, e.g. /blog
-url: "https://crest-lab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-repository: crest-lab/crest-docs
+#url: "https://crest-lab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+repository: crest-lab/crest-lab
 
-theme: "just-the-docs"
+remote_theme: "just-the-docs/just-the-docs"
+
 
 permalink: pretty
 exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"

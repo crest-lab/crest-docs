@@ -1,0 +1,21 @@
+{% if {{include.obj}} %}
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="70%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Runtype</th>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+ {% for flags in {{include.obj}} %}
+    {% include tr.html td1= flags.type td2=flags.comm ctd2=flags.cmd td3=flags.descript rtag=flags.url.text ref=flags.url.link a=flags.anchor %}
+ {% endfor %}
+</tbody>
+</table>
+{% endif %}

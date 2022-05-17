@@ -22,7 +22,7 @@ The program supports molecular input files in the
 - Xmol format (**.xyz** extension, Ångström) 
 - MDL molfile format (V2000,V3000, **.sdf**/**.mol** extension, Ångström)
 
-Examples for these input formats can be found [on this page.](/docs/documentation/coords.html)
+Examples for these input formats can be found [on this page.]({{site.baseurl}}/docs/documentation/coords.html)
 
 ```bash
  crest [INPUT] [OPTIONS]
@@ -30,6 +30,6 @@ Examples for these input formats can be found [on this page.](/docs/documentatio
 
 If no file is given as `[INPUT]`, then CREST automatically searches for a file called `coord` in the **.coord** format.
 Either must be present. 
-The different `[OPTIONS]` can be found [on this page.](/docs/documentation/keywords.html)
+The different `[OPTIONS]` can be found [on this page.]({{site.baseurl}}/docs/documentation/keywords.html)
 
 

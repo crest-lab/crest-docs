@@ -1,0 +1,520 @@
+# The HTML formatting of these flags into a table form is done via the tr.html template in _include/
+# This script can only handle tables with one and two coloumns,
+# so if something else is needed you have to modify it or make a new html template
+
+
+# object structure:
+# cmd: the keyword, will be printed as code in the first or second coloumn
+# comm: alternative field for cmd: (DO NOT USE BOTH for one object), format the markdown yourself
+# anchor: optional argument to include an anchor that can be linked to
+# descript: the keyword description, markdown format
+# url: child-object with content for linking INTERNAL links at the end of the descript: field
+#   text: The text the url: link is linked to
+#   link: the link adress (automatically pepended by {{site.baseurl}}, read from _config.yml)
+
+general:
+
+  - comm: "`-h`, `--help`"
+    descript: > 
+      Print an overview of most available
+      options (*i.e.*, more  or less this site completely).
+
+  - cmd: "--version"
+    descript: >
+      Print only the program header and disclaimer.
+
+  - cmd: "--cite"
+    descript: >
+      Print the most relevant CREST citations.
+
+  - cmd: "-xnam <BIN>"
+    descript: >
+      Specify the name (and path) of the `xtb` binary that
+      should be used as `<BIN>`. The [default] is *xtb*.
+
+  - cmd: "--scratch <DIR>" 
+    descript: >
+      Performs the entire calculation in the specified
+      `<DIR>`. If `<DIR>` does not exist, it will be created.
+
+  - cmd: "--niceprint"
+    descript: >
+      In-line progress bar printout for optimizations.
+
+  - cmd: "--T <threads>"
+    descript: >
+      Specify the number of CPU `<threads>` that shall be used.
+      CREST automatically adjusts the number of processes according to this variable in each step,
+      in order to achieve optimal parallelization of the  calculations.
+
+  - cmd: "--dry"
+    descript: >
+      Perform a “dry” run, *i.e.*, nothing is actually done but       
+      instead an overview of the settings that would be applied in the calculation is given.
+
+
+
+runtype:
+
+  - cmd: --v1 
+    type: MF-MD-GC sampling (outdated) 
+    descript: >
+      First generation of the GFN*n*-xTB driven conformational search algorithm,
+      consisting out of mode following, molecular dynamics sampling and genetic 
+      structure crossing. This workflow is deprecated.
+    
+  - cmd: --v2 
+    type: MTD-GC sampling (outdated) 
+    descript: >
+      Second generation of the GFN*n*-xTB driven conformational search algorithm,
+      consisting out of a metadynamics approach and genetic structure crossing.
+    
+  - comm: "`--v2i`, `--v3`"
+    type: iMTD-GC sampling
+    descript: >
+      Iterative version of the MTD-GC workflow, which is the [default] runtype of CREST.
+    url:
+      text: See here.
+      link: /docs/overview/workflows.html#imtd-gc-algorithm
+    
+  - cmd: --v4
+    type: iMTD-sMTD sampling
+    descript: >
+      Iterative workflow making use of static metadynamics simulations.
+    url:
+      text: See here.
+      link: /docs/overview/workflows.html#conformational-entropy-calculations
+    
+  - cmd: --entropy 
+    type: Confromational Entropy Algorithm 
+    descript: >
+      Specialized version  of the iMTD-sMTD workflow, 
+      used in the calculation of conformational entropy.
+    url:
+      text: See here.
+      link: /docs/overview/workflows.html#conformational-entropy-calculations
+    
+  - cmd: --protonate 
+    type: Protonation site sampling 
+    descript: >
+      Workflow for sampling protonation sites. 
+    url:
+      link: See here.
+      link: /docs/overview/workflows.html#protonation-site-screening
+    
+  - cmd: --deprotonate 
+    type: Deprotonation site sampling 
+    descript: >
+      Workflow for sampling protonation sites. This is related to the `--protonate` option.
+    
+  - cmd: --tautomerize 
+    type: Prototropic Tautomer sampling 
+    descript: >
+      Workflow for sampling prototropic tautomers. 
+      This is related to the `--protonate` option.
+    
+  - cmd: --cregen <FILE> 
+    anchor: cregen
+    type: CREGEN ensemble sorting routine 
+    descript: >
+      The standalone option for sorting an ensemble or a
+      trajectory into conformers and rotamers.
+    url:
+      text: See below. <i class="fa-solid fa-circle-down"></i>
+      link: /docs/documentation/keywords.html#ensemble-sorting-options
+    
+  - cmd: --qcg 
+    type: QCG tool 
+    descript: >
+      Use the Quantum Cluster Growth functionalities. 
+      QCG has several individual runtypes. See
+    url:
+      text: QCG keywords.
+      link: /docs/documentation/qcg.html
+
+
+leveloftheory:
+
+  - subheader: "**GFN*n*-xTB method selection**"
+    
+  - cmd: --gfn1 
+    descript: Use GFN1-xTB.
+    
+  - cmd: --gfn2 
+    descript: Use GFN2-xTB.
+    
+  - comm: "`--gff`, `--gfnff`"
+    descript: Use GFN-FF.
+    
+  - cmd: --gfn2//gfnff
+    descript: >
+      Use the GFN2-xTB//GFN-FF composite method. 
+      Sampling and optimizations are done at GFN-FF level, 
+      which is appended by a GFN2-xTB singlepoint calculation.
+    
+  - subheader: <br>**Charge and multiplicity selection**
+    
+  - cmd: --chrg <INT> 
+    descript: >
+      Set molecular charge to `<INT>`. Only required if `<INT>`≠0.
+    
+  - cmd: --uhf <INT> 
+    descript: >
+      Set the number of $$N_\alpha - N_\beta$$ electrons. 
+      For example, `<INT>`=0 for the neutral *S*<sub>0</sub> state,
+      `<INT>`=2 for an *S*<sub>1</sub> state, etc. Only required if `<INT>`≠0.
+    
+  - subheader: <br>**Implicit solvation**
+    
+  - cmd: --gbsa <SOLVENT> 
+    descript: >
+      Use the Generalized Born (GB) and solvent accessible surface area (SASA) model. 
+      For available `<SOLVENT>` options see the 
+      [`xtb` documentation](https://xtb-docs.readthedocs.io/en/latest/gbsa.html#gbsa). 
+      The solvent input is not case-sensitive.
+    
+  - cmd: --alpb <SOLVENT> 
+    descript: >
+      Use the ALPB model, an improved version of GBSA. 
+      For available `<SOLVENT>` options see the 
+      [`xtb` documentation](https://xtb-docs.readthedocs.io/en/latest/gbsa.html#gbsa). 
+      The solvent input is not case-sensitive.
+    
+  - subheader: <br>**Geometry optimization**
+    
+  - cmd: --opt <LEVEL> 
+    descript: >
+      Set the optimization accuracy for GFN*n*–xTB optimizations. 
+      In CREST's multilevel approach, only the *final* geometry optimization 
+      is affected by this setting. For available `<LEVEL>` see the 
+      [`xtb` documentation](https://xtb-docs.readthedocs.io/en/latest/optimization.html#geometry-optimization). The [default] is `<LEVEL>`=*vtight*.
+
+
+mdsettings:
+
+  - comm: "`--len <REAL>`, `--mdlen <REAL>`" 
+    descript: >
+      The length of the metadynamics simulations in CREST is usually 
+      determined automatically, but with this flag it can be set to 
+      `<REAL>` (in ps). It is also possible to set a multiple of the 
+      automatically determined length by using `x<REAL>` instead, 
+      where `<REAL>` then is a multiplicative factor (e.g. `<REAL>`=*x0.5*
+       for half the default   simulation length).
+
+  - cmd: --shake <INT>
+    descript: >
+      Set SHAKE mode for MD. `<INT>` can be any of 0 (= off), 
+      1 (= H-only), or 2 (= all bonds). The [default] is `<INT>`=2.
+
+  - cmd: --tstep <REAL> 
+    descript: >
+      Set MD time step to `<REAL>` **fs**. The [default] is 5 fs for GFN*n*-xTB 
+      calculations (requires SHAKE), and 1.5 fs for GFN-FF. The timestep is also
+      automatically checked with a trial simulation at the beginning of the 
+      conformational search.
+
+  - cmd: --mddump <INT> 
+    descript: >
+      Set dump frequency in which coordinates are written to the trajectory 
+      file to `<INT>` **fs**. The [default] is 100 fs.
+
+  - cmd: --vbdump <INT>
+    descript: >
+      Set frequency in which coordinates are dumped to the collective 
+      variable reference structure list to `<INT>` **ps**. The [default] is 1.0 ps.
+
+
+confsettings:
+
+  - subheader: "**Z-matrix sorting**"
+    
+  - cmd: --zs
+    descript: >
+      Perform ZSORT prior to conformational sampling. 
+      Input coordinates will be overwritten.
+
+  - cmd: --nosz
+    descript: Skip ZSORT. [default]
+
+  - subheader: "<br>**Genertic z-matrix crossing** (only for iMTD-GC)" 
+
+  - cmd: --cross
+    descript: Perform GC step. [default]
+
+  - cmd: --nocross
+    descript: Do *not* perform GC z-matrix crossing.
+
+  - subheader: "<br>**Sampling behavior**"
+  
+  - cmd: --norotmd
+    descript: >
+      Turn off the additional MDs on the lowest conformers after the MTD step in iMTD-GC.
+
+  - cmd: --tnmd <REAL>
+    descript: >
+      Set temperature for the additional normal MDs on the lowest conformers
+      after the MTD step. The [default] is 400 K.
+
+  - cmd: --mrest <INT>
+    descript: >
+      Adjust the iterative behaviorof iMTD-GC by setting the
+      maximum number of possible MTD restart cycles. The [default] is 5 cycles.
+
+  - comm: "`--hflip`/`--noflip`"
+    descript: >
+      Turn on/off a small enhancement routine to rotate XH groups
+      after MTD in iMTD- GC. The [default] is ON.
+
+  - cmd: --maxflip <INT>
+    descript: >
+      To be used with `--hflip`. Maximum number of new structures
+      by the above mentioned enhancement routine. 
+      The [default] is 1000 structures.
+
+  - cmd: --quick
+    descript: >
+      Perform an iMTD-GC search with reduced settings
+      for a crude conformer ensemble.
+
+  - cmd: --squick
+    descript: >
+      Perform an iMTD-GC search with even further 
+      reduced settings than `--quick`.
+
+  - cmd: --mquick
+    descript: >
+      Perform an iMTD-GC search with even further reduced 
+      settings than `--quick` or `--squick`.
+
+  - subheader: "<br>**Conformer sampling for non-covalent systems**"
+ 
+  - cmd: --nci
+    descript: >
+      Specialized NCI mode that can be used to find aggregates of NCI complexes. 
+      The option generates an ellipsoid potential around the input structure and
+      adds it to the MTD simulation. Also, MTD bias parameters are adjusted and 
+      some settings are reduced in order to achieve lower computation times. See
+    url:
+       text: Example X.
+       link: /docs/examples/
+
+  - cmd: --wscal <REAL>
+    descript: >
+      Scale the ellipsoid potential axes generated by the `--nci` mode by factor`<REAL>`.
+
+  - subheader: "<br>**Property appendix**"
+
+  - cmd: --prop hess
+    descript: >
+      Performs a hessian calculation for all conformers and re-weights 
+      the ensemble on *free energies* after the conformational sampling.
+
+  - cmd: --prop reopt
+    descript: >
+      Reoptimization of the ensemble with *vtight* thresholds after conformational
+      sampling (useful for `--quick` runs).
+
+  - cmd: --prop autoIR
+    descript: >
+      Calculate vibrational modes for all conformers and average them 
+      (weighted by Boltzmann populations) in a single `crest.vibspectrum` file. 
+      Note that the `autoIR` command is case-sensitive!
+
+  - cmd: --prop singlepoint
+    descript: >
+      Calculate a singlepoint energy for all structures in the ensemble and reorder
+      the ensemble accordingly. Not particulary useful after sampling, but effective 
+      with the `--for` command,
+    url:
+      text: see below. <i class="fa-solid fa-circle-down"></i>
+      link: /docs/documentation/keywords.html#standalone-tools
+
+  - subheader: "<br>**Technical settings**"
+
+  - cmd: --origin
+    descript: Track conformer origins. [default]
+
+  - cmd: --keepdir
+    descript: Keep sub-directories created during the simulations.
+
+  - cmd: --noreftopo
+    anchor: noreftopo
+    descript: >
+      Turn off **only the initial** topology check prior to the conformational search.
+      Do not confuse with 
+    url:
+       text: "`--notopo` <i class='fa-solid fa-triangle-exclamation'></i>"
+       link: /docs/documentation/keywords.html#notopo
+
+
+entropysettings:
+
+  - cmd: --scthr <REAL>
+    descript: >
+      Specify the ensemble growth threshold (% new conformers) for 
+      `--entropy` and `--v4` convergence. The [default] is 0.02 (=2%)
+      for the entropy mode and 0.05 (=5%) for `--v4`.
+    
+  - cmd: --ssthr <REAL>
+    descript: >
+      Specify the entropy growth threshold (% entropy gain) for `--entropy` 
+      and `--v4` convergence. The [default] is 0.005 (=0.5%) for the entropy 
+      mode and 0.01 (=1%) for `--v4`.
+    
+  - cmd: --trange <from> <to> <step>
+    descript: >
+      Entropies from the `--entropy` mode are always printed for a range of temperatures.
+      The respective temperatures can be specified with this option. 
+      `<from>` and `<to>` specify the range, `<step>` deterimines which temperatures 
+      in this range are printed.
+    
+  - cmd: --tread <FILE>
+    descript: >
+      Intended for similiar use as `--trange`. Read a `<FILE>` containing 
+      temperatures (one temperature per line) for which the entropies shall 
+      be evaluated explicitly instead of using the range option.
+    
+  - cmd: --ptot <REAL>
+    descript: >
+      The rovibrational average $$\overline{S}$$<sub>msRRHO</sub> requires frequency
+      calculations at GFN level. To reduce computational cost, only the specified  
+      `<REAL>` fraction of structures are calculated, and the rest is averaged. 
+      The [default] is 0.9 (=90%) most populated structures.
+    
+  - cmd: --fscal <REAL>
+    descript: >
+      Scale vibrational frequencies for *S*<sub>msRRHO</sub> by a given factor. 
+      The [default] is 1.0.
+      <br>Also works with the `--thermo` option,
+    url:
+      text: see below. <i class="fa-solid fa-circle-down"></i>
+      link: /docs/documentation/keywords.html#standalone-tools
+    
+  - cmd: --sthr <REAL>
+    descript: >
+      Specify the RR-HO interpolation threshold for *S*<sub>msRRHO</sub> 
+      (*i.e.*, τ in cm<sup>-1</sup>). The [default] is 25.0 cm<sup>-1</sup>.
+      <br>Also works with the `--thermo` option,
+    url:
+      text: see below. <i class="fa-solid fa-circle-down"></i>
+      link: /docs/documentation/keywords.html#standalone-tools
+    
+  - cmd: --ithr <REAL>
+    descript: >
+      Define an imaginary mode cutoff for vibrational frequency evaluation.
+      The [default] is -50.0   cm<sup>-1</sup>.
+      <br>Also works with the `--thermo` option,
+    url: 
+      text: see below. <i class="fa-solid fa-circle-down"></i>
+      link: /docs/documentation/keywords.html#standalone-tools
+
+
+
+
+sortingsettings:
+
+  - cmd: --ewin <REAL>
+    descript: >
+      Set the energy threshold to `<REAL>` kcal/mol. 
+      This affects several runtypes. The [default] is depending on the application 
+      (e.g., 6 kcal/mol conformational searches, 30 kcal/mol protonation site tools).
+
+  - cmd: --rthr <REAL>
+    descript: >
+      Set RMSD threshold to `<REAL>` Ångström. The [default] is 0.125  Å.
+
+  - cmd: --ethr <REAL>
+    descript: >
+      Set energy threshold between conformer pairs in kcal/mol.
+      The [default] is 0.05 kcal/mol.
+
+  - cmd: --bthr <REAL>
+    descript: >
+      Set lower bound for the rotational constant threshold to `<REAL>`. 
+      The [default] is 0.01 (= 1%). The threshold is dynamically adjusted
+      between this value  and 2.5%, based on an anisotropy of the rotational 
+      constants in the enesemble.
+
+  - cmd: --pthr <REAL>
+    descript: >
+      Boltzmann population threshold. Currently unused.
+
+  - comm: "`--nmr`, `--eqv`"
+    descript: >
+      Activate determination and printout of NMR-equivalencies for the ensemble. 
+      Writes the files `anmr_rotamer` and `anmr_nucinfo`, which are required by 
+      the [CENSO](https://xtb-docs.readthedocs.io/en/latest/CENSO_docs/censo.html) python script.
+
+  - cmd: --athr <REAL>
+    descript: >
+      Similarity threshold to determine internal rotation of equal atoms
+      for NMR (to be used in conjunction with `--nmr`). The [default] is 0.04.
+
+  - cmd: --temp <REAL>
+    descript: >
+      Temperature used for Boltzmann populations in CREGEN. The [default] is 298.15 K.
+
+  - cmd: --esort
+    descript: >
+      Sort only based on energy, *i.e.*, no RMSD and rotational constant comparison.
+
+  - cmd: --nowr
+    descript: >
+      Skip writing new ensemble files (crest_rotamers_\*.xyz, crest_conformers.xyz).
+
+  - cmd: --subrmsd
+    descript: >
+      Compare only those parts of the structure that were also included in the 
+      metadynamics bias potential. Can be important for constrained conformational
+      searches. See
+    url:
+      text: Example X.
+      link: /docs/examples/
+
+  - cmd: --notopo
+    anchor: notopo
+    descript: >
+      Turn off the topology checks in CREGEN for structures in the ensemble.
+      Do not confuse with 
+    url:
+      text: "`--noreftopo` <i class='fa-solid fa-triangle-exclamation'></i>"
+      link: "/docs/documentation/keywords.html#noreftopo"
+
+
+pcasettings:
+
+  - cmd: --cluster [ARG]
+    descript: >
+      Perform a clustering on an ensemble to identify the most representative structures, 
+      based on dihedral angles. `[ARG]` is an unspecified optional argument. If `[ARG]`
+      is an integer, e.g., `[ARG]`=5, that many clusters will be produced. 
+      If `[ARG]` is omitted, the routine will try to determine the best number of clusters
+      by itself. This autonomous mode can also be accessed with different setting if 
+      `[ARG]` is an of `loose`, `normal`, `tight`, or `vtight`. Here, cluster sizes are
+      tested one-by-one, which can be expensive for large ensembles. To speed things up, 
+      some incremental variants are accessible via `incr`, `tightincr`, and `vtightincr`.
+      The [default], *i.e.*, omitting `[ARG]`, corresponds to `--cluster normal`.
+      See also
+    url:
+      text: Example X.
+      link: /docs/examples/
+
+  - cmd: --pccap <INT>
+    descript: >
+      Limit the number of automatically identified principle  components 
+      to the `<INT>` most contributing ones.
+
+  - cmd: --nopcmin
+    descript: >
+      Remove lower bound for principal component contribution, *i.e.*, more
+      principle components might be considerd for the clustering.
+
+  - cmd: --pcaex <atomlist>
+    descript: >
+      Ignore atoms listed in `<atomlist>` in principle component setup. 
+      For the format of `<atomlist>` see
+    url:
+       text: this page.
+       link: /docs/documentation/coords.html#atomlists
+
+

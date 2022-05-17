@@ -10,9 +10,8 @@ permalink: /
 
 Welcome to the documentation site of {% include tooltip.html tool="CREST" tip=site.data.glossary.crest %}.
 
-
-
 {% include image.html file="crest.png" alt="CREST" max-width=250 %}
+
 
 ## Introduction
 
@@ -39,7 +38,7 @@ Quick links to different sections of the documentation can be found below.
      <div class="card-body text-center">
        <h4>Installation</h4>
        <p>View information on how to install CREST.</p>
-       <a href="/docs/installation/" class="stretched-link"></a> 
+       <a href="{{site.baseurl}}/docs/installation/" class="stretched-link"></a> 
      </div>
    </div>
  </div>
@@ -49,7 +48,7 @@ Quick links to different sections of the documentation can be found below.
      <div class="card-body text-center">
        <h4>Examples</h4>
        <p>View the example applications for CREST.</p>
-       <a href="/docs/examples/" class="stretched-link"></a>
+       <a href="{{site.baseurl}}/docs/examples/" class="stretched-link"></a>
      </div>
    </div>
  </div>
@@ -58,7 +57,7 @@ Quick links to different sections of the documentation can be found below.
     {% include image.html file="quicklink_documentation.png" alt="Documentation" %}
       <h4>Documentation</h4>
       <p>View the keyword documentation.</p>
-      <a href="/docs/documentation/" class="stretched-link"></a>
+      <a href="{{site.baseurl}}/docs/documentation/" class="stretched-link"></a>
    </div>
  </div>
  <div class="col-md-3 col-sm-6 d-flex">
@@ -66,7 +65,7 @@ Quick links to different sections of the documentation can be found below.
     {% include image.html file="quicklink_literature.png" alt="Literature" %} 
        <h4>Literature</h4>
        <p>View literature for CREST & Co.</p>
-       <a href="/docs/about/literature.html" class="stretched-link"></a>
+       <a href="{{site.baseurl}}/docs/about/literature.html" class="stretched-link"></a>
    </div>
  </div>
 </div>

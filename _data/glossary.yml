@@ -1,0 +1,6 @@
+crest: "CREST is an abbreviation for Conformer-Rotamer Ensemble Sampling Tool."
+
+sqm: "Semiempirical Quantum Mechanics. On this site, SQM usually refers to the GFNn-xTB methods."
+
+static_binary: "This means the source code has been translated into 'machine language' and should not need any other dependencies at runtime besides the obvious."
+

@@ -5,7 +5,7 @@ parent: About
 nav_order: 3
 toc: false
 summary: "A collection of works that focus on CREST and <code>xtb</code>"
-permalink: /docs/about/literature.html
+permalink: /page/about/literature.html
 ---
 
 # {{ page.title }}

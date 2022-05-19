@@ -5,7 +5,7 @@ parent: Documentation
 nav_order: 3
 toc: false
 summary: "Examples for input files and formats."
-permalink: /docs/documentation/coords.html
+permalink: /page/documentation/coords.html
 ---
 
 # {{page.title}}
@@ -25,6 +25,8 @@ Depending on the input file type the Cartesian coordinates can be in atomic unit
 Some file formats additionally require the total number of atoms in the molecule.
 The order in which atoms are specified should not be changed since structure comparisons depend on it.
 For the caffeine example the atom order has been marked in the below figure for better comprehension.
+{: .text-justify }
+
 
 {% include image.html file="caffeine.png" alt="caffeine" max-width=300 %}
 
@@ -164,7 +166,7 @@ $$$$
 </div>
 {% include defaulttab.html %}
 
-
+---
 
 ## Ensemble and Trajectory Files
 
@@ -174,6 +176,9 @@ The files simply consists out of all the structures pasted after another.
 If the ensemble is to be processed by CREST, e.g., with the CREGEN sorting routine,
 an energy in atomic units (*E*<sub>h</sub>, Hartree) should be provided in the comment line.
 An example for an *n*-butane ensemble can be seen here:
+{: .text-justify }
+
+
 {% capture struc_xyz %}
   14
          -1.95933513
@@ -227,3 +232,7 @@ An example for an *n*-butane ensemble can be seen here:
 {% include codecell.html content=struc_xyz style="font-size:10px" %}
 
 {% include tip.html content="Ensemble and trajectory files in the above format can be opened with [molden](https://www3.cmbi.umcn.nl/molden/) and [VMD](https://www.ks.uiuc.edu/Research/vmd/)." %}
+
+
+---
+## Atomlists

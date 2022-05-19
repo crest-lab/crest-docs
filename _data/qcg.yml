@@ -1,0 +1,155 @@
+
+
+qcgruntypes:
+
+  - cmd: --grow
+    type: Grow algorithm
+    descript: >
+      The [default] runtype of QCG. 
+      The grow algorithm is employed without ensemble generation. 
+    url:
+      text: See here.
+      link: /page/overview/workflows.html#automated-grow-algorithm-and-ensemble-generation
+
+  - cmd: --ensemble
+    type: Ensemble algorithm
+    descript: >
+      The grow algorithm is employed *with* ensemble generation. 
+    url:
+      text: See here.
+      link: /page/overview/workflows.html#automated-grow-algorithm-and-ensemble-generation
+
+  - cmd: --gsolv
+    type: Solvation Free Energy
+    descript: >
+      Generates ensembles to compute the solvation free energy.
+    url:
+      text: See here.
+      link: /page/overview/workflows.html#solvation-free-energy
+
+
+qcggrow:
+
+  - cmd: --nsolv <INT>
+    descript: >
+      Number of solvents that should be added.
+
+  - cmd: --nopreopt
+    descript: >
+      Does not perform a GFN2-xTB preoptimization of the input structures.
+
+  - cmd: --keepdir
+    descript: >
+      Saves the temporary directories  of QCG calculations.
+  
+  - comm: "`--gfn1`, `--gfn2`, `--gfnff`"
+    descript: >
+      Use GFN1-xTB, GFN2-xTB [default], or GFN-FF for geometry optimization
+      during the QCG Grow algorithm.
+
+  - cmd: --samerand
+    descript: >
+      Use the same random number for the xTB-IFF runs.
+
+  - cmd: --chrg <INT>
+    descript: >
+      Set the charge for the solute and creates .CHRG file.
+
+  - cmd: --uhf <INT>
+    descript: >
+      Set the number of unpaired electrons for the solute and creates .UHF file.
+
+  - cmd: --wscal <REAL>
+    descript: >
+      Set the scaling factor for the outer wall potential. 
+      The default is 1.0 except for water.
+
+  - cmd: --fixsolute
+    descript: >
+      Fix the solute during the grow process (automatically done for water as solvent).
+
+  - cmd: --nofix
+    descript: >
+      No fixing of the solute during the grow process 
+      (fixing is only applied for water as solvent file).
+
+
+qcgensemble:
+
+  - cmd: --ncimtd
+    descript: >
+      Perform an ensemble generation with the NCI-MTD runtype. [default]
+
+  - cmd: --mtd
+    descript: >
+      Perform an ensemble generation with a single MTD simulation.
+
+  - cmd: --md
+    descript: >
+      Perform an ensemble generation with a single MD simulation.
+
+  - comm: "`--enslvl gfn1`, `--enslvl gfn2`, `--enslvl gfnff`"
+    descript: >
+      Use GFN1-xTB, GFN2-xTB [default], or GFN-FF for MD or MTD simulation and geometry
+      optimizations during the ensemble generation.
+      For the NCI-MTD runtype GFN-FF is the [default].
+
+  - comm: "`--len <REAL>`, `--mdlen <REAL>`, `--mdtime <REAL>`"
+    descript: >
+      Set the MD or MTD length in **ps**.
+
+  - cmd: --mddump <INT>
+    descript: >
+      Set the dumping frequency of the MTD simulations.
+
+  - cmd: --tstep <INT>
+    descript: >
+      Set the MD or MTD time step in **fs**.
+
+  - cmd: --vbdump <INT>
+    descript: >
+      Set the dumping interval (in **ps**) for  which a new reference structure is 
+      taken for the bias potential.
+
+  - cmd: --norotmd
+    descript: >
+      Turn off the additional MDs on the lowest conformers after the MTD 
+      simulations in the NCI-MTD runtype.
+
+  - cmd: --tnmd <REAL>
+    descript: >
+      Set the temperature for the additional MDs in the NCI-MTD runtype.
+
+  - cmd: --mreset <INT>
+    descript: >
+      Set maximum number of MTD restarts of the NCI-MTD run-type
+
+
+qcgsolv:
+  
+  - cmd: --nocff
+    descript: > 
+      Generate the reference ensemble with the same method the 
+      solute–solvent ensemble was generated instead of the CFF algorithm
+
+  - cmd: --esolv
+    descript: >
+      Compute only the pure solvation energy without frequency calculations.
+
+  - cmd: --nclus [INT]
+    descript: >
+      Set the number of solute–solvent clusters to take further into account. 
+      The highest populated clusters are considered. If `[INT]` is not set, 
+      a number is determined according to the population distribution (max. 10).
+
+  - comm: "`--freqlvl gfn1`, `--freqlvl gfn2`, `--freqlvl gfnff`"
+    descript: >
+      Use GFN1-xTB, GFN2-xTB, or GFN-FF [default]  for frequency in QCG solvation 
+      free energy calculations.
+
+  - cmd: --freqscal <REAL>
+    descript: >
+      Only for printout: Set a scaling factor for the translational and rotational entropy.
+      [default] is `<REAL>`=0.75.
+    
+

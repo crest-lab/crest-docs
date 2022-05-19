@@ -20,13 +20,16 @@ The programs name originated as an abbreviation for Conformer–Rotamer Ensemble
 Since then several functionalities have been added to the code.
 In its current state, the program provides a variety of sampling procedures, for example for improved thermochemistry, or solvation.
 Generally, CREST functions as an IO-based scheduler for the `xtb` program and as tool for analyzing structure ensembles.
+{: .text-justify }
 
 The key procedure implemented in CREST is a conformational search workflow abbreviated as iMTD-GC. 
 This workflow generates conformer/rotamer ensembles by extensive metadynamics-based sampling.
 Other notable standalone functionalities are automated detection and ranking of protonation sites and the quantum cluster growth (QCG) workflow for explicit solvation.
+{: .text-justify }
 
 This documentation aims to provide a practical installation guide and a series of example applications.
-Quick links to different sections of the documentation can be found below.
+Quick links to different sections of the documentation can be found below. 
+{: .text-justify }
 
 
 ## Quick Links
@@ -38,7 +41,7 @@ Quick links to different sections of the documentation can be found below.
      <div class="card-body text-center">
        <h4>Installation</h4>
        <p>View information on how to install CREST.</p>
-       <a href="{{site.baseurl}}/docs/installation/" class="stretched-link"></a> 
+       <a href="{{site.baseurl}}/page/installation/" class="stretched-link"></a> 
      </div>
    </div>
  </div>
@@ -48,7 +51,7 @@ Quick links to different sections of the documentation can be found below.
      <div class="card-body text-center">
        <h4>Examples</h4>
        <p>View the example applications for CREST.</p>
-       <a href="{{site.baseurl}}/docs/examples/" class="stretched-link"></a>
+       <a href="{{site.baseurl}}/page/examples/" class="stretched-link"></a>
      </div>
    </div>
  </div>
@@ -57,7 +60,7 @@ Quick links to different sections of the documentation can be found below.
     {% include image.html file="quicklink_documentation.png" alt="Documentation" %}
       <h4>Documentation</h4>
       <p>View the keyword documentation.</p>
-      <a href="{{site.baseurl}}/docs/documentation/" class="stretched-link"></a>
+      <a href="{{site.baseurl}}/page/documentation/" class="stretched-link"></a>
    </div>
  </div>
  <div class="col-md-3 col-sm-6 d-flex">
@@ -65,7 +68,7 @@ Quick links to different sections of the documentation can be found below.
     {% include image.html file="quicklink_literature.png" alt="Literature" %} 
        <h4>Literature</h4>
        <p>View literature for CREST & Co.</p>
-       <a href="{{site.baseurl}}/docs/about/literature.html" class="stretched-link"></a>
+       <a href="{{site.baseurl}}/page/about/literature.html" class="stretched-link"></a>
    </div>
  </div>
 </div>

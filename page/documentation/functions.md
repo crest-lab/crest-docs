@@ -5,7 +5,7 @@ parent: Documentation
 nav_order: 2
 toc: false
 summary: "An overview over the different tools implemented in CREST."
-permalink: /docs/documentation/functions.html
+permalink: /page/documentation/functions.html
 ---
 
 # {{page.title}}

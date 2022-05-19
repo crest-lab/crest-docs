@@ -3,7 +3,7 @@ layout: default
 title: Compiling from Source
 parent: Installation
 nav_order: 2
-permalink: /docs/installation/install_compile.html
+permalink: /page/installation/install_compile.html
 summary: "This guide contains instructions for compiling CREST from source."
 ---
 

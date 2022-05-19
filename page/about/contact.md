@@ -5,7 +5,7 @@ parent: About
 nav_order: 1
 toc: false
 summary: "How to get in contact?"
-permalink: /docs/about/contact.html
+permalink: /page/about/contact.html
 ---
 
 ## How to get in contact?

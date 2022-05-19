@@ -1,0 +1,16 @@
+
+// set table background color individually ind the color-scheme file. 
+// this is just the definition
+$table-header-color: $table-background-color !default;
+th {
+  background-color: $table-header-color;
+}
+
+
+// add option for text justification
+.text-justify {
+  text-align: justify !important;
+}
+
+
+

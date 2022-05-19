@@ -5,7 +5,7 @@ parent: About
 nav_order: 2
 toc: false
 summary: "What is to know about this documentation?"
-permalink: /docs/about/about-docs.html
+permalink: /page/about/about-docs.html
 ---
 
 ## About this Documentation

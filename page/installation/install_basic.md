@@ -3,7 +3,7 @@ layout: default
 title: Step-by-step Installation
 parent: Installation
 nav_order: 1
-permalink: /docs/installation/install_basic.html
+permalink: /page/installation/install_basic.html
 summary: "This guide contains detailed step-by-step instructions for the installation of CREST. Make sure to read it carefully."
 ---
 
@@ -28,7 +28,7 @@ Installation instructions shown in the following were tested on *Ubuntu 20.04 LT
 
 Requirements for the installation can depend on whether you decide to install CREST from
 the precompiled binaries, or build the program on yourself locally:
-- In general, [compiling the program from source](/docs/installation/install_basic.html#compiling-from-source) will provide you with a binary more tailored to your specific computer/architecture.
+- In general, [compiling the program from source](/page/installation/install_basic.html#compiling-from-source) will provide you with a binary more tailored to your specific computer/architecture.
   Furthermore, you will be able to get the newest developments and code updates more quickly.
   However, building the program from source will require some effort.
 - The installation of {% include tooltip.html tool="statically compiled binaries" tip=site.data.glossary.static_binary %}statically compiled binaries</a> from GitHub is faster and will in most cases be sufficient.

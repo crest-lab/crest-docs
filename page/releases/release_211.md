@@ -5,7 +5,7 @@ parent: Releases
 nav_order: 1
 toc: false
 summary: "Release notes for CREST versions 2.11.x"
-permalink: /docs/examples/release_211.html
+permalink: /page/examples/release_211.html
 ---
 
 # CREST Release versions 2.11.x

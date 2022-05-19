@@ -19,7 +19,7 @@ permalink: /page/examples/example_1.html
 
 ## Standard Conformational Search (iMTD-GC)
 
-The default application of CREST is the [iMTD-GC workflow](/page/overview/workflows.html#imtd-gc-algorithm). 
+The default application of CREST is the [iMTD-GC workflow]({{site.baseurl}}/page/overview/workflows.html#imtd-gc-algorithm). 
 In the following, a standard production run with this workflow is shown for the alanineglycine molecule.
 {: .text-justify }
 
@@ -318,7 +318,7 @@ CREST terminated normally.
 
 The program call first creates a `coord` file from the given input structure. 
 Then, settings such as the length of the MTD simulation are automatically determined from a molecular flexibility measure.
-With these settings, the workflow as presented [here]({{page.baseurl}}/page/overview/workflows.html#imtd-gc-algorithm) is conducted.
+With these settings, the workflow as presented [here]({{site.baseurl}}/page/overview/workflows.html#imtd-gc-algorithm) is conducted.
 {: .text-justify }
 
 

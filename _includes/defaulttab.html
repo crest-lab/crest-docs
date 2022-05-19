@@ -1,3 +1,9 @@
+{% if {{include.id}} %}
+<script>
+document.getElementById("{{include.id}}").click();
+</script>
+{% else %}
 <script>
 document.getElementById("defaultOpen").click();
 </script>
+{% endif %}

@@ -31,8 +31,8 @@ given in the [**Input Formats** section.]({{site.baseurl}}/page/documentation/co
 
 Assume in the following, that you are working with an ensemble for the alanineglycine from [Example 1.](../examples/example_1.html)
 As you remember, in the previous example the ensemble was generated with an implicit solvation potential for water.
-Assume that this was wrong and you wanted the ensemble in the gasphase.
-After refining (optimizing) the GBSA(water) structure for the gasphase and stitching them together in a new ensemble file (here: `input-ensemble.xyz`), or by using the `--mdopt` function ([Example X](#)), you might be left of with an unorderd collection of structures as in the figure below.
+Assume that this was an error and you wanted the ensemble in the *gasphase*.
+After refining (optimizing) the GBSA(water) structure for the gasphase and stitching them together in a new ensemble file (here: `input-ensemble.xyz`), or by using the `--mdopt` function ([Example X](#)), you might be left with an unorderd collection of structures as in the figure below.
 {: .text-justify }
 
 
@@ -47,13 +47,13 @@ The answer is given here:
 
  <!-- Tab links -->
 <div class="tab card">
-  <button class="tablinks" onclick="openCity(event, 'command')" id="defaultOpen"><code>command</code></button>
-  <button class="tablinks" onclick="openCity(event, 'struc')"><code>struc.xyz</code></button>
-  <button class="tablinks" onclick="openCity(event, 'ensemble')"><code>input-ensemble.xyz</code></button>
-  <button class="tablinks" onclick="openCity(event, 'output')"><code>output</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'command', 'tab-id-1')" id="tab-id-1"><code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'struc', 'tab-id-1')"><code>struc.xyz</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'ensemble', 'tab-id-1')"><code>input-ensemble.xyz</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'output', 'tab-id-1')"><code>output</code></button>
 </div>
 <!-- Tab content -->
-<div id="command" class="tabcontent" style="text-align:justify">
+<div id="command" class="tabcontent tab-id-1" style="text-align:justify">
 {% include command.html cmd="crest struc.xyz --cregen input-ensemble.xyz" %}
 <span markdown="span">
 This is the command that needs to be executed from the command line. 
@@ -64,7 +64,7 @@ The output will look something like the one in the `output` tab above.
 Note again, that the ensemble must satisfy the format requiements from the [**Input Formats** section.]({{site.baseurl}}/page/documentation/coords.html#ensemble-and-trajectory-files)
 </span>
 </div>
-<div id="struc" class="tabcontent" style="font-size:10px">
+<div id="struc" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture struc_xyz %}
  20
 
@@ -91,7 +91,7 @@ H     3.572730    -0.688405    -1.154998
 {% endcapture %}
 {% include codecell.html content=struc_xyz %}
 </div>
-<div id="ensemble" class="tabcontent" style="font-size:10px">
+<div id="ensemble" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture struc_xyz %}
   20
         -33.86165671
@@ -537,7 +537,7 @@ H     3.572730    -0.688405    -1.154998
 {% endcapture %}
 {% include codecell.html content=struc_xyz %}
 </div>
-<div id="output" class="tabcontent" style="font-size:10px">
+<div id="output" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture output_file %}
  
        ==============================================
@@ -631,15 +631,124 @@ Overall wall time  : 0h : 0m : 0s
 {% endcapture %}
 {% include codecell.html content=output_file %}
 </div>
-{% include defaulttab.html %}
+{% include defaulttab.html id="tab-id-1" %}
 
 
+This program call will produce 3 files that are of main interest:
 
+- `<input-file-name>.xyz.sorted`, the sorted input ensemble with an ascending energy order of structures and all duplicates removed.
+
+- `crest_ensemble.xyz`, the file containing all unique conformers (*i.e.*, rotamers sorted out).
+
+- `crest.energies`, a plaintext file containing the energies for all structures in `crest_ensemble.xyz`.
+
+Taking a look at the `output` tab above reveals several things for our Ala-Gly example.
+First, a summary of sorting thresholds is provided.
+The most important point here is the energy window, which is by default set to 6 kcal/mol.
+All 20 structures of our ensemble are within this threshold and are analyzed.
+Two of these structures were duplicates of the same minimum and are removed.
+Three other structures are identified as rotamers of conformers 1, 3, and 5, respectively.
+This means, from the inital 20 structures, 18 conformers *and* rotamers were written to the
+`input-ensemble.xyz.sorted` file, and 15 unique conformers were written to `crest_ensemble.xyz`.
+The correct ascending energy order of the latter can again be seen in the figure below.
 
 {% include image.html file="example-2-2.png" alt="Ala-Gly MOLDEN screenshot" caption="MOLDEN         screenshot of the sorted Ala-Gly ensemble." max-width=500 %}
 
 
+{% include tip.html content="Many options for adjusting sorting thresholds are available. See the [**Keyword Documentation** <i class='fa-solid fa-book'></i>](../documentation/keywords.html#ensemble-sorting-options) for CREGEN." %}
+
+
 ---
 
-## Handling Topology
+## Handling Topology in CREGEN
+
+You might have noticed that Ala-Gly in the above example and [Example 1]({{site.baseurl}}/page/examples/example_1.html) was presented in a neutral state and not as a zwitter ion.
+The zwitterionic species might have been generated during the MTD sampling since GFN*n*-xTB as an SQM method allows the free forming and breaking of bonds.
+However, the ensemble sorting procedure CREGEN by default checks the topology of all structures and
+removes those that do not match a given reference geometry (`struc.xyz` in our case).
+{: .text-justify }
+
+
+You can try this by adding the following structure to the ensemble and executing the `--cregen` command again (see the **example commands** tab below).
+
+{% include image.html file="example-2-3.png" alt="Ala-Gly zwitter ion" caption="Zwitterionic structure of Ala-Gly." max-width=300 %}
+
+<!-- Tab links -->
+<div class="tab card">
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'zwitter', 'tab-id-2')" id="tab-id-2"><code>zwitterion.xyz</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'action', 'tab-id-2')">example commands</button>
+</div>
+<!-- Tab content -->
+<div id="zwitter" class="tabcontent tab-id-2">
+{% capture struc_xyz %}
+  20
+  -33.818790361116
+C    -2.11918647262311      0.14895122905994      0.24492450423152
+C    -0.84613409018542     -0.71545902108420      0.09396449210643
+N     0.01110878038306     -0.55798901361218      1.12345941613331
+C     1.43207934792106     -0.57482696384029      0.88443865999916
+C     1.88833437319196      0.82600233879956      0.32894440663697
+O     0.97255546731960      1.64669100387907      0.07336052986943
+N    -1.68369973202269      1.50506796633395     -0.22286995339128
+O    -0.63218235961918     -1.39453299525113     -0.89224121288301
+O     3.10015236848593      1.00313723593259      0.19263098642795
+H    -1.80652736708673      1.56915945577230     -1.24134242988971
+H    -0.62343017334745      1.63550171644745     -0.04221327393975
+C    -3.27633103833500     -0.36059678289799     -0.59454793916073
+H    -2.39948198144750      0.21252333754469      1.29833445377503
+H    -0.26102312521712      0.06347936661626      1.87388430943554
+H     1.66922672788030     -1.32346211195377      0.12752055915879
+H     1.98470863280314     -0.79708838903490      1.79613752154667
+H    -2.21430989711448      2.26244905004632      0.22131157546907
+H    -4.09390756675707      0.35408686586709     -0.60424410399088
+H    -2.94048851129317     -0.55788329271452     -1.60997845699847
+H    -3.63943941783663     -1.29716616081078     -0.18197510503603
+{% endcapture %}
+<span style="font-size:10px">
+{% include codecell.html content=struc_xyz %}
+</span>
+{% include note.html content="The zwitterion is only stable at the GFN*n*-xTB level in combination with GBSA or ALPB. For consistency, structure was optimized with `--gbsa water` but the energy in was replaced by a gasphase singlepoint calculation at the GFN2-xTB level (-33.818790361116 *E*<sub>h</sub>)." %} 
+</div>
+<div id="action" class="tabcontent tab-id-2" style="test-align:justify" >
+<span markdown="span">
+To add the zwitterion to the ensemble execute
+</span>
+{% include command.html cmd="cat zwitterion.xyz >> input-ensemble.xyz" %}
+and then execute as before
+{% include command.html cmd="crest struc.xyz --cregen input-ensemble.xyz --ewin 30" %}
+{% include note.html content="The `--ewin 30` command was added here to increase the energy window to 30 kcal/mol. This is necessary because the zwitter ion has a much higher energy in the gasphase than the neutral Ala-Gly structures and would be sorted out simply by the energy threshold." %}
+</div>
+{% include defaulttab.html id="tab-id-2" %}
+
+You will notice that the zwitterion is sorted out immediately, regardless of the energy threshold in CREGEN.
+This is due to the mismatching topology/connectivity of the reference `struc.xyz`
+and the newly added `zwitterion.xyz`.
+If you "reverse" the reference, *i.e.*, by using
+{: .text-justify }
+
+```bash
+crest zwitterion.xyz --cregen input-ensemble.xyz
+```
+
+only the zwitter ion should remain because now it was taken for 
+constructing the reference topology.
+{: .text-justify }
+
+
+**There is**, however, **a way to deal with topology-mismatches** if required:
+{: .text-justify }
+
+
+All topology checks in CREGEN can be *ignored* by adding the [`--notopo` command]({{site.baseurl}}/page/documentation/keywords.html#notopo) to the program call.
+{: .text-justify }
+
+```bash
+crest zwitterion.xyz --cregen input-ensemble.xyz --ewin 30 --notopo 
+```
+
+With this command **_any_** isomer of the reference structure in the ensemble file will be
+considered, as long as it satisfies the format requiements from the 
+[**Input Formats** section.]({{site.baseurl}}/page/documentation/coords.html#ensemble-and-trajectory-files)
+ 
+
 

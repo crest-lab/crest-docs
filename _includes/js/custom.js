@@ -21,3 +21,32 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " active";
 } 
 
+
+
+
+// This is required for the custom "tabs" implementation
+function openTabId(evt, contentName, groupName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  // if they belong to the correct class
+  tabcontent = document.getElementsByClassName('tabcontent' + ' ' +groupName);
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName('tablinks' + ' ' + groupName);
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(contentName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+

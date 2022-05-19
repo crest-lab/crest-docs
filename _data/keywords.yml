@@ -473,10 +473,13 @@ sortingsettings:
       text: Example X.
       link: /page/examples/
 
-  - cmd: --notopo
+  - cmd: --notopo [atomlist]
     anchor: notopo
     descript: >
       Turn off the topology checks in CREGEN for structures in the ensemble.
+      The optional `[atomlist]` argument can be used to select specific atoms 
+      that should be ignored in the topology checks.
+      For the `atomlist` format see the [**Input Formats**](coords.html#atomlists) section.
       Do not confuse with 
     url:
       text: "`--noreftopo` <i class='fa-solid fa-triangle-exclamation'></i>"
@@ -604,12 +607,14 @@ constrainment:
     descript: >
       Specify a `<FILE>` with additional constraints in the xTB syntax.
 
-  - cmd: --constrain <atom list>
+  - cmd: --constrain <atomlist>
     descript: >
       Set up an example file in which the atoms in `<atom list>` shall be constrained. 
       The file will be called `.xcontrol.sample`. No calculations will be performed and
       the run is aborted after this sample is written. The written file can be read 
-      with the `--cinp` option. See
+      with the `--cinp` option. 
+      For specifications on the `atomlist` format 
+      see the [**Input Formats**](coords.html#atomlists) section.
 
   - cmd: --cbonds [REAL]
     descript: >

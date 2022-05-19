@@ -40,9 +40,13 @@ Assuming further that our initial input structure (atomic coordinates, here in Ã
 <!-- Tab content -->
 <div id="command" class="tabcontent" style="text-align:justify">
 {% include command.html cmd="crest struc.xyz --gfn2 --gbsa h2o -T 4" %}
-This is the command that needs to be executed from the command line. <code>--gfn2</code> specifies   the usage of the SQM level GFN2-xTB, <code>--gbsa h2o</code> implements the GBSA implicit solvation  for water, and <code>-T 4</code> requests the usage of 4 CPU threads.
-You can save the terminal output of this command by adding <code>> crest.out</code> at the end of the line.
-The output will look something like the one in the <code>output</code> tab above.
+<span markdown="span">
+This is the command that needs to be executed from the command line. 
+`--gfn2` specifies   the usage of the SQM level GFN2-xTB, `--gbsa h2o` implements 
+the GBSA implicit solvation  for water, and `-T 4` requests the usage of 4 CPU threads.
+You can save the terminal output of this command by adding `> crest.out` at the end of the line.
+The output will look something like the one in the `output` tab above.
+</span>
 </div>
 <div id="struc" class="tabcontent" style="font-size:10px">
 {% capture struc_xyz %}

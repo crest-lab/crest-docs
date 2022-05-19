@@ -4,7 +4,7 @@ title: Keyword Documentation
 parent: Documentation
 nav_order: 1
 has_children: true
-has_toc: false
+has_toc: true
 summary: "The entire list of available command line arguments for CREST."
 permalink: /page/documentation/keywords.html
 ---

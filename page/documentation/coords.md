@@ -236,3 +236,33 @@ An example for an *n*-butane ensemble can be seen here:
 
 ---
 ## Atomlists
+
+Atomlists are used for some argument such as [`--notopo`]({{site.baseurl}}/page/documentation/keywords.html#notopo).
+They are used to specify atoms or types of atoms of your input structure.
+Effectively, atomlists are a single string consisting out of the respective number of the atom, or the element symbol.
+The only important thing to notice is that **_no whitespaces_** should be present in the `atomlist`, and arguments are separated by a comma `,`.
+As an example,
+{: .text-justify }
+
+```bash
+  3,4,5,6
+```
+
+would select the nitrogen atoms in the caffeine exmple from [above.  <i class="fa-solid fa-circle-up"></i>](#input-atomic-coordinates)
+Alternatively a range of atoms could be specified, as for example
+
+```bash
+  1,3-6
+```
+
+which would select atom 1 (one of the oxygens) and all nitrogen atoms.
+Finally, atomlists are compatible with element symbols,
+so the same atoms would be selected by
+
+```bash
+  1,n
+```
+
+
+---
+

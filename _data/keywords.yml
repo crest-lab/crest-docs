@@ -348,6 +348,11 @@ confsettings:
        text: "`--notopo` <i class='fa-solid fa-triangle-exclamation'></i>"
        link: /page/documentation/keywords.html#notopo
 
+  - comm: "`--noopt`,`--nopreopt`"
+    descript: >
+      Turn of automatic pre-optimization of the input geometry at the beinning of a run.
+
+
 
 entropysettings:
 
@@ -484,6 +489,10 @@ sortingsettings:
     url:
       text: "`--noreftopo` <i class='fa-solid fa-triangle-exclamation'></i>"
       link: "/page/documentation/keywords.html#noreftopo"
+
+
+
+
 
 
 pcasettings:

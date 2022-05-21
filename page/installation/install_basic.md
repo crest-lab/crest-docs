@@ -22,7 +22,8 @@ summary: "This guide contains detailed step-by-step instructions for the install
 
 CREST was built as a commandline-based application for UNIX distributions.
 Therefore, this guide will assume that you are familiar with the basic navigation in the terminal.
-Installation instructions shown in the following were tested on *Ubuntu 20.04 LTS*.
+Installation instructions shown in the following were tested on *Ubuntu 20.04 LTS* {{ site.data.icons.ubuntu }}.
+{: .text-justify }
 
 ## Requirements
 
@@ -31,20 +32,61 @@ the precompiled binaries, or build the program on yourself locally:
 - In general, [compiling the program from source](/page/installation/install_basic.html#compiling-from-source) will provide you with a binary more tailored to your specific computer/architecture.
   Furthermore, you will be able to get the newest developments and code updates more quickly.
   However, building the program from source will require some effort.
-- The installation of {% include tooltip.html tool="statically compiled binaries" tip=site.data.glossary.static_binary %}statically compiled binaries</a> from GitHub is faster and will in most cases be sufficient.
+- The installation of {% include tooltip.html tool="statically compiled binaries" tip=site.data.glossary.static_binary %} from GitHub {{ site.data.icons.github }} is faster and will in most cases be sufficient.
   However, in rare cases you might encounter runtime errors.
-  Additionally, the precompiled program is mostly updated only when a new version is released, so some code updates might not be included.
+  Additionally, the precompiled program is updated only periodically with a new release, so some code updates might not yet be included.
+{: .text-justify }
 
-Most CREST applications will require access to the [`xtb` program. {% include elink.html %}](https://github.com/grimme-lab/xtb)
+Most CREST applications will require access to the [`xtb` program. {{ site.data.icons.ext }}](https://github.com/grimme-lab/xtb)
 You will need to install `xtb` on your machine and make sure it can be executed globally.
-You can follow the installation instructions for `xtb` on the [GitHub repository {% include elink.html %}](https://github.com/grimme-lab/xtb), but note that most of the process is similar to the CREST installation presented here.
-If you plan on using QCG, you will also need to install the [`xtbiff` program. {% include elink.html %}](https://github.com/grimme-lab/xtbiff)
+You can follow the installation instructions for `xtb` on the [GitHub repository {{ site.data.icons.github }}](https://github.com/grimme-lab/xtb), but note that most of the process is similar to the CREST installation presented here.
+If you plan on using QCG, you will also need to install the [`xtbiff` program. {{ site.data.icons.ext }}](https://github.com/grimme-lab/xtbiff)
+{: .text-justify }
 
+---
 
 ## Installation from precompiled binaries
 
 Installation via precompiled static binaries is the the simplest option.
+First, you will have to download the program.
 
+1. Navigate to the **_Releases_** tab on CREST's [GitHub page {{ site.data.icons.github }}]( {{ site.project }} )
+   {% include image.html file="install-1.png" %}
 
+2. Select the release version you want to install (probably the one flagged as "*Latest*")
+   and download the packed binary
+   {% include image.html file="install-2.png" max-width=400 %}
+
+3. Move the packed binary to some place of your choice (e.g., `/home/$USER/bin/`) and
+   unpack it there
+   ```bash
+   unzip crest.zip
+   ```
+
+4. Assuming you put CREST in `/home/$USER/bin/`, make the statically linked binary
+   an executable (might require `sudo`) with
+   ```bash
+   chmod +x /home/$USER/bin/crest
+   ```
+5. Then export it to your `PATH` variable to make it accessible on your system, if necessary
+   ```bash
+   export PATH=$PATH:/home/$USER/bin/
+   ```
+   You can check if the export was successful by executing the command
+   ```bash
+   which crest
+   ```
+   which should return the full path to the CREST binary.
+   You can also add the `export` line to your `~/.bashrc` to load it on the terminal startup.
+
+That's pretty much all.
+If `xtb` has been correctly installed, you can now start to use CREST.
+You can test the installation, for example by executing
+```bash
+crest --version
+```
+which should print the program header to the terminal.
+
+---
 
 ## Compiling from source

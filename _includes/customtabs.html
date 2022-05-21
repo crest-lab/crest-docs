@@ -1,7 +1,7 @@
 
  <!-- Tab links -->
 <div class="tab card">
-  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-1', 'tab-id-X')" id="tab-id-    X">Tab 1</button>
+  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-1', 'tab-id-X')" id="open-X">Tab 1</button>
   <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-2', 'tab-id-X')">Tab 2</button>
   <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-3', 'tab-id-X')">Tab 3</code></button>
   <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-4', 'tab-id-X')">Tab 4</button>
@@ -19,4 +19,5 @@
 <div id="tab-X-4" class="tabcontent tab-id-X" style="text-align:justify">
 
 </div>
+{% include defaulttab.html id="open-X" %}
 

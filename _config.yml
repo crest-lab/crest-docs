@@ -19,9 +19,10 @@ baseurl: "/crest-docs" # the subpath of your site, e.g. /blog
 #url: "https://crest-lab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 repository: crest-lab/crest-lab
 
+#This is the project the documentation is ment for
+project: "https://github.com/grimme-lab/crest"
+
 remote_theme: "just-the-docs/just-the-docs"
-
-
 permalink: pretty
 exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"
 , "docs/tests/"
@@ -83,9 +84,16 @@ nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # Back to top link
 back_to_top: true
-back_to_top_text: "Back to top"
+back_to_top_text: "Back to top <i class='fa-solid fa-circle-up'></i>"
 
-footer_content: "Copyright &copy; 2022 Philipp Pracht."
+footer_content: >
+  Copyright &copy; 2022 Philipp Pracht.
+  <br><br>
+  CREST is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU Lesser General Public License for more details.
+
 
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter

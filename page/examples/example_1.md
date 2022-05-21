@@ -33,12 +33,12 @@ Assuming further that our initial input structure (atomic coordinates, here in Ã
 
  <!-- Tab links -->
 <div class="tab card">
-  <button class="tablinks" onclick="openCity(event, 'command')" id="defaultOpen"><code>command</code></button>
-  <button class="tablinks" onclick="openCity(event, 'struc')"><code>struc.xyz</code></button>
-  <button class="tablinks" onclick="openCity(event, 'output')"><code>output</code></button>
+  <button class="tablinks tab-1-1" onclick="openTabId(event, 'command', 'tab-1-1')" id="defaultOpen">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-1-1" onclick="openTabId(event, 'struc', 'tab-1-1')">{{ site.data.icons.codefile }}  <code>struc.xyz</code></button>
+  <button class="tablinks tab-1-1" onclick="openCity(event, 'output', 'tab-1-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
-<div id="command" class="tabcontent" style="text-align:justify">
+<div id="command" class="tabcontent tab-1-1" style="text-align:justify">
 {% include command.html cmd="crest struc.xyz --gfn2 --gbsa h2o -T 4" %}
 <span markdown="span">
 This is the command that needs to be executed from the command line. 
@@ -48,7 +48,7 @@ You can save the terminal output of this command by adding `> crest.out` at the 
 The output will look something like the one in the `output` tab above.
 </span>
 </div>
-<div id="struc" class="tabcontent" style="font-size:10px">
+<div id="struc" class="tabcontent tab-1-1" style="font-size:10px">
 {% capture struc_xyz %}
  20
 
@@ -75,7 +75,7 @@ H     3.572730    -0.688405    -1.154998
 {% endcapture %}
 {% include codecell.html content=struc_xyz %}
 </div>
-<div id="output" class="tabcontent" style="font-size:10px">
+<div id="output" class="tabcontent tab-1-1" style="font-size:10px">
 {% capture output_file %}
     ==============================================
     |                                            |

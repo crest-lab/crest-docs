@@ -14,6 +14,13 @@ permalink: /page/examples/example_2.html
 {{ page.summary }}
 {: .fs-6 .fw-300 }
 
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+
 ---
 
 
@@ -47,10 +54,10 @@ The answer is given here:
 
  <!-- Tab links -->
 <div class="tab card">
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'command', 'tab-id-1')" id="tab-id-1"><code>command</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'struc', 'tab-id-1')"><code>struc.xyz</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'ensemble', 'tab-id-1')"><code>input-ensemble.xyz</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'output', 'tab-id-1')"><code>output</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'command', 'tab-id-1')" id="tab-id-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'struc', 'tab-id-1')">{{ site.data.icons.codefile }} <code>struc.xyz</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'ensemble', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input-ensemble.xyz</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'output', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="command" class="tabcontent tab-id-1" style="text-align:justify">
@@ -675,8 +682,8 @@ You can try this by adding the following structure to the ensemble and executing
 
 <!-- Tab links -->
 <div class="tab card">
-  <button class="tablinks tab-id-2" onclick="openTabId(event, 'zwitter', 'tab-id-2')" id="tab-id-2"><code>zwitterion.xyz</code></button>
-  <button class="tablinks tab-id-2" onclick="openTabId(event, 'action', 'tab-id-2')">example commands</button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'zwitter', 'tab-id-2')" id="tab-id-2">{{ site.data.icons.codefile }} <code>zwitterion.xyz</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'action', 'tab-id-2')">{{ site.data.icons.code }} example commands</button>
 </div>
 <!-- Tab content -->
 <div id="zwitter" class="tabcontent tab-id-2">

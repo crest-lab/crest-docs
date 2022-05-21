@@ -55,6 +55,7 @@ $tab-header-color: $grey-lt-200 !default;
 }
 
 /* Style the buttons that are used to open the tab content */
+$tab-text-color: $blue-100 !default;
 .tab button {
   background-color: inherit;
   float: left;
@@ -63,6 +64,7 @@ $tab-header-color: $grey-lt-200 !default;
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
+  color: $tab-text-color;
 }
 
 /* Change background color of buttons on hover */

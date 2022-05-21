@@ -15,10 +15,10 @@ permalink: /page/about/about-docs.html
 
 
 This documentation was created for hosting on [GitHub pages](https://pages.github.com/)
-with [Jekyll {% include elink.html %}](https://jekyllrb.com/). {% include inline_image.html file="jekyll.png" url="http://jekyllrb.com" alt="Jekyll" %}
+with [Jekyll {{ site.data.icons.ext }}](https://jekyllrb.com/). {% include inline_image.html file="jekyll.png" url="http://jekyllrb.com" alt="Jekyll" %}
 
 
-The Jekyll theme was adapted from the [Just the Docs <i class="fa-brands fa-github"></i>](https://github.com/just-the-docs/just-the-docs) repository on GitHub with some minimal custom HTML, CSS, and JS additions.
+The Jekyll theme was adapted from the [Just the Docs {{ site.data.icons.github }}](https://github.com/just-the-docs/just-the-docs) repository on GitHub with some minimal custom HTML, CSS, and JS additions.
 
-Images of molecules were created with [UCSF Chimera {% include elink.html %}](https://www.cgl.ucsf.edu/chimera/).
+Images of molecules were created with [UCSF Chimera {{ site.data.icons.ext }}](https://www.cgl.ucsf.edu/chimera/). ... or just screenshot from MOLDEN (if I was lazy).
 

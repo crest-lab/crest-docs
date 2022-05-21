@@ -1,0 +1,45 @@
+#
+# Some shortcuts for html icons from the FontAwesome package
+# They have been included in the head_custom.html via the respective stylesheet
+# In Markdown files of this project they can then be included via {{ site.data.icons.<name> }}
+
+
+# GitHub logo
+github: <i class="fa-brands fa-github"></i>
+
+# A book icon
+book: <i class="fa-solid fa-book"></i>
+
+# Square with an arrow icon for external links
+ext: <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+# Email icon
+mail: <i class="fa-solid fa-envelope"></i>
+
+# Ubuntu logo
+ubuntu: <i class="fa-brands fa-ubuntu"></i>
+
+# The </> symbol
+code: <i class="fa-solid fa-code"></i>
+
+# A file icon with the < > symbol on it
+codefile: <i class="fa-solid fa-file-code"></i>
+
+# A file icon with a check mark
+checkfile: <i class="fa-solid fa-file-circle-check"></i>
+
+# A file icon with a down arrow
+filein: <i class="fa-solid fa-file-arrow-down"></i>
+
+# A file icon with an up arrow
+fileout: <i class="fa-solid fa-file-arrow-up"></i>
+
+# A triangle with an exclamation mark
+attn: <i class='fa-solid fa-triangle-exclamation'></i>
+
+# A circle with an arrow down
+adown: <i class="fa-solid fa-circle-down"></i>
+
+# A circle with an arrow up
+aup: <i class="fa-solid fa-circle-up"></i>
+

@@ -15,8 +15,8 @@ Welcome to the documentation site of {% include tooltip.html tool="CREST" tip=si
 
 ## Introduction
 
-CREST is a utility and driver program for the semiempirical quantum chemistry package [`xtb`{% include elink.html %}](https://github.com/grimme-lab/xtb).
-The programs name originated as an abbreviation for Conformer–Rotamer Ensemble Sampling Tool as it was developed as a program for conformational sampling at the extended tight-binding level GFN-xTB.
+CREST was developed as a utility and driver program for the semiempirical quantum chemistry package [`xtb`{{ site.data.icons.github }}](https://github.com/grimme-lab/xtb).
+The programs name originated as an abbreviation for *Conformer–Rotamer Ensemble Sampling Tool* as it was developed as a program for conformational sampling at the extended tight-binding level GFN-xTB.
 Since then several functionalities have been added to the code.
 In its current state, the program provides a variety of sampling procedures, for example for improved thermochemistry, or solvation.
 Generally, CREST functions as an IO-based scheduler for the `xtb` program and as tool for analyzing structure ensembles.

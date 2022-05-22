@@ -106,6 +106,7 @@ N         -2.6155337000        1.4820613000        0.0000603000
 Two ensembles will result:
 - a "complete" one named `full_ensemble.xyz`
 - and one with only the highest populated clusters `final_ensemble.xyz`) 
+
 All ensembles will have a solute structure that has the same Fe-C geometries as the `solute.xyz` file.
 {: .text-justify }
 

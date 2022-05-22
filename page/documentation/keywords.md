@@ -111,7 +111,7 @@ An extension to the CREGEN sorting is an automatic principle component analysis 
 CREST offers an interface to `xtb`'s constraints by passing the respective arguments, 
 e.g. manually via the `--cinp` option, or by an automatic setup like `--cbonds`.
 Constrainment syntax for the `xtb` can be found [here.](https://xtb-docs.readthedocs.io/en/latest/xcontrol.html#fixing-constraining-and-confining)
-Some examples for constrained CREST calculations are presented [here.](/page/examples/)
+Some examples for constrained CREST calculations are presented [here.](../examples/example_4.html)
 {: .text-justify }
 
 {% include 2tab.html obj=site.data.keywords.constrainment %}

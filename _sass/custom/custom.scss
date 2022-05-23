@@ -1,3 +1,12 @@
+// Add bottom margin to headline sizes h2-h4
+.main-content{
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 1em;
+  }
+}
+
 
 // set table background color individually ind the color-scheme file. 
 // this is just the definition

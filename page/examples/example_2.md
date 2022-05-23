@@ -39,7 +39,7 @@ given in the [**Input Formats** section.]({{site.baseurl}}/page/documentation/co
 Assume in the following, that you are working with an ensemble for the alanineglycine from [Example 1.](../examples/example_1.html)
 As you remember, in the previous example the ensemble was generated with an implicit solvation potential for water.
 Assume that this was an error and you wanted the ensemble in the *gasphase*.
-After refining (optimizing) the GBSA(water) structure for the gasphase and stitching them together in a new ensemble file (here: `input-ensemble.xyz`), or by using the `--mdopt` function ([Example X](#)), you might be left with an unorderd collection of structures as in the figure below.
+After refining (optimizing) the GBSA(water) structure for the gasphase and stitching them together in a new ensemble file (here: `input-ensemble.xyz`), or by using the `--mdopt` function ([Example: Ensemble Optimization](../examples/utilities/utils_1.html)), you might be left with an unorderd collection of structures as in the figure below.
 {: .text-justify }
 
 

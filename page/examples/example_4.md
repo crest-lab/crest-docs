@@ -20,6 +20,9 @@ permalink: /page/examples/example_4.html
 1. TOC
 {:toc}
 
+---
+
+{% include warning.html content="Constraints that are included via CREST's `--cinp` command will generally be present for **ALL** `xtb` calculations; MD, MTD, optimizations, and singlepoints. Be careful not to bias your calculation too strongly and choose *moderate* force constants!" %}
 
 ---
 
@@ -39,6 +42,7 @@ An even simpler example are small non-covalent complexes.
 As was noted in [Example 3](example_3.html), the MTD bias potential would lead to dissociation of such non-covalently bound molecules.
 Instead of employing a wall potential like in the previous example, one could simply constrain some interatomic distances.
 This is can be shown, for example for the methanol-acetamide complex from the [S66 benchmark set](https://doi.org/10.1021/ct2002946).
+{: .text-justify }
 
 {% include image.html file="example-4-1.png" alt="methanol-acetamide complex"  caption="Non-covalent complex of methanol and acetamid, taken from the S66 benchmark set." max-width=400 %}
 
@@ -91,12 +95,14 @@ $constrain
   distance: 2, 12, 1.85
 $end
 {% endcapture %}
-{% include codecell.html content=constraint_file style="font-size:10px" %}
+{% include codecell.html content=constraint_file %}
 </div>
 {% include defaulttab.html id="open-1" %}
 
 
-{% include warning.html content="Constraints that are included via CREST's `--cinp` command will be present for **ALL** `xtb` calculations; MD, MTD, optimizations, and singlepoints. Be careful not to bias your calculation to strongly and choose *moderate* force constants!" %}
+The respective conformational search provides an ensemble of non-covalently bound 
+methanol-acetamide structures which all have a H(2)-O(12) distance close to 1.85 Å.
+{: .text-justify }
 
 
 
@@ -109,7 +115,7 @@ $end
 Sometimes it is necessary to fixe entire parts of the structure.
 While **complete freezing of atoms is not possible in CREST**,
 putting a **_constraint on a large part of the substructure is possible_**.
-The procedure is in principle identical to the one [above {{ site.data.icons.aup }}](#), but needs some simple additions.
+The procedure is in principle identical to the one [above {{ site.data.icons.aup }}](#constrained-conformational-sampling), but needs some simple additions.
 {: .text-justify }
 
 As an example, a fictional system consisting out of a linear *n*-octane chain with a diglycine substituent is calculated.
@@ -198,7 +204,7 @@ $metadyn
   atoms: 27-41
 $end
 {% endcapture %}
-{% include codecell.html content=cons_file style="font-size:10px" %}
+{% include codecell.html content=cons_file %}
 </div>
 <div id="tab-2-4" class="tabcontent tab-id-2" style="text-align:justify">
 {% capture output_file %}
@@ -363,8 +369,9 @@ Overall wall time  : 0h :12m :24s
 </div>
 {% include defaulttab.html id="open-2" %}
 
-
-
+A large ensemble of 121 unique conformers was obtained for our fictional system.
+Inspection of these structures reveals that, indeed, all of them still show a linear conformation of the *n*-octane chain.
+{: .text-justify }
 
 
 ### Semi-automated preparation of a constraint input
@@ -394,7 +401,7 @@ crest struc.xyz --cbonds
 ```
 
 The only drawback here is, that the information whether an interatomic distance corresponds to a covalent bond is approximated from an empirical topology set up from atomic coordination numbers.
-**It can not be ensured that the constrained distances actually correspond to the true covalent bonds.**
+**_It can not be ensured that the constrained distances actually correspond to the "true" covalent bonds._**
 Furthermore, metal atoms are often problematic due to their large variety of coordination numbers.
 {: .text-justify }
 

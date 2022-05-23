@@ -2,7 +2,7 @@
 layout: default
 title: Home
 nav_order: 1
-description: "Just the Docs is a responsive Jekyll theme with built-in search that is easily customizable and hosted on GitHub Pages."
+description: "CREST is an IO-based scheduler for semiempirical quantum mechanical calculations at the GFN<i>n</i>-xTB level."
 permalink: /
 ---
 
@@ -22,12 +22,7 @@ In its current state, the program provides a variety of sampling procedures, for
 Generally, CREST functions as an IO-based scheduler for the `xtb` program and as tool for analyzing structure ensembles.
 {: .text-justify }
 
-The key procedure implemented in CREST is a conformational search workflow abbreviated as iMTD-GC. 
-This workflow generates conformer/rotamer ensembles by extensive metadynamics-based sampling.
-Other notable standalone functionalities are automated detection and ranking of protonation sites and the quantum cluster growth (QCG) workflow for explicit solvation.
-{: .text-justify }
-
-This documentation aims to provide a practical installation guide and a series of example applications.
+This documentation aims to provide a practical [installation guide](./page/installation) and a series of [example applications](./page/examples).
 Quick links to different sections of the documentation can be found below. 
 {: .text-justify }
 
@@ -74,3 +69,4 @@ Quick links to different sections of the documentation can be found below.
 </div>
 
 
+{% include twitter.html %}

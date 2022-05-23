@@ -35,7 +35,7 @@ Assuming further that our initial input structure (atomic coordinates, here in Ã
 <div class="tab card">
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'command', 'tab-1-1')" id="defaultOpen">{{ site.data.icons.code }} <code>command</code></button>
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'struc', 'tab-1-1')">{{ site.data.icons.codefile }}  <code>struc.xyz</code></button>
-  <button class="tablinks tab-1-1" onclick="openCity(event, 'output', 'tab-1-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
+  <button class="tablinks tab-1-1" onclick="openTabId(event, 'output', 'tab-1-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="command" class="tabcontent tab-1-1" style="text-align:justify">

@@ -609,6 +609,14 @@ standalonetools:
       the file or a range of structures. The new directories are collected in a 
       directory called SPLIT.
 
+  - cmd: --reactor
+    type: xTB nanoreactor setup
+    descript: >
+      This function provides a utility function to set up an xTB nanoreactor calculation
+      as specified in [JCTC, 2019, 15, 2847-2862.](https://doi.org/10.1021/acs.jctc.9b00143).
+      For instructions on how to use it see 
+      [Example: xTB Nanoreactor](../examples/utilities/utils_6.html).
+
 
 constrainment:
 

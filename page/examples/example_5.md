@@ -307,7 +307,7 @@ crest struc.xyz --protonate --swel ca2+
 ```
 
 to add Ca<sup>2+</sup> instead of H<sup>+</sup>.
-There is basically no limitation in which element/charge combination can be added with this command.
+There is basically no limitation to which element/charge combination can be added with this command.
 However, **_adding polyatomic ions is currently not possible_**.
 {: .text-justify }
 

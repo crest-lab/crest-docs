@@ -5,7 +5,7 @@ parent: Utility Tools
 grand_parent: Examples
 nav_order: 5
 toc: false
-summary: "How to calculate a Cartesian RMSD with CREST."
+summary: "How to calculating an <i>averaged</i> <i>S</i><sub>msRRHO</sub> for CREST's entropy mode."
 permalink: /page/examples/utilities/utils_5.html
 ---
 

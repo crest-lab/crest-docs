@@ -46,8 +46,9 @@ This is can be shown, for example for the methanol-acetamide complex from the [S
 
 {% include image.html file="example-4-1.png" alt="methanol-acetamide complex"  caption="Non-covalent complex of methanol and acetamid, taken from the S66 benchmark set." max-width=400 %}
 
-In principle, the constaining of *any* interatomic **distance**, **angle**, or **dihedral angle** is possible in the `constraints.inp` file.
-All constraints have do be specified in the `xtb` format. See the [`xtb` **Detailed Input** documentation](https://xtb-docs.readthedocs.io/en/latest/xcontrol.html#fixing-constraining-and-confining).
+{% include tip.html content="In principle, the constaining of *any* interatomic **distance**, **angle**, or **dihedral angle** is possible." %}
+
+In the respective `constraints.inp` file all constraints have to be specified in the `xtb` format. See the [`xtb` **Detailed Input** documentation](https://xtb-docs.readthedocs.io/en/latest/xcontrol.html#fixing-constraining-and-confining).
 For the methanol-acetamide example, the interatomic distance between the hyrdogen atom (2)
 and the oxygen atom (12) is constrained by an harmonic potential (force constant in atomic units, 0.25 *E*<sub>h</sub>/Bohr<sup>2</sup>) to a value of 1.85 Ångström. 
 The input files and the CREST command are given as

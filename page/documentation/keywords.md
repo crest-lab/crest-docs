@@ -4,7 +4,7 @@ title: Keyword Documentation
 parent: Documentation
 nav_order: 1
 has_children: true
-has_toc: true
+has_toc: false
 summary: "The entire list of available command line arguments for CREST."
 permalink: /page/documentation/keywords.html
 ---
@@ -126,4 +126,12 @@ The following tools can be used as as standalone application in CREST, similar t
 
 {% include 3tab.html obj=site.data.keywords.standalonetools %}
 
+
+---
+
+## Quantum Cluster Growth (QCG) Options
+
+The QCG keyword section can be found on the next page:
+
+[Go to Quantum Cluster Growth Keyword Documentation <i class="fa-solid fa-book"></i>](qcg.html){: .btn .btn-blue }
 

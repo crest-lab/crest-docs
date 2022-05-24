@@ -14,6 +14,12 @@ permalink: /page/documentation/coords.html
 {{ page.summary }}
 {: .fs-6 .fw-300 }
 
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
 ---
 
 ## Input Atomic Coordinates
@@ -245,24 +251,105 @@ As an example,
 {: .text-justify }
 
 ```bash
-  3,4,5,6
+  1,3,4,5,6
 ```
 
-would select the nitrogen atoms in the caffeine exmple from [above.  <i class="fa-solid fa-circle-up"></i>](#input-atomic-coordinates)
+would select atom 1 (one of the oxygens) and all the nitrogen atoms in the caffeine exmple from [above.  <i class="fa-solid fa-circle-up"></i>](#input-atomic-coordinates)
 Alternatively a range of atoms could be specified, as for example
 
 ```bash
   1,3-6
 ```
-
-which would select atom 1 (one of the oxygens) and all nitrogen atoms.
 Finally, atomlists are compatible with element symbols,
 so the same atoms would be selected by
-
 ```bash
   1,n
 ```
 
 
 ---
+## Constraints
 
+Files for constraining must be in [`xtb`'s input format.](https://xtb-docs.readthedocs.io/en/latest/xcontrol.html#)
+An example would be
+
+```
+$constrain
+  atoms: 1-26
+  force constant=0.5
+  reference=coord.ref
+$metadyn
+  atoms: 27-41
+$end
+```
+
+See [Example 4](../examples/example_4.html) for a more detailed guide.
+
+
+---
+
+## Vibrational frequencies in the <code>vibspectrum</code> format
+
+Construction of `vibspectrum` files is straightforward.
+They are declared by the `$vibrational spectrum` keyword and ended by the `$end` keyword.
+Within this block, each mode is assigned *one line* containing the mode number, symmetry label, frequency in **cm<sup>-1</sup>**, intensity (arbitrary units), in that order. 
+For a molecule with *N* atoms, *3N* lines have to be present.
+The modes must be arragend to their frequencies in ascending order.
+Comment lines starting with `#` are ignored.
+{: .text-justify }
+For thymine (15 atoms), a `vibspectrum` file would look something like this:
+{% capture vibspectrum %}
+$vibrational spectrum
+#  mode     symmetry     wave number   IR intensity    selection rules
+#                         cm**(-1)      (km*mol⁻¹)       IR     RAMAN
+     1                      -0.00         0.00000        -       -
+     2                      -0.00         0.00000        -       -
+     3                      -0.00         0.00000        -       -
+     4                       0.00         0.00000        -       -
+     5                       0.00         0.00000        -       -
+     6                       0.00         0.00000        -       -
+     7        a             70.05         0.38846       YES     YES
+     8        a            105.13         0.44816       YES     YES
+     9        a            147.88         4.81587       YES     YES
+    10        a            261.06         3.14819       YES     YES
+    11        a            301.90         0.50209       YES     YES
+    12        a            360.79         7.68669       YES     YES
+    13        a            377.25        25.99351       YES     YES
+    14        a            431.27        13.50432       YES     YES
+    15        a            522.33         2.07831       YES     YES
+    16        a            583.19         4.66771       YES     YES
+    17        a            587.91       102.69438       YES     YES
+    18        a            664.09        13.87677       YES     YES
+    19        a            685.26        10.36450       YES     YES
+    20        a            720.79       217.35379       YES     YES
+    21        a            755.25         2.31369       YES     YES
+    22        a            777.49         2.22428       YES     YES
+    23        a            860.72        15.31103       YES     YES
+    24        a            958.79         1.79962       YES     YES
+    25        a           1006.53         1.51584       YES     YES
+    26        a           1035.98         6.36000       YES     YES
+    27        a           1126.59        38.23933       YES     YES
+    28        a           1153.10        45.04718       YES     YES
+    29        a           1212.04        55.76099       YES     YES
+    30        a           1273.30        29.07111       YES     YES
+    31        a           1303.81        96.17203       YES     YES
+    32        a           1327.48        68.41479       YES     YES
+    33        a           1400.54        60.93027       YES     YES
+    34        a           1410.68       139.45727       YES     YES
+    35        a           1454.52         5.40728       YES     YES
+    36        a           1472.57         1.05534       YES     YES
+    37        a           1663.21       141.68596       YES     YES
+    38        a           1739.67       685.35070       YES     YES
+    39        a           1779.98       830.38911       YES     YES
+    40        a           3016.25         8.53182       YES     YES
+    41        a           3034.18         7.87679       YES     YES
+    42        a           3052.46        20.26137       YES     YES
+    43        a           3076.43        17.81182       YES     YES
+    44        a           3398.16        26.97265       YES     YES
+    45        a           3444.01        49.06620       YES     YES
+$end
+{% endcapture %}
+{% include codecell.html content=vibspectrum style="font-size:10px" %}
+Note that some additional information was present (IR and RAMAN coloumns), which is ignored by CREST.
+Not also, that the **first six entries correspond to the translation and rotation** and hence have a frequency of zero.
+{: .text-justify }

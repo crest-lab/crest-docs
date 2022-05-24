@@ -69,4 +69,7 @@ Quick links to different sections of the documentation can be found below.
 </div>
 
 
+---
+## News
+
 {% include twitter.html %}

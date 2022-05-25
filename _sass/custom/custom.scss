@@ -203,3 +203,26 @@ $tab-text-color: $blue-100 !default;
 
 
 
+//for copy code button
+.highlight-rel{
+   position:relative;
+}
+$copybtn-color: $blue-000 !default;
+.copybtn{
+  visibility: hidden;
+  position:absolute;
+  top:5px;
+  right:5px;
+  @include btn-color($grey-lt-000, $copybtn-color);
+}
+.copybtn-clicked{
+  visibility: visible;
+  position:absolute;
+  top:5px;
+  right:5px;
+  @include btn-color($green-000, $copybtn-color);
+}
+// make the copybutton visible only on hover over the code box
+.highlight-rel:hover .copybtn{
+   visibility: visible;
+}

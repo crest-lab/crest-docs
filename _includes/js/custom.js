@@ -50,3 +50,77 @@ function openTabId(evt, contentName, groupName) {
 }
 
 
+
+const copyButtonLabel = " Copy";
+const copyButtonHTML ='<span class="fa-solid fa-copy"></span>';
+const copyButtonHTML2 ='<i class="fa-solid fa-check"></i>';
+const buttonClass1="copybtn btn  fa-solid fa-copy";
+const buttonClass2="copybtn-clicked btn  fa-solid fa-check";
+
+
+async function copyCode(event) {
+  const button = event.srcElement;
+  const pre = button.parentElement;
+  let code = pre.querySelector("pre");
+  let text = code.innerText;
+  await navigator.clipboard.writeText(text);
+  
+  //button.innerText = "Copied!";
+  //button.innerHTML = copyButtonHTML2;
+  //button.innerText = " Copied!";
+  button.className = buttonClass2;
+  
+  setTimeout(()=> {
+    //button.innerText = copyButtonLabel;
+    //button.innerHTML = copyButtonHTML;
+    button.className = buttonClass1;
+  },1000)
+}
+
+async function copyCode2(event) { 
+  const button = event.srcElement;
+  const pre = button.parentElement;
+  let code = pre.querySelector("code");
+  let text = code.innerText;
+  await navigator.clipboard.writeText(text);
+
+  //button.innerText = "Copied!";
+  //button.innerHTML = copyButtonHTML2;
+  //button.innerText = " Copied!";
+  button.className = buttonClass2;
+
+
+  setTimeout(()=> {
+    //button.innerText = copyButtonLabel;
+    //button.innerHTML = copyButtonHTML;
+    button.className = buttonClass1;
+
+  },1000)
+}
+
+
+// this adds a copy-button to bash code blocks
+let blocks = document.getElementsByClassName("language-bash");
+window.onload = function () {
+for (i = 0; i < blocks.length; i++) {
+    blocks[i].classList.add("highlight-rel");
+    let btn = document.createElement("button");
+    btn.style.cssText += 'font-size:12px';
+    btn.className = buttonClass1;
+    btn.addEventListener("click", copyCode2);
+    blocks[i].appendChild(btn);
+}
+}
+
+
+/*
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+    button.className = 'copybtn btn btn-blue fa-solid fa-copy';
+    button.addEventListener("click", copyCode);
+    block.appendChild(button);
+  }
+});
+*/

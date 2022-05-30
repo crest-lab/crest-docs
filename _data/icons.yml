@@ -43,3 +43,7 @@ adown: <i class="fa-solid fa-circle-down"></i>
 # A circle with an arrow up
 aup: <i class="fa-solid fa-circle-up"></i>
 
+# A circle with an arrow right
+
+aright: <i class="fa-solid fa-circle-arrow-right"></i>
+

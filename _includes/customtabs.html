@@ -3,7 +3,7 @@
 <div class="tab card">
   <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-1', 'tab-id-X')" id="open-X">Tab 1</button>
   <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-2', 'tab-id-X')">Tab 2</button>
-  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-3', 'tab-id-X')">Tab 3</code></button>
+  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-3', 'tab-id-X')">Tab 3</button>
   <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-4', 'tab-id-X')">Tab 4</button>
 </div>
 <!-- Tab content -->
@@ -18,6 +18,39 @@
 </div>
 <div id="tab-X-4" class="tabcontent tab-id-X" style="text-align:justify">
 
+</div>
+{% include defaulttab.html id="open-X" %}
+
+
+ <!-- Tab links -->
+<div class="tab card">
+  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-1', 'tab-id-X')" 
+  id="open-X">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-2', 'tab-id-X')">{{ site.data.icons.codefile}} <code>input</code></button>
+  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-3', 'tab-id-X')">{{ site.data.icons.codefile}} <code>input2</code></button>
+  <button class="tablinks tab-id-X" onclick="openTabId(event, 'tab-X-4', 'tab-id-X')">{{ site.data.icons.checkfile}} <code>output</code></button>
+</div>
+<!-- Tab content -->
+<div id="tab-X-1" class="tabcontent tab-id-X" style="text-align:justify">
+{% include command.html cmd='someprog <span class="nt">--someflag</span>' %}
+</div>
+<div id="tab-X-2" class="tabcontent tab-id-X" style="text-align:justify">
+{% capture inputfile %}
+
+{% endcapture %}
+{% include codecell.html content=inputfile style="font-size:10px" %}
+</div>
+<div id="tab-X-3" class="tabcontent tab-id-X" style="text-align:justify">
+{% capture inputfile2 %}
+
+{% endcapture %}
+{% include codecell.html content=inputfile2 style="font-size:10px" %}
+</div>
+<div id="tab-X-4" class="tabcontent tab-id-X" style="text-align:justify">
+{% capture outputfile %}
+
+{% endcapture %}
+{% include codecell.html content=outputfile style="font-size:10px" %}
 </div>
 {% include defaulttab.html id="open-X" %}
 

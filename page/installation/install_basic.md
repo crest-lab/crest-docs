@@ -90,3 +90,23 @@ which should print the program header to the terminal.
 ---
 
 ## Compiling from source
+
+If you wish to build the program yourself from the source code, you will first
+have to obtain it.
+For this, navigate to CREST's [GitHub page {{ site.data.icons.github }}]( {{ site.project }} ) and
+either fork it (if you are familiar with GitHub), or locate the "*Code*" button.
+{: .text-justify }
+
+{% include image.html file="install-3.png" max-width=400 %}
+
+There, you will have the option to either clone the project with `git` via the command line
+```bash
+git clone {{ site.project }}.git /directory/of/your/choice
+```
+
+or simply download the ZIP file.
+After you have obtained the source code, you will need to build the program.
+Instructions on this can be found on the next page.
+{: .text-justify }
+
+[ Continue: Compiling from Source {{ site.data.icons.aright }}](./install_compile.html){: .btn .btn-blue }

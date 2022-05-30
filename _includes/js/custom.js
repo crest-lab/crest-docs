@@ -74,7 +74,7 @@ async function copyCode(event) {
     //button.innerText = copyButtonLabel;
     //button.innerHTML = copyButtonHTML;
     button.className = buttonClass1;
-  },1000)
+  },2000)
 }
 
 async function copyCode2(event) { 
@@ -95,7 +95,7 @@ async function copyCode2(event) {
     //button.innerHTML = copyButtonHTML;
     button.className = buttonClass1;
 
-  },1000)
+  },2000)
 }
 
 

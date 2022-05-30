@@ -73,7 +73,46 @@ If you decided on the GNU compilers, set them as your defaults:
 export FC=gfortran CC=gcc
 ```
 
-## Install via CMake
+---
 
 ## Install via Meson
 
+Meson is an open source multiplatform build system. The main development project can be found on [Meson's GitHub page {{site.data.icons.github}}](https://github.com/mesonbuild/meson).
+Meson is used in combination with the [Ninja {{site.data.icons.github}}](https://github.com/ninja-build/ninja) build system (version > 1.8) as a backend.
+Both can be installed from the command line via `pip` (Python version > 3.7).
+```bash
+python3 -m pip install meson ninja
+```
+**OR** via
+```bash
+sudo apt install meson ninja-build
+```
+Check their installation with
+```bash
+meson --version ; ninja --verison
+```
+<br>
+Instructions for building CREST with Meson are read from the `meson.build` file.
+For the next steps you will need to have chosen a compiler (`ifort`/`icc` or `gfortran`/`gcc`) and exported the `FC` and `CC` variables as described [above {{site.data.icons.aup}}](#choice-of-compiler). 
+To start building the program, navigate to the directory in which you have saved CREST and set up the build with
+{: .text-justify }
+```bash
+meson setup _build
+```
+This will prepare the directory `_build` in which the program will be compiled.
+{% include tip.html content="You may need to specify the linear algebra backend in the setup step. This is done by adding the `-Dla_backend=<option>` keyword to the setup command.
+For example, add `-Dla_backend=mkl` to use the shared MKL library." %}
+
+If the setup was successfull, initiate the build (still in the same directory) with
+```bash
+ninja -C _build
+```
+
+
+
+---
+
+## Install via CMake
+
+CMake is one of the most widely used multiplatform build systems.
+It can be used with [Ninja {{site.data.icons.github}}](https://github.com/ninja-build/ninja) or the regular `make` as a backend.

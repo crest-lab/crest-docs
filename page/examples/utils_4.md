@@ -20,6 +20,17 @@ permalink: /page/examples/utilities/utils_4.html
 ## Evaluating rotational/vibrational/translational partition functions
 
 
+Calculations of the entropy or free energy require an evaluation of the rovibrational partition functions.
+In publications such as [*Chem. Sci.*, **2021**, *12*, 6551-6568](https://doi.org/10.1039/D1SC00621E)
+we employ a *modified and scaled rigid-rotor harmonic-oscillator* (msRRHO) evaluation of the partition function.
+While this can in principal be conducted at any level of theory (FF, SQM, DFT, etc.), the modified (*i.e.*, interpolated) and scaled treatment is  not necessarly available in any QM code.
+Therefore, a standalone version of the `thermo` program is implemented in CREST that allows just that.
+All that is required is the molecular input structure (for identification of rotational and translational partition functions), and the vibrational frequencies in a file called `vibspectrum` using a [specific format](../../documentation/coords.html#vibrational-frequencies-in-the-vibspectrum-format).
+{: .text-justify }
+
+An example is shown for the thymine molecule below.
+The `vibspectrum` file must simply be present in the same directory and is read automatically.
+
 {% include image.html file="utils-example-4-1.png" alt="Thymine input structure" caption="Input structure of the thymine molecule used to obtain the vibrational frequencies." max-width=200 %}
 
 
@@ -207,4 +218,9 @@ Overall wall time  : 0h : 0m : 0s
 </div>
 {% include defaulttab.html id="open-1" %}
 
+By default, the evaluation is conducted for the partition functions at a temperature range from 278.15 to 378.15 K.
+This can be changed with the `--trange` command.
+Interpolation and scaling parameters of msRRHO can be adjusted with the `--sthr` and `--fscal` commands, respectively.
+See the [**Keyword Documentation** {{ site.data.icons.book }}](../..//documentation/keywords.html#entropy-mode-settings).
+{: .text-justify }
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: QCG Examples
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 8
 has_children: true
 permalink: /page/examples/qcg

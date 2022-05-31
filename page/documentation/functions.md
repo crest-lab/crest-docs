@@ -2,7 +2,7 @@
 layout: default
 title: Functionalities
 parent: Documentation
-nav_order: 2
+nav_order: 3
 toc: false
 summary: "An overview over the different tools implemented in CREST."
 permalink: /page/documentation/functions.html

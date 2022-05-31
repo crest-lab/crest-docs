@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Utility Tools
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 10
 has_children: true
 permalink: /page/utilities

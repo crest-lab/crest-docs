@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Input Formats
+title: File Formats
 parent: Documentation
-nav_order: 3
+nav_order: 4
 toc: false
 summary: "Examples for input files and formats."
 permalink: /page/documentation/coords.html
@@ -23,6 +23,11 @@ permalink: /page/documentation/coords.html
 ---
 
 ## Input Atomic Coordinates
+
+The program supports molecular `[INPUT]` files in the
+- Turbomole coord format (**.coord** extension, Bohr)
+- Xmol format (**.xyz** extension, Ångström)
+- MDL molfile format (V2000,V3000, **.sdf**/**.mol** extension, Ångström)
 
 Example coordinates are shown for the caffeine molecule below.
 Atoms are typically specified line-by-line, each containing

@@ -3,7 +3,7 @@
 <colgroup>
 <col width="25%" />
 <col width="25%" />
-<col width="70%" />
+<col width="50%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -14,7 +14,7 @@
 </thead>
 <tbody>
  {% for flags in {{include.obj}} %}
-    {% include tr.html td1= flags.type td2=flags.comm ctd2=flags.cmd td3=flags.descript rtag=flags.url.text ref=flags.url.link a=flags.anchor %}
+    {% include tr.html td1=flags.type td2=flags.comm ctd2=flags.cmd td3=flags.descript rtag=flags.url.text ref=flags.url.link a=flags.anchor %}
  {% endfor %}
 </tbody>
 </table>

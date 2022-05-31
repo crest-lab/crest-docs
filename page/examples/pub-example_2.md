@@ -2,7 +2,7 @@
 layout: default
 title: Metal-organic Systems
 parent: Publication Examples
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 2
 toc: false
 summary: "An exmaple for sampling conformers of metal-organic systems."

@@ -116,3 +116,45 @@ ninja -C _build
 
 CMake is one of the most widely used multiplatform build systems.
 It can be used with [Ninja {{site.data.icons.github}}](https://github.com/ninja-build/ninja) or the regular `make` as a backend.
+CMake can be installed in different ways. For example from the [official webiste](https://cmake.org/install/), or via `pip`
+
+```bash
+pip install cmake
+```
+
+As before, you must have  exported `FC` and `CC` variables to set the compilers.
+To start building CREST, navigate to the source (a file called `CMakeLists.txt` should be present here) and setup a `_build` directory with
+```bash
+cmake -B _build -DCMAKE_BUILD_TYPE=Release
+```
+If you wish to use Ninja as a backend also add the `-GNinja` option to this command.
+Then build the project with
+```bash
+make -C _build
+```
+or `ninja -C _build`, whatever you prefer.
+
+---
+
+
+## Conda
+
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/crest.svg)](https://anaconda.org/conda-forge/crest)
+
+Installing CREST from the [`conda-forge` channel](https://conda-forge.org/) can be achieved by adding `conda-forge` to your channels with:
+
+```bash
+conda config --add channels conda-forge
+```
+
+Once the `conda-forge` channel has been enabled, CREST can be installed with:
+
+```bash
+conda install crest
+```
+
+It is possible to list all of the versions of CREST available on your platform with:
+
+```bash
+conda search crest --channel conda-forge
+```

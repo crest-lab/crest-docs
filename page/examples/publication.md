@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Publication Examples
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 7
 has_children: true
 permalink: /page/examples/publication

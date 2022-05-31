@@ -2,7 +2,7 @@
 layout: default
 title: Calculate <i>S</i><sub>msRRHO</sub>
 parent: Utility Tools
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 5
 toc: false
 summary: "How to calculating an <i>averaged</i> <i>S</i><sub>msRRHO</sub> for CREST's entropy mode."

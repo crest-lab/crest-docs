@@ -12,7 +12,7 @@ permalink: /page/documentation/keywords.html
 # {{page.title}}
 {: .no_toc }
 
-This page contains the documentation of all available keywords for CREST.
+This page contains the documentation of all available command line keywords for CREST.
 The command line arguments are grouped according to different functions.
 For the general command line usage [see the parent page.]({{site.baseurl}}/page/documentation/#general-usage) 
 This page specifies the `[OPTIONS]`. Required arguments will be marked with `< >`, optional arguments are marked by brackets `[ ]`.

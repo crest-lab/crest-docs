@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Example 3
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 3
 toc: false
 summary: "A conformational search with CREST's NCI mode for non-covalent systems."

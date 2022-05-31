@@ -2,7 +2,7 @@
 layout: default
 title: QCG Example 3
 parent: QCG Examples
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 3
 toc: false
 summary: "An example for constrained QCG calculations."

@@ -2,7 +2,7 @@
 layout: default
 title: <code>thermo</code> Calculations
 parent: Utility Tools
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 4
 toc: false
 summary: "How to evaluate thermodynamical partition functions with the <i>thermo</i> submodule."

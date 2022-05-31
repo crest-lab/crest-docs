@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Example 5
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 5
 toc: false
 summary: "A guide to protonation/deprotonation sampling with CREST."

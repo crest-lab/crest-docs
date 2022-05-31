@@ -2,7 +2,7 @@
 layout: default
 title: Ensemble Optimization
 parent: Utility Tools
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 1
 toc: false
 summary: "An example on how te (re-)optimize ensembles with CREST."

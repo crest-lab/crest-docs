@@ -2,7 +2,7 @@
 layout: default
 title: Release 2.12
 parent: Releases
-nav_order: 1
+nav_order: 2
 toc: false
 summary: "Release notes for most current CREST version"
 permalink: /page/examples/release_current.html

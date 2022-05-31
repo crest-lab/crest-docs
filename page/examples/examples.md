@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Examples
+title: Examples and Guides
 nav_order: 6
 has_children: true
 permalink: /page/examples

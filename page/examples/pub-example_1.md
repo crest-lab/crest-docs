@@ -2,7 +2,7 @@
 layout: default
 title: TS Conformers
 parent: Publication Examples
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 1
 toc: false
 summary: "An exmaple for sampling conformers at the transition-state."

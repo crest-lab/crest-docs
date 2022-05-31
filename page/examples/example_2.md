@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Example 2
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 2
 toc: false
 summary: "A guide to sorting ensembles with CREST."

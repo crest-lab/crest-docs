@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Example 1
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 1
 toc: false
 summary: "A simple conformational search with CREST."

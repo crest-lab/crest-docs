@@ -1,0 +1,35 @@
+{% if {{include.obj}} %}
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Key</th>
+<th>Values / Description</th>
+</tr>
+</thead>
+<tbody>
+ {% for opt in {{include.obj}} %}
+    <tr>
+     {% if {{opt.comm}} %}
+     <td markdown="span">{{opt.comm}}</td>
+     {% else %}
+     <td markdown="span">`{{opt.key}}`</td>
+     {% endif %}
+     <td>
+     <div markdown="span">{{opt.descript}}</div>
+     {% if {{opt.vals}} %}    
+      <ul>
+       {% for val in {{opt.vals}} %}
+         <li markdown="span">{{val}}</li>
+       {% endfor %}
+      </ul>
+     {% endif %}
+    </td>
+    </tr>
+ {% endfor %}
+</tbody>
+</table>
+{% endif %}

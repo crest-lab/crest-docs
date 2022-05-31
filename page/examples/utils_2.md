@@ -2,7 +2,7 @@
 layout: default
 title: Calculating RMSDs
 parent: Utility Tools
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 2
 toc: false
 summary: "How to calculate a Cartesian RMSD with CREST."

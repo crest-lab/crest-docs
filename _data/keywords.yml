@@ -52,6 +52,15 @@ general:
       Perform a “dry” run, *i.e.*, nothing is actually done but       
       instead an overview of the settings that would be applied in the calculation is given.
 
+  - cmd: "--input <INPUTFILE>"
+    descript: >
+      <span class='label label-green'>CREST 3.0 preview</span>
+      Specify a CREST input file from which the calculation settings are read.
+      For more information see the
+      [**Input File Documentation** <i class='fa-solid fa-book'></i>](./inputfiles.html
+      'Documentation / Input File Documentation').
+
+
 
 
 runtype:

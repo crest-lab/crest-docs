@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Example 4
-parent: Examples
+parent: "Examples and Guides"
 nav_order: 4
 toc: false
 summary: "A guide to <i>constrained</i> conformational sampling with CREST."

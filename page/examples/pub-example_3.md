@@ -2,7 +2,7 @@
 layout: default
 title: TYR on graphene
 parent: Publication Examples
-grand_parent: Examples
+grand_parent: "Examples and Guides"
 nav_order: 3
 toc: false
 summary: "An exmaple for conformers of tyrosine on a graphene cutout."

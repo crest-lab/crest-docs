@@ -4,7 +4,7 @@ title: News
 parent: About
 nav_order: 4
 toc: false
-summary: "How to get in contact?"
+summary: "What's new?"
 permalink: /page/about/news.html
 ---
 

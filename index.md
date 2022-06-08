@@ -36,7 +36,7 @@ Quick links to different sections of the documentation can be found below.
      <div class="card-body text-center">
        <h4>Installation</h4>
        <p>View information on how to install CREST.</p>
-       <a href="{{site.baseurl}}/page/installation/" class="stretched-link"></a> 
+       <a href="{{site.baseurl}}/page/installation" class="stretched-link"></a> 
      </div>
    </div>
  </div>
@@ -46,7 +46,7 @@ Quick links to different sections of the documentation can be found below.
      <div class="card-body text-center">
        <h4>Examples</h4>
        <p>View the example applications for CREST.</p>
-       <a href="{{site.baseurl}}/page/examples/" class="stretched-link"></a>
+       <a href="{{site.baseurl}}/page/examples" class="stretched-link"></a>
      </div>
    </div>
  </div>
@@ -55,7 +55,7 @@ Quick links to different sections of the documentation can be found below.
     {% include image.html file="quicklink_documentation.png" alt="Documentation" %}
       <h4>Documentation</h4>
       <p>View the keyword documentation.</p>
-      <a href="{{site.baseurl}}/page/documentation/" class="stretched-link"></a>
+      <a href="{{site.baseurl}}/page/documentation" class="stretched-link"></a>
    </div>
  </div>
  <div class="col-md-3 col-sm-6 d-flex">

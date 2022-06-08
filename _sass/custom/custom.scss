@@ -53,6 +53,17 @@ figcaption {
 }
 
 
+// Code-block modifications
+$code-text-color: $grey-dk-100 !default;
+code {
+  color: $code-text-color;
+  font-weight: bold;
+}
+
+// color of code-blocks within links
+a code {
+  color: $link-color;
+}
 
 
 // Definitions of TABS

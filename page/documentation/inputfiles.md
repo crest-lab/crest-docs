@@ -20,7 +20,7 @@ This page contains a guide to CREST input files that can be used with program ve
 
 CREST program instructions via the various [command line arguments](./documentation.html) can become quite lengthy and tedious.
 Therefore, following version 3.0 of CREST, input files will be available.
-Currently, the input files are *loosely* based on the [**TOML format** {{site.data.icons.ext}}](https://toml.io/en/ "https://toml.io") and we are planning on implementing a proper TOML parser at some point.
+Currently, the input files are *loosely* based on the [**TOML format** {{site.data.icons.ext}}](https://toml.io/en/ "https://toml.io") and we are planning on implementing a [proper TOML parser](https://github.com/toml-f/toml-f) at some point.
 {: .text-justify }
 
 CREST input files can be loaded with the `--input` command

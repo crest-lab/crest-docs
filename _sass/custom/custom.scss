@@ -66,6 +66,7 @@ a code {
 }
 
 
+
 // Definitions of TABS
 $tab-header-color: $grey-lt-200 !default;
 .tab {
@@ -85,6 +86,10 @@ $tab-text-color: $blue-100 !default;
   padding: 14px 16px;
   transition: 0.3s;
   color: $tab-text-color;
+}
+
+.tab code {
+ color: $tab-text-color;
 }
 
 /* Change background color of buttons on hover */

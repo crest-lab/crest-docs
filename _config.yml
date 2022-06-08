@@ -18,10 +18,10 @@ description: A documentation for the CREST program
 baseurl: "/crest-docs" # the subpath of your site, e.g. /blog
 #url: "https://crest-lab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 #repository: crest-lab/crest-docs
-repository: prct92/crest-docs
+repository: crest-lab/crest-docs
 
 #This is the project the documentation is ment for
-project: "https://github.com/grimme-lab/crest"
+project: "https://github.com/crest-lab/crest"
 
 remote_theme: "just-the-docs/just-the-docs"
 permalink: pretty

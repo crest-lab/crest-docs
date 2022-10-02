@@ -5,7 +5,7 @@ parent: Publication Examples
 grand_parent: "Examples and Guides"
 nav_order: 3
 toc: false
-summary: "An exmaple for conformers of tyrosine on a graphene cutout."
+summary: "An example for conformers of tyrosine on a graphene cutout."
 permalink: /page/examples/publication/example_3.html
 ---
 

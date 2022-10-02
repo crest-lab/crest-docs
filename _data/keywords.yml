@@ -305,8 +305,8 @@ confsettings:
       adds it to the MTD simulation. Also, MTD bias parameters are adjusted and 
       some settings are reduced in order to achieve lower computation times. See
     url:
-       text: Example X.
-       link: /page/examples/
+       text: Example 3.
+       link: /page/examples/example_3.html
 
   - cmd: --wscal <REAL>
     descript: >
@@ -484,8 +484,8 @@ sortingsettings:
       metadynamics bias potential. Can be important for constrained conformational
       searches. See
     url:
-      text: Example X.
-      link: /page/examples/
+      text: Example 4.
+      link: /page/examples/example_4.html
 
   - cmd: --notopo [atomlist]
     anchor: notopo
@@ -517,10 +517,7 @@ pcasettings:
       tested one-by-one, which can be expensive for large ensembles. To speed things up, 
       some incremental variants are accessible via `incr`, `tightincr`, and `vtightincr`.
       The [default], *i.e.*, omitting `[ARG]`, corresponds to `--cluster normal`.
-      See also
-    url:
-      text: Example X.
-      link: /page/examples/
+      See also [Example: Conformational Entropy](../examples/entropy.html).
 
   - cmd: --pccap <INT>
     descript: >

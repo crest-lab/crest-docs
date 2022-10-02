@@ -5,7 +5,7 @@ parent: Releases
 nav_order: 3
 toc: false
 summary: "Release notes for previous CREST versions"
-permalink: /page/examples/release_old.html
+permalink: /page/releases/release_old.html
 ---
 
 # CREST Release versions 2.11.2 and older

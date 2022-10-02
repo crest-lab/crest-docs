@@ -5,7 +5,7 @@ parent: Publication Examples
 grand_parent: "Examples and Guides"
 nav_order: 2
 toc: false
-summary: "An exmaple for sampling conformers of metal-organic systems."
+summary: "An example for sampling conformers of metal-organic systems."
 permalink: /page/examples/publication/example_2.html
 ---
 

@@ -5,7 +5,7 @@ parent: Releases
 nav_order: 2
 toc: false
 summary: "Release notes for most current CREST version"
-permalink: /page/examples/release_current.html
+permalink: /page/releases/release_current.html
 ---
 
 # CREST Release versions 2.12.x

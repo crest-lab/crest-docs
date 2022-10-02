@@ -5,7 +5,7 @@ parent: "Examples and Guides"
 nav_order: 6
 toc: false
 summary: "A guide to the calculation of conformational entropies with CREST."
-permalink: /page/examples/eentropy.html
+permalink: /page/examples/entropy.html
 ---
 
 # {{page.title}}

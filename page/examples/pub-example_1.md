@@ -5,7 +5,7 @@ parent: Publication Examples
 grand_parent: "Examples and Guides"
 nav_order: 1
 toc: false
-summary: "An exmaple for sampling conformers at the transition-state."
+summary: "An example for sampling conformers at the transition-state."
 permalink: /page/examples/publication/example_1.html
 ---
 

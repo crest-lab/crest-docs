@@ -32,6 +32,10 @@ This is a collection of various works that focus on CREST and `xtb`.
 
 - **Quantum Cluster Growth (QCG):** Spicher, S.; Plett, C.; Pracht, P.; Hansen, A.; Grimme, S.; *Automated Molecular Cluster Growing for Explicit Solvation by Efficient Force Field and Tight Binding Methods*, *J. Chem. Theory Comput.*, **2022**, *18 (5)*, 3174-3189. [DOI: 10.1021/acs.jctc.2c00239](https://doi.org/10.1021/acs.jctc.2c00239)
 
+- **Minimum Energy Crossing Point (MECP) sampling:** Pracht, P.; Bannwarth, C.; *Fast Screening of Minimum Energy Crossing Points with Semiempirical Tight-Binding Methods*, *J. Chem. Theory Comput.*, **2022**, [DOI: 10.1021/acs.jctc.2c00578](https://doi.org/10.1021/acs.jctc.2c00578).
+
+
+
 ---
 
 ## GFN*n*-xTB Methods
@@ -41,16 +45,16 @@ This is a collection of various works that focus on CREST and `xtb`.
 - **GFN1-xTB:** Grimme, S.; Bannwarth, C.; Shushkov, P.; *A Robust and Accurate Tight-Binding Quantum Chemical Method for Structures, Vibrational Frequencies, and Noncovalent Interactions of Large Molecular Systems Parameterized for All spd-Block Elements (Z = 1-86).* *J. Chem. Theory Comput.*, **2017**, *13 (5)*, 1989-2009. [DOI: 10.1021/acs.jctc.7b00118](https://doi.org/10.1021/acs.jctc.7b00118)
 
 - **GFN2-xTB:** Bannwarth, C.; Ehlert, S.; Grimme, S.; *GFN2-xTB — An Accurate and Broadly Parametrized Self-Consistent Tight-Binding Quantum Chemical Method with Multipole Electrostatics and Density-Dependent Dispersion Contributions* *J. Chem. Theory Comput.* **2019**, *15 (3)*, 1652–1671. [DOI: 10.1021/acs.jctc.8b01176](https://doi.org/10.1021/acs.jctc.8b01176)
-
+doi:10.1021/acs.jctc.2c00578
 - **xTB-iFF:** Grimme, S.; Bannwarth, C.; Caldeweyher, E.; Pisarek, J.; Hansen, A.; *A general intermolecular force field based on tight-binding quantum chemical calculations*, *J. Chem. Phys.*, **2017**, *147*, 161708. [DOI: 10.1063/1.4991798](https://doi.org/10.1063/1.4991798)
 
-- **GFN-FF:** Spicher, S.; Grimme, S.; *Robust atomistic modeling of materials, organometallic and biochemical systems* *Angew. Chem. Int. Ed.* **2020**, *59*,15665. [DOI: 10.1002/anie.202004239](https://doi.org/10.1002/anie.202004239)
+- **GFN-FF:** Spicher, S.; Grimme, S.; *Robust atomistic modeling of materials, organometallic and biochemical systems* *Angew. Chem. Int. Ed.* **2020**, *59*, 15665. [DOI: 10.1002/anie.202004239](https://doi.org/10.1002/anie.202004239)
 
 ---
 
 ## Applications
 
-- **Conformational Entropy in Solution:** Gorges, J.; Grimme, S.; Hansen, A.; Pracht, P.; *Towards understanding solvation effects on the conformational entropy of non-rigid molecules*, *Phys. Chem. Chem. Phys.*, **2022**, [DOI: 10.1039/D1CP05805C](https://doi.org/10.1039/D1CP05805C)
+- **Conformational Entropy in Solution:** Gorges, J.; Grimme, S.; Hansen, A.; Pracht, P.; *Towards understanding solvation effects on the conformational entropy of non-rigid molecules*, *Phys. Chem. Chem. Phys.*, **2022**, *24*, 12249-12259. [DOI: 10.1039/D1CP05805C](https://doi.org/10.1039/D1CP05805C)
 
 - **Free Energy Calculations:** Grimme, S.; Bohle, F.; Hansen, H.; Pracht, P.; Spicher, S.; Stahn, M.; *Efficient Quantum Chemical Calculation of Structure Ensembles and Free Energies for Nonrigid Molecules*, *J. Phys. Chem. A*, **2021**, *125 (19)*, 4039-4054. [DOI: 10.1021/acs.jpca.1c00971](https://doi.org/10.1021/acs.jpca.1c00971)
 https://doi.org/10.1021/acs.jctc.0c00877

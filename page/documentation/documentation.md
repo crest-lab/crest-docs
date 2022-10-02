@@ -31,8 +31,9 @@ The different command line `[OPTIONS]` can be found in the [**Keyword Documentat
 ---
 <span class="label label-green">CREST 3.0 Preview</span>
 
-***Alternatively***, CREST instructions can be defined entriely in a separate input file and passed via
+***Alternatively***, [CREST 3](../releases/release_preview.html) instructions can be defined entriely in a separate input file and passed via
 ```bash
 crest --input <INPUTFILE>
 ```
-For more information see the [**Input File Documentation** {{site.data.icons.book}}]({{site.baseurl}}/page/documentation/inputfiles.html) section.
+For more information see the [**Input File Documentation** {{site.data.icons.book}}]({{site.baseurl}}/page/documentation/inputfiles.html) section,
+or [some selected **examples**]({{site.baseurl}}/page/examples/mecp).

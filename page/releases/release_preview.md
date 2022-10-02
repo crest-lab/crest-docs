@@ -28,6 +28,7 @@ permalink: /page/releases/release_preview.html
 
 ---
 
-To try out new implementations of CREST 3, build the development version [**from source**](../installation/install_compile.html).
+To try out new implementations of CREST 3, build the development version [**from source**](../installation/install_compile.html). 
+Note, that development is done with intel (`ifort/icc`) compilers, so there might be some issues for GNU (`gfortran/gcc`) builds.
 The respective code can be found in the `3.0dev` branch of the repository:
 {% include image.html file="install-3dev.png" %}

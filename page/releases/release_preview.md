@@ -24,7 +24,7 @@ permalink: /page/releases/release_preview.html
 - Standalone MD and metadynamics module
 - Standalone implementation of geometrical constraints
 - New minimum energy crossing point (MECP) algorithm (see [**Examples/MECP Calaculations**](../examples/mecp   "Examples / MECP Calculations"))
-
+- Integration of the [**tblite API** {{ site.data.icons.github }}](https://github.com/tblite/tblite "tblite on GitHub")
 
 ---
 

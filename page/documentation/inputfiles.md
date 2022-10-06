@@ -41,7 +41,7 @@ elog="energies.log"
 
 [[calculation.level]]
 method = "xtb"
-prog = "xtb-6.5.0"
+binary = "xtb-6.5.0"
 uhf = 0
 flags = "--gfn 2 --grad"
 dir = "s0"

@@ -73,7 +73,7 @@ elog="energies.log"
 
 [[calculation.mecp]]  # This block automatically sets up a uhf=0 and uhf=2 calculation with xtb
 method = "xtb"
-prog = "xtb"
+binary = "xtb"
 flags = "--gfn 2 --grad"
 
 [[calculation.constraints]]

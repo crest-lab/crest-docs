@@ -75,14 +75,14 @@ elog="energies.log"
 
 [[calculation.level]]
 method = "xtb"
-prog = "xtb"
+binary = "xtb"
 uhf = 0  # GFN2-xTB S0 state
 flags = "--gfn 2 --grad"
 dir = 's0'
 
 [[calculation.level]]
 method = "xtb"
-prog = "xtb"
+binary = "xtb"
 uhf = 2  # GFN2-xTB T1 state
 dir = 's1'
 flags = "--gfn 2 --grad"

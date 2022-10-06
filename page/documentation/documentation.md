@@ -31,7 +31,7 @@ The different command line `[OPTIONS]` can be found in the [**Keyword Documentat
 ---
 <span class="label label-green">CREST 3.0 Preview</span>
 
-***Alternatively***, [CREST 3](../releases/release_preview.html) instructions can be defined entriely in a separate input file and passed via
+***Alternatively***, [CREST 3]({{site.baseurl}}/page/releases/release_preview.html) instructions can be defined entriely in a separate input file and passed via
 ```bash
 crest --input <INPUTFILE>
 ```

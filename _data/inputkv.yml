@@ -15,7 +15,8 @@ general:
 
    - comm: "`bin`, `binary`"
      descript: >
-       Specify a `xtb` binary as a *string*
+       Specify a `xtb` binary as a *string*. Used for *legacy* runtypes of CREST. 
+       For new integrations use the `binary` option within the `[calculation.level]` block.
 
    - key: runtype
      descript: >
@@ -84,6 +85,9 @@ calclevel:
      vals:
        - "`xtb`,`gfn`,`gfn-xtb` - Select GFN*n*-xTB method calculations 
           performed via the `xtb` program"
+       - "`generic` - Call a generic script. The script should process the coordinates that
+          crest writes into a file `genericinp.xyz` and you must know how to obtain the gradient
+          (see options `gradtype` and `gradfile` below)`"
 
    - comm: "`bin`, `binary`"
      descript: >
@@ -100,7 +104,7 @@ calclevel:
    - comm: "`dir`, `calcspace`"
      descript: >
        Specify the directory in which CREST shall perform this calculation as a *string*.
-       Note, that this is can be a *relative* OR *absolute* path to the directory.
+       Note, this is can be a *relative* OR *absolute* path to the directory.
 
    - comm: "`chrg`, `charge`"
      descript: >
@@ -125,6 +129,18 @@ calclevel:
      descript: >
        Activate/Deactivate reading of the Cartesian gradient of the molecular dipole moments 
        for each singlepoint at the chosen level. Specify as *boolean* (`true`/`false`)
+
+   - key: gradfile
+     descript: >
+       Name the file from which each singlepoint in the `generic` method interface
+       obtains the energy and gradient information. Specify as *string*
+
+   - key: gradtype
+     descript: >
+       Name the gradient file *format* for each singlepoint in the `generic` method interface.
+       Specify as *string*. Available options are:
+     vals:
+       - "`engrad` - the *.engrad* format used by e.g. xtb and ORCA."
 
 
 

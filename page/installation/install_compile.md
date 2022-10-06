@@ -18,7 +18,7 @@ summary: "This guide contains instructions for compiling CREST from source."
 
 ---
 
-{% include tip.html content="A great resource for the things discussed in the following and the *Fortran* programming language in general is also the [**fortran-lang.org** <i class='fa-solid fa-arrow-up-right-from-square'></i>](https://fortran-lang.org) project. Check it out!" %}
+{% include tip.html content="A great resource for the things discussed in the following and the *Fortran* programming language in general is the [**fortran-lang.org** <i class='fa-solid fa-arrow-up-right-from-square'></i>](https://fortran-lang.org) project. Check it out!" %}
 
 ## Choice of Compiler
 

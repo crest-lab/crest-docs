@@ -32,7 +32,7 @@ This is a collection of various works that focus on CREST and `xtb`.
 
 - **Quantum Cluster Growth (QCG):** Spicher, S.; Plett, C.; Pracht, P.; Hansen, A.; Grimme, S.; *Automated Molecular Cluster Growing for Explicit Solvation by Efficient Force Field and Tight Binding Methods*, *J. Chem. Theory Comput.*, **2022**, *18 (5)*, 3174-3189. [DOI: 10.1021/acs.jctc.2c00239](https://doi.org/10.1021/acs.jctc.2c00239)
 
-- **Minimum Energy Crossing Point (MECP) sampling:** Pracht, P.; Bannwarth, C.; *Fast Screening of Minimum Energy Crossing Points with Semiempirical Tight-Binding Methods*, *J. Chem. Theory Comput.*, **2022**, [DOI: 10.1021/acs.jctc.2c00578](https://doi.org/10.1021/acs.jctc.2c00578).
+- **Minimum Energy Crossing Point (MECP) sampling:** Pracht, P.; Bannwarth, C.; *Fast Screening of Minimum Energy Crossing Points with Semiempirical Tight-Binding Methods*, *J. Chem. Theory Comput.*, **2022**, *18 (10)*, 6370-6385. [DOI: 10.1021/acs.jctc.2c00578](https://doi.org/10.1021/acs.jctc.2c00578).
 
 
 

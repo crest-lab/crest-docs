@@ -59,7 +59,7 @@ doi:10.1021/acs.jctc.2c00578
 - **Conformational Entropy in Solution:** Gorges, J.; Grimme, S.; Hansen, A.; Pracht, P.; *Towards understanding solvation effects on the conformational entropy of non-rigid molecules*, *Phys. Chem. Chem. Phys.*, **2022**, *24*, 12249-12259. [DOI: 10.1039/D1CP05805C](https://doi.org/10.1039/D1CP05805C)
 
 - **Free Energy Calculations:** Grimme, S.; Bohle, F.; Hansen, H.; Pracht, P.; Spicher, S.; Stahn, M.; *Efficient Quantum Chemical Calculation of Structure Ensembles and Free Energies for Nonrigid Molecules*, *J. Phys. Chem. A*, **2021**, *125 (19)*, 4039-4054. [DOI: 10.1021/acs.jpca.1c00971](https://doi.org/10.1021/acs.jpca.1c00971)
-https://doi.org/10.1021/acs.jctc.0c00877
+
 - **Conformational Energies of Transition Metal Complexes (TMCONF40):** Bursch, M.; Pracht, P.; Hansen, A.; Grimme, S. *Theoretical study on conformational energies of transition metal complexes* *Phys. Chem. Chem. Phys.* **2021**, *23*, 287-299. [DOI: 10.1039/D0CP04696](https://doi.org/10.1039/D0CP04696E)
 
 - **Molecular Muscles:** Kohn, J.; Spicher, S.; Bursch, M.; Grimme, S.; *Quickstart guide to model structures and interactions of artificial molecular muscles with efficient computational methods*, *Chem. Commun.*, **2022**, *58*, 258-261. [DOI: 10.1039/D1CC05759F](https://doi.org/10.1039/D1CC05759F)

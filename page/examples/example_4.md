@@ -46,7 +46,7 @@ This is can be shown, for example for the methanol-acetamide complex from the [S
 
 {% include image.html file="example-4-1.png" alt="methanol-acetamide complex"  caption="Non-covalent complex of methanol and acetamid, taken from the S66 benchmark set." max-width=400 %}
 
-{% include tip.html content="In principle, the constaining of *any* interatomic **distance**, **angle**, or **dihedral angle** is possible." %}
+{% include tip.html content="In principle, the constraining of *any* interatomic **distance**, **angle**, or **dihedral angle** is possible." %}
 
 In the respective `constraints.inp` file all constraints have to be specified in the `xtb` format. See the [`xtb` **Detailed Input** documentation](https://xtb-docs.readthedocs.io/en/latest/xcontrol.html#fixing-constraining-and-confining).
 For the methanol-acetamide example, the interatomic distance between the hyrdogen atom (2)

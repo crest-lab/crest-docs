@@ -54,6 +54,8 @@ doi:10.1021/acs.jctc.2c00578
 
 ## Applications
 
+- **Supramolecular Complexes containing Heavy Main Group Elements:** Gorges, J.; Grimme, S.; Hansen, A.; *Reliable prediction of association (free) energies of supramolecular complexes with heavy main group elements - the HS13L benchmark set*, *Phys. Chem. Chem. Phys.*, **2022**, [DOI 10.1039/D2CP04049B](https://doi.org/10.1039/D2CP04049B)
+
 - **Conformational Entropy in Solution:** Gorges, J.; Grimme, S.; Hansen, A.; Pracht, P.; *Towards understanding solvation effects on the conformational entropy of non-rigid molecules*, *Phys. Chem. Chem. Phys.*, **2022**, *24*, 12249-12259. [DOI: 10.1039/D1CP05805C](https://doi.org/10.1039/D1CP05805C)
 
 - **Free Energy Calculations:** Grimme, S.; Bohle, F.; Hansen, H.; Pracht, P.; Spicher, S.; Stahn, M.; *Efficient Quantum Chemical Calculation of Structure Ensembles and Free Energies for Nonrigid Molecules*, *J. Phys. Chem. A*, **2021**, *125 (19)*, 4039-4054. [DOI: 10.1021/acs.jpca.1c00971](https://doi.org/10.1021/acs.jpca.1c00971)

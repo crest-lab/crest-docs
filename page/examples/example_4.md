@@ -28,27 +28,27 @@ permalink: /page/examples/example_4.html
 
 ## Constrained conformational sampling
 
-CRESTs conformational search relies on the quality of the underlying level of theory.
+CREST's conformational search relies on the quality of the underlying level of theory.
 Since we are choosing a SQM method (GFN*n*-xTB), it is possible for the system to
 freely form and break bonds.
 While it was shown in [Example 2](example_2.html#handling-topology-in-cregen) how to handle the resulting topology mismatches in the sorting algorithm,
-in some occasions it might be required by the user to constrain certain parts of the geometry.
+in some occasions it might be required for the user to constrain certain parts of the geometry.
 In CREST this is possible by passing the respective **constraints as a separate file** to `xtb`.
 {: .text-justify }
 
 A typical example are metal-organic compounds that can be sigificantly distorted at the GFN*n*-xTB level.
-Here, certain bond lengths or angles could be constrained in order to avoid this.
+Here, certain bond lengths or angles can be constrained in order to avoid this.
 An even simpler example are small non-covalent complexes.
-As was noted in [Example 3](example_3.html), the MTD bias potential would lead to dissociation of such non-covalently bound molecules.
-Instead of employing a wall potential like in the previous example, one could simply constrain some interatomic distances.
-This is can be shown, for example for the methanol-acetamide complex from the [S66 benchmark set](https://doi.org/10.1021/ct2002946).
+As was noted in [Example 3](example_3.html), the MTD bias potential leads to dissociation of such non-covalently bound molecules.
+Instead of employing a wall potential like in the previous example, one can simply constrain some interatomic distances.
+This can be shown, for example for the methanol-acetamide complex from the [S66 benchmark set](https://doi.org/10.1021/ct2002946).
 {: .text-justify }
 
-{% include image.html file="example-4-1.png" alt="methanol-acetamide complex"  caption="Non-covalent complex of methanol and acetamid, taken from the S66 benchmark set." max-width=400 %}
+{% include image.html file="example-4-1.png" alt="methanol-acetamide complex"  caption="Non-covalent complex of methanol and acetamide, taken from the S66 benchmark set." max-width=400 %}
 
 {% include tip.html content="In principle, the constraining of *any* interatomic **distance**, **angle**, or **dihedral angle** is possible." %}
 
-In the respective `constraints.inp` file all constraints have to be specified in the `xtb` format. See the [`xtb` **Detailed Input** documentation](https://xtb-docs.readthedocs.io/en/latest/xcontrol.html#fixing-constraining-and-confining).
+In the respective `constraints.inp` file, all constraints have to be specified in the `xtb` format. See the [`xtb` **Detailed Input** documentation](https://xtb-docs.readthedocs.io/en/latest/xcontrol.html#fixing-constraining-and-confining).
 For the methanol-acetamide example, the interatomic distance between the hyrdogen atom (2)
 and the oxygen atom (12) is constrained by an harmonic potential (force constant in atomic units, 0.25 *E*<sub>h</sub>/Bohr<sup>2</sup>) to a value of 1.85 Ångström. 
 The input files and the CREST command are given as
@@ -113,23 +113,23 @@ methanol-acetamide structures which all have a H(2)-O(12) distance close to 1.85
 
 {% include image.html file="example-4-2.png" alt="Side-chain conformational sampling" caption="An    example where constraining an entire part of the structure is necessary: Sampling of side-chain      conformations. This system was investigated with CREST in <a href='https://doi.org/10.1039/D0CP04920D'>Phys. Chem. Chem. Phys., 2020, 22, 24282- 24290.</a>" %}
 
-Sometimes it is necessary to fixe entire parts of the structure.
+Sometimes it is necessary to fix entire parts of the structure.
 While **complete freezing of atoms is not possible in CREST**,
 putting a **_constraint on a large part of the substructure is possible_**.
-The procedure is in principle identical to the one [above {{ site.data.icons.aup }}](#constrained-conformational-sampling), but needs some simple additions.
+In principle, the procedure is identical to the one [above {{ site.data.icons.aup }}](#constrained-conformational-sampling), but needs some simple additions.
 {: .text-justify }
 
 As an example, a fictional system consisting out of a linear *n*-octane chain with a diglycine substituent is calculated.
 Here, the *entire* *n*-octane chain shall be fixed, so that it remains linear.
 {: .text-justify }
 
-{% include image.html file="example-4-3.png" alt="Side-chain conformational sampling example" caption="A fictional example for finding side-chain conformations. The linear n-octane chain (in orange) is fixated. Different side-chain conformers of the diglycine substituent are shown in transparent blue." max-width=400 %}
+{% include image.html file="example-4-3.png" alt="Side-chain conformational sampling example" caption="A fictional example for finding side-chain conformations. The linear n-octane chain (in orange) is fixed. Different side-chain conformers of the diglycine substituent are shown in transparent blue." max-width=400 %}
 
 To prepare the calculation, several things have to be done:
 
 1. A constraints file has to be created
 2. In this file, all atoms that shall be fixed must be added to the `$constrain` block with the `atoms:` keyword
-3. An *unchanged* reference geometry (= a copy of your input geometry) has to be added in the calculation diectory and specified in the `$constrain` block with the `reference=` keyword
+3. An *unchanged* reference geometry (= a copy of your input geometry) has to be added in the calculation directory and specified in the `$constrain` block with the `reference=` keyword
 4. All atoms that are *not* constrained (= your side chain to be sampled) must be added to the `$metadyn` block with the `atoms:` keyword
 5. The command line argument `--subrmsd` should be used in the CREST call
 6. (Optional) the MD/MTD time step should be reduced with `--tstep <REAL>`
@@ -384,7 +384,7 @@ The respective command is
 crest fictional.xyz --constrain 1-26
 ```
 
-Here, the [`--constrain <atomlist>` command](../documentation/keywords.html#constraining-options) was used which will do nothing else but write a file called `.xcontrol.sample` (=`constraints.inp` from above).
+Here, the [`--constrain <atomlist>` command](../documentation/keywords.html#constraining-options) was used, which will simply write a file called `.xcontrol.sample` (=`constraints.inp` from above).
 The command will automatically make a copy of the input geometry and name it `coord.ref`.
 All atoms *not* present in `<atomlist>` will be added to the metadynamics bias.
 
@@ -393,7 +393,7 @@ All atoms *not* present in `<atomlist>` will be added to the metadynamics bias.
 
 ## Automated bond constraints
 
-CREST has also a function for automatically constraining all interatomic distances between covalently bound atoms to the distance they have in the input structure.
+CREST also has a function for automatically constraining the interatomic distances of all covalent bonds to those from the input structure.
 This option can be invoked with the `--cbonds` command (or its variants, see [**Keyword Documentation** {{site.data.icons.book}}](../documentation/keywords.html#constraining-options)).
 {: .text-justify }
 

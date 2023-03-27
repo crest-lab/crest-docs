@@ -76,9 +76,14 @@ qcggrow:
 
 qcgensemble:
 
+  - cmd: --qcgmtd
+    descript: >
+      Perform an ensemble generation with the NCI-MTD runtype with parameters adjusted
+      for solutions. [default]
+
   - cmd: --ncimtd
     descript: >
-      Perform an ensemble generation with the NCI-MTD runtype. [default]
+      Perform an ensemble generation with the NCI-MTD runtype.
 
   - cmd: --mtd
     descript: >

@@ -50,7 +50,8 @@ If you plan on using QCG, you will also need to install the [`xtbiff` program. {
 Installation via precompiled static binaries is the the simplest option.
 First, you will have to download the program.
 
-1. Navigate to the **_Releases_** tab on CREST's [GitHub page {{ site.data.icons.github }}]( {{ site.project }} )
+1. Navigate to the **_Releases_** tab on CREST's [GitHub page {{ site.data.icons.github }}]( {{ site.project }} ) 
+   (Note, there is also a [**continuous release**  {{ site.data.icons.github }}](https://github.com/crest-lab/crest/releases/tag/latest))
    {% include image.html file="install-1.png" %}
 
 2. Select the release version you want to install (probably the one flagged as "*Latest*")

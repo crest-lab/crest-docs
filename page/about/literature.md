@@ -46,6 +46,7 @@ This is a collection of various works that focus on CREST and `xtb`.
 
 - **GFN2-xTB:** Bannwarth, C.; Ehlert, S.; Grimme, S.; *GFN2-xTB — An Accurate and Broadly Parametrized Self-Consistent Tight-Binding Quantum Chemical Method with Multipole Electrostatics and Density-Dependent Dispersion Contributions* *J. Chem. Theory Comput.* **2019**, *15 (3)*, 1652–1671. [DOI: 10.1021/acs.jctc.8b01176](https://doi.org/10.1021/acs.jctc.8b01176)
 doi:10.1021/acs.jctc.2c00578
+
 - **xTB-iFF:** Grimme, S.; Bannwarth, C.; Caldeweyher, E.; Pisarek, J.; Hansen, A.; *A general intermolecular force field based on tight-binding quantum chemical calculations*, *J. Chem. Phys.*, **2017**, *147*, 161708. [DOI: 10.1063/1.4991798](https://doi.org/10.1063/1.4991798)
 
 - **GFN-FF:** Spicher, S.; Grimme, S.; *Robust atomistic modeling of materials, organometallic and biochemical systems* *Angew. Chem. Int. Ed.* **2020**, *59*, 15665. [DOI: 10.1002/anie.202004239](https://doi.org/10.1002/anie.202004239)
@@ -53,6 +54,8 @@ doi:10.1021/acs.jctc.2c00578
 ---
 
 ## Applications
+
+- **Minimum Energy Crossing Points with GFN0-xTB:** Pracht, P.; Bannwarth, C.; *Finding Excited-State Minimum Energy Crossing Points on a Budget: Non-Self-Consistent Tight-Binding Methods*, *J. Phys. Chem. Lett.*, **2023**, *14*, 4440–4448, [DOI: 10.1021/acs.jpclett.3c00494](https://doi.org/10.1021/acs.jpclett.3c00494)
 
 - **Supramolecular Complexes containing Heavy Main Group Elements:** Gorges, J.; Grimme, S.; Hansen, A.; *Reliable prediction of association (free) energies of supramolecular complexes with heavy main group elements - the HS13L benchmark set*, *Phys. Chem. Chem. Phys.*, **2022**, [DOI 10.1039/D2CP04049B](https://doi.org/10.1039/D2CP04049B)
 

@@ -2,7 +2,7 @@
 layout: default
 title: Release 3.0 Preview
 parent: Releases
-nav_order: 1
+nav_order: 2
 toc: false
 summary: "Notes for the upcomming CREST version"
 permalink: /page/releases/release_preview.html
@@ -25,6 +25,8 @@ permalink: /page/releases/release_preview.html
 - Standalone implementation of geometrical constraints
 - New minimum energy crossing point (MECP) algorithm (see [**Examples/MECP Calaculations**](../examples/mecp   "Examples / MECP Calculations"))
 - Integration of the [**tblite API** {{ site.data.icons.github }}](https://github.com/tblite/tblite "tblite on GitHub")
+- Integration of a [**GFN0-xTB API** {{ site.data.icons.github }}](https://github.com/pprcht/gfn0) (see [J. Phys. Chem. Lett. 2023, 14, 19, 4440–4448](https://doi.org/10.1021/acs.jpclett.3c00494))
+- Integration of the [**TOML-F**  {{ site.data.icons.github }}](https://github.com/toml-f/toml-f) parser
 
 ---
 

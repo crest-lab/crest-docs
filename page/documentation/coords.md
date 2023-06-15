@@ -113,7 +113,7 @@ $end
 </div>
 <div id="sdf" class="tabcontent">
 {% include warning.html content="Be aware that the <b>.sdf</b> format is 
-highly sensitve to the number of spaces. You have to match the
+highly sensitve to the number of whitespaces. You have to match the
 <i>exact</i> number of characters for each field (with exception of the comment line). This also means that the format supports only up to 999 atoms." %}
 {% capture struc_xyz %}
 2519

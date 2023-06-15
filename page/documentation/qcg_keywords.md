@@ -1,7 +1,7 @@
 ---
 layout: default
 title: QCG Keywords
-parent: Keyword Documentation
+parent: Command Line Keyword Documentation
 grand_parent: Documentation
 nav_order: 1
 summary: "The list of available command line arguments for QCG."

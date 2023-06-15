@@ -363,6 +363,7 @@ confsettings:
 
 
 
+
 entropysettings:
 
   - cmd: --scthr <REAL>
@@ -498,6 +499,11 @@ sortingsettings:
     url:
       text: "`--noreftopo` <i class='fa-solid fa-triangle-exclamation'></i>"
       link: "/page/documentation/keywords.html#noreftopo"
+
+  - comm: "`--wall`,`--wallxl`,`--wallxxl`"
+    descript: >
+      Automatically set up a wall potential (3 different sizes are available) for the
+      calculation, independent of any NCI mode.
 
 
 

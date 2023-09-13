@@ -73,6 +73,28 @@ qcggrow:
       No fixing of the solute during the grow process 
       (fixing is only applied for water as solvent file).
 
+  - cmd: --xtbiff
+    descript: >
+      Use the old `xtbiff` binary for docking instead of the recommended `aISS` algorithm available with `xtb`.
+      The `xtbiff` can be obtained at the 
+      [*xtbiff* GitHub repository <i class='fa-brands fa-github'></i>](https://github.com/grimme-lab/xtbiff).
+
+  - cmd: --normdock
+    descript: >
+      Use the docking algorithm during the grow algorithm with normal settings
+      (per default, reduced settings are applied for a faster search).
+      This is only possible in combination with the `aISS` algorithm.
+
+  - cmd: --directed <FILE>
+    descript: >
+      Employ the directed docking feature of the `aISS` algorithm implemented in `xtb`
+      to solvate specific atoms of the solute. For details about the format of 
+      `<FILE>`
+    url:
+      text: see here.
+      link: /page/examples/qcg/example_5.html 
+
+
 
 qcgensemble:
 
@@ -128,6 +150,13 @@ qcgensemble:
   - cmd: --mreset <INT>
     descript: >
       Set maximum number of MTD restarts of the NCI-MTD run-type
+
+  - cmd: ---fin_opt_gfn2
+    descript: >
+      Perform final GFN2-xTB optimization after grow step and
+      evaluate ensemble after ensemble step with GFN2-xTB.
+      Only applicable if GFN2-xTB is not used for grow and ensemble
+      step.
 
 
 qcgsolv:

@@ -23,8 +23,6 @@ Required arguments will be marked with `< >`, optional arguments are marked by b
 
 ---
 
-{% include note.html content="Be aware that most QCG applications require the `xtbiff` program than can be obtained as a statically compiled binary from the respective [*xtbiff* GitHub repository <i class='fa-brands fa-github'></i>](https://github.com/grimme-lab/xtbiff)." %}
-
 The QCG extension of CREST can be invoked via the command line. 
 To activate QCG, use a command similar to
 

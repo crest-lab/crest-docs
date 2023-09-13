@@ -40,7 +40,7 @@ the precompiled binaries, or build the program on yourself locally:
 Most CREST applications will require access to the [`xtb` program. {{ site.data.icons.ext }}](https://github.com/grimme-lab/xtb)
 You will need to install `xtb` on your machine and make sure it can be executed globally.
 You can follow the installation instructions for `xtb` on the [GitHub repository {{ site.data.icons.github }}](https://github.com/grimme-lab/xtb), but note that most of the process is similar to the CREST installation presented here.
-If you plan on using QCG, you will also need to install the [`xtbiff` program. {{ site.data.icons.ext }}](https://github.com/grimme-lab/xtbiff)
+If you plan on using QCG, you can either use the recommended `aISS` docking algorithm implemented in `xtb` version 6.6.0 and above or the [`xtbiff` program. {{ site.data.icons.ext }}](https://github.com/grimme-lab/xtbiff)
 {: .text-justify }
 
 ---

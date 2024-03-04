@@ -153,6 +153,24 @@ Conducting a sequence of protonation and deprotonation screening steps can be us
 
 ---
 
+## Automated Reaction Discovery for Mass Spectra Elucidation (MSREACT)
+
+For detailed information see [*J. Chem. Phys.*, **2024**, *submitted*.]{}
+
+The MSREACT tool of CREST aids reaction exploration with a special focus on
+creating fragments and rearrangement products (isomers) occurring in mass spectrometry
+(MS) experiments, such as electron ionization (EI) or Electrospray Ionization/Collision In-
+duced Dissociation (CID/ESI). Systematic generation of possible products for the input
+molecule is achieved through the application of constraining potentials between atom pairs
+and optimization using an efficient SQM method. Interatomic distances are deliberately
+extended well beyond their equilibrium values, inducing dissociation and rearrangement re-
+action products.
+
+{: .text-justify }
+
+[Go to the MSREACT keyword documentation <i class="fa-solid fa-book"></i>]({{site.baseurl}}/page/documentation/msreact.html){: .btn .btn-blue }
+
+
 ## Quantum Cluster Growth (QCG)
 
 For detailed information see [*J. Chem. Theory Comput.*, **2022**, *18 (5)*, 3174-3189.](https://doi.org/10.1021/acs.jctc.2c00239)

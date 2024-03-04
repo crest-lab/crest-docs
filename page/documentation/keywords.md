@@ -135,3 +135,8 @@ The QCG keyword section can be found on the next page:
 
 [Go to Quantum Cluster Growth Keyword Documentation <i class="fa-solid fa-book"></i>](qcg.html){: .btn .btn-blue }
 
+## MSREACT mode Options
+
+Options for the MSREACT mode can be found here:
+
+[Go to MSREACT Keyword Documentation <i class="fa-solid fa-book"></i>](msreact.html){: .btn .btn-blue }

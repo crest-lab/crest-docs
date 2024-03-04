@@ -144,7 +144,7 @@ runtype:
   - cmd: --msreact 
     type: MSREACT tool 
     descript: >
-      Use the mass spectral fragment generator 
+      Use the mass spectral fragment generator. 
       MSREACT has several individual runtypes. See
     url:
       text: MSREACT keywords.

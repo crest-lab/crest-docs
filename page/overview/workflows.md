@@ -168,6 +168,8 @@ action products.
 
 {: .text-justify }
 
+{% include image.html file="msreact-algo.png" alt="MSREACT fragment generation workflow." caption="Basic concept of the MSREACT fragment generation workflow with the 2-pentanone molecule as an example." max-width=1000 %}
+
 [Go to the MSREACT keyword documentation <i class="fa-solid fa-book"></i>]({{site.baseurl}}/page/documentation/msreact.html){: .btn .btn-blue }
 
 

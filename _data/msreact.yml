@@ -14,7 +14,7 @@ msreactkeywords:
 
   - cmd: ---msnoattrh
     descript: >
-      deactivate attractive potential between hydrogen and LMO centers.
+      deactivate attractive potential between hydrogen atoms and LMO centers.
 
   - cmd: --msmolbar
     descript: >
@@ -28,7 +28,7 @@ msreactkeywords:
     descript: >
       do not remove temporary files and MSDIR with constrained optimizations and write
       directories for isomers and fragmentpairs, as well as seperated fragment structures in 
-      individual directories. The nomenclature of the directories is `p<number of product>` for isomers and productpairs.
+      individual directories. The nomenclature of the directories is `p<number of product>` for isomers and product pairs.
       For fragments, it is `p<number of corresponding product pair>f<number of respective fragment>`.
 
   - cmd: --chrg <int> 

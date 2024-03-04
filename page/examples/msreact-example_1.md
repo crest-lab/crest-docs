@@ -25,7 +25,7 @@ permalink: /page/examples/msreact/example_1.html
 {% include image.html file="msreact-example-1-1.png" alt="Bacillaene at GFN-FF level" caption="Most stable gas-phase structure of 2-pentanone at charge +1 with GFN2-xTB." max-width=400 %}
 
 
-We want to investigate the fragmentation reactions of 2-pentanone in an EI-MS experiment. Therefore, we provide the lowest conformer found by `CREST` at charge +1 as input <2-pentanone.xyz>. We only want to get unique fragments so we use the -msmolbar flag to sort out duplicates with `molbar`.  Before starting crest, we should make sure that `molbar` is properly installed and in our path. 
+We want to investigate the fragmentation reactions of 2-pentanone in an EI-MS experiment. Therefore, we provide the lowest conformer found by `CREST` at charge +1 as input <2-pentanone.xyz>. We only want to get unique fragments so we use the -msmolbar flag to sort out duplicates with `molbar`.  Before starting crest, we should make sure that `molbar` is properly installed and can be executed globally. 
 {: .text-justify }
 
 
@@ -700,6 +700,5 @@ CREGEN> running RMSDs ... done.
 </div>
 {% include defaulttab.html %}
 
-CREST produces 25 unique products and writes them sorted according to their relative energy to
-to the file `crest_msreact_products.xyz`. Isomers are also written to `isomers.xyz`, fragmentpairs to `fragmentpairs.xyz`.
+CREST produces 25 unique products and writes them sorted according to their relative energy to the file `crest_msreact_products.xyz`. Additionally, isomers are written to `isomers.xyz`, fragmentpairs to `fragmentpairs.xyz`.
 {: .text-justify }

@@ -1,0 +1,84 @@
+msreactkeywords:
+
+  - cmd: --msnbonds <int>
+    descript: >
+      maximum number of bonds between atoms pairs for applying a repulsive potential (default 3)
+
+  - cmd: --msnshifts <int>
+    descript: >
+      perform <i>int</i> optimizations with randomly shifted atom positions (default 0)
+
+  - cmd: --msnshifts2 <int>
+    descript: >
+      perform </i>int</i> optimizations with randomly shifted atom positions and a repulsive potential applied to atom pairs (default 0)
+
+  - cmd: ---msnoattrh
+    descript: >
+      deactivate attractive potential between hydrogen atoms and LMO centers.
+
+  - cmd: --msmolbar
+    descript: >
+      sort out topological duplicates by molbar codes (requires  sourced "molbar")
+
+  - cmd: --msinchi
+    descript: >
+      sort out topological duplicates by InChI codes (requires  sourced "obabel") 
+
+  - cmd: --mslargeprint
+    descript: >
+      do not remove temporary files and MSDIR with constrained optimizations and write
+      directories for isomers and fragmentpairs, as well as seperated fragment structures in 
+      individual directories. The nomenclature of the directories is `p<number of product>` for isomers and product pairs.
+      For fragments, it is `p<number of corresponding product pair>f<number of respective fragment>`.
+
+  - cmd: --chrg <int> 
+    descript: >
+      set the molecules´ charge (default 0, for EI-MS: 1, for DEA-MS: -1).    
+
+  - cmd: --ewin <real>
+    descript: >
+      set energy window in for sorting out fragments kcal/mol [default: 200.0 kcal/mol].  
+
+  - cmd: --msiso
+    descript: >
+      print only non-dissociated structures (isomers).
+
+  - cmd: --msnoiso 
+    descript: >
+      print only dissociated structures.
+       
+  - cmd: --msinput <file>
+    descript: >
+      read advanced settings from input file.
+
+
+
+msreactinputfilekeywords:
+
+    - cmd: fragdist <real>
+      descript: >
+        increase distance between fragments xyz structures (default 0 Angstrom). 
+        (Useful for input generation of automatic reaction pathfinder.)
+
+    - cmd: atomshift <real>
+      descript: >
+        shift of atoms in random atom displacement (default 0.75 Angstrom)
+
+    - cmd: distthr_attr <real>
+      descript: >
+        distance threshold in Angstrom for H-LMO attraction (default 4.0 Angstrom)
+
+    - cmd: fc_rep <real>
+      descript: >
+        force constant for repulsive potential between atom pairs (default 0.5)
+
+    - cmd: fc_attr <real>
+      descript: >
+        force constant for attractive potential between hydrogen and LMO centers (default -0.5)
+
+    - cmd: etemp <real>
+      descript: >
+        change electronic temperature in xTB optimizations       (default 5000 K)     
+
+        
+ 

@@ -141,6 +141,15 @@ runtype:
       text: QCG keywords.
       link: /page/documentation/qcg.html
 
+  - cmd: --msreact 
+    type: MSREACT tool 
+    descript: >
+      Use the mass spectral fragment generator. 
+      MSREACT has several individual runtypes. See
+    url:
+      text: MSREACT keywords.
+      link: /page/documentation/msreact.html      
+
 
 leveloftheory:
 

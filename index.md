@@ -10,7 +10,7 @@ permalink: /
 
 Welcome to the documentation site of {% include tooltip.html tool="CREST" tip=site.data.glossary.crest %}.
 
-{% include image.html file="crest.png" alt="CREST" max-width=250 %}
+{% include image.html file="newtoc.png" alt="CREST" max-width=800 %}
 
 
 ## Introduction

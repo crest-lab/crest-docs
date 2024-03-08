@@ -4979,7 +4979,7 @@ p318              isomer      199.86063132
 {% endcapture %}
 {% include codecell.html content=output_file  style="text-align:justify" %}
 </div>
-{% include defaulttab.html %}
+{% include defaulttab.html id="open-1" %}
 
 {% include image.html file="benzisos.png" alt="Isomers of benzene" caption="Selected generated isomers of benzene, the numbering corresponds to their ordering according to the relative energy of all obtained isomers." max-width=800 %}
 

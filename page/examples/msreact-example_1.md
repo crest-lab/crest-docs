@@ -698,7 +698,7 @@ CREGEN> running RMSDs ... done.
 {% endcapture %}
 {% include codecell.html content=output_file style="text-align:justify" %}
 </div>
-{% include defaulttab.html %}
+{% include defaulttab.html id="open-1" %}
 
 CREST produces 25 unique products and writes them sorted according to their relative energy to the file `crest_msreact_products.xyz`. Additionally, isomers are written to `isomers.xyz`, fragmentpairs to `fragmentpairs.xyz`.
 {: .text-justify }

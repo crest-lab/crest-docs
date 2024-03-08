@@ -82,7 +82,7 @@ All CREs that are found within the iterations are included in the conformer/rota
 The iMTD-GC worflow is outlined graphically in the figure below.
 {: .text-justify }
 
-{% include image.html file="imtd-gc.png" alt="iMTD-GC Workflow" caption="Flowchart for the iMTD-GC workflow." %}
+{% include image.html file="imtdgc-new.png" alt="iMTD-GC Workflow" caption="Flowchart for the iMTD-GC workflow." %}
 
 
 
@@ -102,7 +102,7 @@ After each sMTD iteration, new bias structures for the potential are identified 
 The iMTD-sMTD workflow is outlined in the figure below.
 {: .text-justify }
 
-{% include image.html file="imtd-smtd.png" alt="iMTD-sMTD Workflow" caption="Flowchart for the iMTD-sMTD workflow." %}
+{% include image.html file="imtdsmtd-new.png" alt="iMTD-sMTD Workflow" caption="Flowchart for the iMTD-sMTD workflow." %}
 
 
 This algorithm can be used not only for ensemble generation, but also provides the capability to determine a
@@ -172,6 +172,7 @@ action products.
 
 [Go to the MSREACT keyword documentation <i class="fa-solid fa-book"></i>]({{site.baseurl}}/page/documentation/msreact.html){: .btn .btn-blue }
 
+---
 
 ## Quantum Cluster Growth (QCG)
 

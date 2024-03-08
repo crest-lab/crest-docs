@@ -3,7 +3,7 @@ layout: default
 title: Restarting QCG
 parent: QCG Examples
 grand_parent: "Examples and Guides"
-nav_order: 5
+nav_order: 6
 toc: false
 summary: "A guide on how to restart QCG calculations."
 permalink: /page/examples/qcg/example_restart.html

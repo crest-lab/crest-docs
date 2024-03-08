@@ -157,12 +157,12 @@ Conducting a sequence of protonation and deprotonation screening steps can be us
 
 For detailed information see [*J. Chem. Theory Comput.*, **2022**, *18 (5)*, 3174-3189.](https://doi.org/10.1021/acs.jctc.2c00239)
 
-Quantum Cluster Growth is a utility/driver extension of CREST for the `xtb` and [`xtbiff`](https://doi.org/10.1063/1.4991798) program.
+Quantum Cluster Growth is a utility/driver extension of CREST for the `xtb` program.
 It is designed to automatically add explicit solvent molecules to a solute, to generate an ensemble of the resulting cluster, and to compute solvation free energies in an explicit fashion.
 Thereby, almost any solute–solvent combination can be used, including open-shell and charged solutes.
 {: .text-justify }
 
-The key procedure is the automated addition of solvent molecules around the solute, mainly done by a screening of docking positions, using the `xtbiff`, and `xtb` geometry optimizations. 
+The key procedure is the automated addition of solvent molecules around the solute, mainly done by a screening of docking positions, using the `aISS` docking algorithm or the `xtbiff` program, and `xtb` geometry optimizations. 
 A second step includes the ensemble generation, which can be done either with single a MD/MTD simulation or the NCI-MTD workflow of CREST.
 The solvation free energy can additionally be computed by generating a reference ensemble.
 {: .text-justify }
@@ -179,7 +179,7 @@ The automated grow algorithm starts with input coordinates provided by the user.
 
 The inner one causes the solute to stay in the center, while the outer one prevents 
 the solvent molecules from clustering and causes the solvent to surround the solute.
-Having the prerequisites set, first an `xtbiff` docking of a solute and solvent 
+Having the prerequisites set, first an aISS (or `xtbiff`) docking of a solute and solvent 
 molecule is performed under application of the wall potentials. 
 Second, a geometry optimization is done with `xtb`. 
 These two steps repeat until the user-defined number of solvents is added.

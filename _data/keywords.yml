@@ -54,29 +54,49 @@ general:
 
   - cmd: "--input <INPUTFILE>"
     descript: >
-      <span class='label label-green'>CREST 3.0 preview</span>
+      <span class='label label-green'>CREST 3.0</span>
       Specify a CREST input file from which the calculation settings are read.
       For more information see the
       [**Input File Documentation** <i class='fa-solid fa-book'></i>](./inputfiles.html
       'Documentation / Input File Documentation').
 
-
+  - cmd: "--legacy"
+    descript: >
+      <span class='label label-green'>CREST 3.0</span>
+      Attempt (where possible) to switch the program behavior back to previous
+      program versions (<3.0).
 
 
 runtype:
+
+  - comm: "`--sp`"
+    type: Singlepoint energy and gradient evaluation
+    descript: >
+      <span class='label label-green'>CREST 3.0</span>
+      Standalone energy and gradient evaluation of the given input structure.
+
+
+  - comm: "`--opt [level]`,<br> `--ancopt [level]`"
+    type: Geometry optimization
+    descript: >
+      <span class='label label-green'>CREST 3.0</span>
+      Standalone geometry optimization of the given input structure via the ANCOPT algorithm.
+      The optional `[level]` argument can be used to select predefined convergence criteria
+      (see Table IV in [https://doi.org/10.1063/5.0197592](https://doi.org/10.1063/5.0197592)).
 
   - cmd: --v1 
     type: MF-MD-GC sampling (outdated) 
     descript: >
       First generation of the GFN*n*-xTB driven conformational search algorithm,
       consisting out of mode following, molecular dynamics sampling and genetic 
-      structure crossing. This workflow is deprecated.
+      structure crossing. This workflow is **deprecated**.
     
   - cmd: --v2 
     type: MTD-GC sampling (outdated) 
     descript: >
       Second generation of the GFN*n*-xTB driven conformational search algorithm,
-      consisting out of a metadynamics approach and genetic structure crossing.
+      consisting out of a metadynamics approach and genetic structure crossing. 
+      This workflow is **deprecated**.
     
   - comm: "`--v2i`, `--v3`"
     type: iMTD-GC sampling
@@ -144,6 +164,7 @@ runtype:
   - cmd: --msreact 
     type: MSREACT tool 
     descript: >
+      <span class='label label-green'>CREST 3.0</span>
       Use the mass spectral fragment generator. 
       MSREACT has several individual runtypes. See
     url:
@@ -201,12 +222,13 @@ leveloftheory:
     
   - subheader: <br>**Geometry optimization**
     
-  - cmd: --opt <LEVEL> 
+  - cmd: --optlev <LEVEL> 
     descript: >
-      Set the optimization accuracy for GFN*n*–xTB optimizations. 
+      Set the optimization accuracy for ANCOPT optimizations. 
       In CREST's multilevel approach, only the *final* geometry optimization 
       is affected by this setting. For available `<LEVEL>` see the 
       [`xtb` documentation](https://xtb-docs.readthedocs.io/en/latest/optimization.html#geometry-optimization). The [default] is `<LEVEL>`=*vtight*.
+       
 
 
 mdsettings:
@@ -370,8 +392,10 @@ confsettings:
     descript: >
       Turn of automatic pre-optimization of the input geometry at the beinning of a run.
 
-
-
+  - comm: "`--wall`,`--wallxl`,`--wallxxl`"
+    descript: >
+      Automatically set up a wall potential (3 different sizes are available) for the
+      calculation, independent of any NCI mode.
 
 entropysettings:
 
@@ -509,10 +533,10 @@ sortingsettings:
       text: "`--noreftopo` <i class='fa-solid fa-triangle-exclamation'></i>"
       link: "/page/documentation/keywords.html#noreftopo"
 
-  - comm: "`--wall`,`--wallxl`,`--wallxxl`"
-    descript: >
-      Automatically set up a wall potential (3 different sizes are available) for the
-      calculation, independent of any NCI mode.
+
+
+
+
 
 
 

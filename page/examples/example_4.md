@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Example 4
+title: Constrained Sampling
 parent: "Examples and Guides"
 nav_order: 4
 toc: false
-summary: "A guide to <i>constrained</i> conformational sampling with CREST."
+summary: "A guide to <i>constrained</i> conformational sampling."
 permalink: /page/examples/example_4.html
 ---
 

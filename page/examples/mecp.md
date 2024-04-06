@@ -14,6 +14,6 @@ toc: true
 {{page.summary}}
 {: .fs-6 .fw-300 }
 
-<div class="label label-green">CREST 3.0 preview</div>
+<div class="label label-green">CREST 3.0</div>
 
 

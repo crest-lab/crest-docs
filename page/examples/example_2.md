@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Example 2
+title: Ensemble Sorting
 parent: "Examples and Guides"
 nav_order: 2
 toc: false
-summary: "A guide to sorting ensembles with CREST."
+summary: "A guide to sorting ensembles."
 permalink: /page/examples/example_2.html
 ---
 

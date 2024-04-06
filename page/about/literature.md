@@ -24,6 +24,8 @@ This is a collection of various works that focus on CREST and `xtb`.
 
 - **CREST:** Pracht, P.; Bohle, F.; Grimme, S.; *Automated exploration of the low-energy chemical space with fast quantum chemical methods*, *Phys. Chem. Chem. Phys.*, **2020**, *22*, 7169-7192. [DOI: 10.1039/C9CP06869D](https://doi.org/10.1039/C9CP06869D)
 
+- **CREST 3.0:** Pracht, P.; Grimme, S.; Bannwarth, C.; Bohle, F.; Ehlert, S.; Feldmann, G.; Gorges, J.; Müller, M.; Neudecker, T.; Plett, C.; Spicher, S.; Steinbach, P.; Wesołowski, P.A.; Zeller, F.; *CREST — A program for the exploration of low-energy molecular chemical space*, *J. Chem. Phys.*, **2024**, *160*, 114110. [DOI: 10.1063/5.0197592](https://doi.org/10.1063/5.0197592)
+
 - **Conformational Entropy:** Pracht, P.; Grimme, S.; *Calculation of absolute molecular entropies and heat capacities made simple*, *Chem. Sci.*, **2021**, *12*, 6551-6568. [DOI: 10.1039/D1SC00621E](https://doi.org/10.1039/D1SC00621E)
 
 - **Meta-Dynamics Simulations:** Grimme, S.; *Exploration of Chemical Compound, Conformer, and Reaction Space with Meta-Dynamics Simulations Based on Tight-Binding Quantum Chemical Calculations*, *J. Chem. Theory Comput.*, **2019**, *15 (5)*, 2847-2862. [DOI: 10.1021/acs.jctc.9b00143](https://doi.org/10.1021/acs.jctc.9b00143)
@@ -34,7 +36,7 @@ This is a collection of various works that focus on CREST and `xtb`.
 
 - **Minimum Energy Crossing Point (MECP) sampling:** Pracht, P.; Bannwarth, C.; *Fast Screening of Minimum Energy Crossing Points with Semiempirical Tight-Binding Methods*, *J. Chem. Theory Comput.*, **2022**, *18 (10)*, 6370-6385. [DOI: 10.1021/acs.jctc.2c00578](https://doi.org/10.1021/acs.jctc.2c00578).
 
-
+- **MC-ONIOM*n*:** Wesołowski, P.A.; Wales, D.J.; Pracht, P.; *Multilevel Framework for Analysis of Protein Folding Involving Disulfide Bond Formation*, *J. Phys. Chem. B*, **2024**, *128*, 3145–3156. [DOI: 10.1021/acs.jpcb.4c00104](https://doi.org/10.1021/acs.jpcb.4c00104)
 
 ---
 

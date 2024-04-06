@@ -23,16 +23,16 @@ summary: "This guide contains instructions for compiling CREST from source."
 ## Choice of Compiler
 
 In order to compile CREST from source you will need a Fortran and C compiler.
-We recommend either the Intel `ifort`/`icc` or GNU `gfortran`/`gcc` compilers.
+We recommend either the Intel `ifort`/`icx` or GNU `gfortran`/`gcc` compilers.
 Both compilers can be obtained free-of-charge, but in our own developments we primairly use the Intel compilers.
 A quick reference on where to obtain either one is proveded in the following.
 
-{% include note.html content="We recommend the `ifort`/`icc` compilers." %}
+{% include note.html content="We recommend the `ifort`/`icx` compilers. The `icx` compiler replaces `icc`, for which Intel has now discontinued support." %}
 
 
 ### 1. Intel compilers via oneAPI
 
-The `ifort` and `icc` compilers have become publically available only recently with the introduction of Intel's [oneAPI initiative {% include elink.html %}](https://www.oneapi.io/).
+The `ifort` and `icx` compilers have become publically available only recently with the introduction of Intel's [oneAPI initiative {% include elink.html %}](https://www.oneapi.io/).
 You will need to first install the [Intel oneAPI Base Toolkit {% include elink.html %}](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#base-kit) and 
 afterwards the [Intel oneAPI HPC Toolkit {% include elink.html %}](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#hpc-kit).
 Follow the instructions and check the installation via
@@ -41,7 +41,7 @@ ifort -v
 ```
 If this gives you a version number, set these compilers as your defaults:
 ```bash
-export FC=ifort CC=icc
+export FC=ifort CC=icx
 ```
 
 
@@ -75,6 +75,43 @@ export FC=gfortran CC=gcc
 
 ---
 
+## Install via CMake
+
+CMake is one of the most widely used multiplatform build systems.
+Starting with CREST 3.0, we will focus primarily on this build, although the meson build may still be used 
+
+It can be used with [Ninja {{site.data.icons.github}}](https://github.com/ninja-build/ninja) or the regular `make` as a backend.
+CMake can be installed in different ways. For example from the [official webiste](https://cmake.org/install/), or via   `pip`
+
+```bash
+pip install cmake
+```
+
+
+For the next steps you will need to have chosen a compiler (`ifort`/`icx` or `gfortran`/`gcc`) and   exported the `FC` and `CC` variables as described [above {{site.data.icons.aup}}](#choice-of-        compiler).
+To start building CREST, navigate to the source (a file called `CMakeLists.txt` should be present here) and setup a `_build` directory with
+```bash
+cmake -B _build
+```
+Further arguments can be added to this command if you wish to customize the build, for example for including or excluding suprojects. Information about the subprojects is given on the programs [repository page {{site.data.icons.github}}](https://github.com/crest-lab/crest/tree/master/subprojects).
+
+Then build the project with
+```bash
+make -C _build
+```
+If you wish to use Ninja as a backend (instead of `make`), add the `-GNinja` option to the CMake setup command.
+
+Starting with CREST 3.0, we introduce unit tests that can be run via the CMake build. 
+To run these, after having build the program, use
+```
+make test -C _build
+```
+
+The unit tests will be expanded over time.
+
+
+---
+
 ## Install via Meson
 
 Meson is an open source multiplatform build system. The main development project can be found on [Meson's GitHub page {{site.data.icons.github}}](https://github.com/mesonbuild/meson).
@@ -93,7 +130,8 @@ meson --version ; ninja --verison
 ```
 <br>
 Instructions for building CREST with Meson are read from the `meson.build` file.
-For the next steps you will need to have chosen a compiler (`ifort`/`icc` or `gfortran`/`gcc`) and exported the `FC` and `CC` variables as described [above {{site.data.icons.aup}}](#choice-of-compiler). 
+As before, you must have  exported `FC` and `CC` variables to set the compilers.
+However, momentarily the meson build defaults only work with the `ifort/icx` architecture.
 To start building the program, navigate to the directory in which you have saved CREST and set up the build with
 {: .text-justify }
 ```bash
@@ -107,32 +145,6 @@ If the setup was successfull, initiate the build (still in the same directory) w
 ```bash
 ninja -C _build
 ```
-
-
-
----
-
-## Install via CMake
-
-CMake is one of the most widely used multiplatform build systems.
-It can be used with [Ninja {{site.data.icons.github}}](https://github.com/ninja-build/ninja) or the regular `make` as a backend.
-CMake can be installed in different ways. For example from the [official webiste](https://cmake.org/install/), or via `pip`
-
-```bash
-pip install cmake
-```
-
-As before, you must have  exported `FC` and `CC` variables to set the compilers.
-To start building CREST, navigate to the source (a file called `CMakeLists.txt` should be present here) and setup a `_build` directory with
-```bash
-cmake -B _build -DCMAKE_BUILD_TYPE=Release
-```
-If you wish to use Ninja as a backend also add the `-GNinja` option to this command.
-Then build the project with
-```bash
-make -C _build
-```
-or `ninja -C _build`, whatever you prefer.
 
 ---
 

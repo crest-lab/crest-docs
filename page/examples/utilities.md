@@ -5,7 +5,7 @@ parent: "Examples and Guides"
 nav_order: 10
 has_children: true
 permalink: /page/utilities
-summary: "This section contains an overview of utility applications implemented CREST."
+summary: "This section contains an overview of utility applications."
 toc: true
 ---
 

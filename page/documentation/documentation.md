@@ -28,12 +28,15 @@ Usually, either must be present.
 The different command line `[OPTIONS]` can be found in the [**Keyword Documentation** {{site.data.icons.book}}]({{site.baseurl}}/page/documentation/keywords.html).
 {: .text-justify }
 
----
-<span class="label label-green">CREST 3.0 Preview</span>
 
-***Alternatively***, [CREST 3]({{site.baseurl}}/page/releases/release_preview.html) instructions can be defined entriely in a separate input file and passed via
+**As of, [CREST 3.0]({{site.baseurl}}/page/releases/release_current.html) instructions can be defined entriely in a separate input file in the TOML format.**
+The `*.toml` input file can be given as the `[INPUT]` argument or passed explicitly via
 ```bash
 crest --input <INPUTFILE>
 ```
 For more information see the [**Input File Documentation** {{site.data.icons.book}}]({{site.baseurl}}/page/documentation/inputfiles.html) section,
-or [some selected **examples**]({{site.baseurl}}/page/examples/mecp).
+or [some **input examples**]({{site.baseurl}}/page/documentation/inputfiles_examples).
+
+
+{% include note.html content="Command line arguments and options read from the TOML input file are usually compatible. As a rule-of-thumb, command line arguments have a higher parsing priority and will overwrite options from the input file at runtime." %}
+

@@ -13,4 +13,10 @@ permalink: /page/about/news.html
 
 ---
 
+{% for post in site.posts %}
+  <h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+  <p>{{ post.excerpt }}</p>
+{% endfor %}
+
+
 {% include twitter.html %}

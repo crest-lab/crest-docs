@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Example 3
+title: NCI Conformational Sampling
 parent: "Examples and Guides"
 nav_order: 3
 toc: false

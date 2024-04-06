@@ -3,6 +3,7 @@ layout: default
 title: Input File Documentation
 parent: Documentation
 nav_order: 2
+has_children: true
 toc: false
 summary: "A guide to CREST input files (program versions >3.0)."
 permalink: /page/documentation/inputfiles.html
@@ -14,45 +15,52 @@ permalink: /page/documentation/inputfiles.html
 This page contains a guide to CREST input files that can be used with program versions >3.0.
 {: .fs-6 .fw-300 }
 
-<div class="label label-green">CREST 3.0 preview</div>
+<div class="label label-green">CREST 3.0</div>
 
 ---
 
 CREST program instructions via the various [command line arguments](./documentation.html) can become quite lengthy and tedious.
 Therefore, following version 3.0 of CREST, input files will be available.
-Currently, the input files are *loosely* based on the [**TOML format** {{site.data.icons.ext}}](https://toml.io/en/ "https://toml.io") and are parsed using [**TOML-F**](https://github.com/toml-f/toml-f).
+Currently, the input files are based on the [**TOML format** {{site.data.icons.ext}}](https://toml.io/en/ "https://toml.io") and are parsed using [**TOML-F**](https://github.com/toml-f/toml-f).
 {: .text-justify }
 
 CREST input files can be loaded with the `--input` command
 ```bash
-crest --input input.toml
+crest struc.xyz --input input.toml
+```
+or simply be given as the first argument (the file extension `.toml` is mandatory)
+```bash
+crest input.toml
 ```
 where the `input.toml` would look something like this
 
 {% capture infile %}
-input = "struc.xyz"
+# CREST 3 input file
+input = "struc.xyz"   
 runtype="ancopt"
 threads = 9
 
 [calculation]
-type = 1 
-eprint = true
 elog="energies.log"
 
 [[calculation.level]]
-method = "xtb"
-binary = "xtb-6.5.0"
+method = "gfn2"
 uhf = 0
-flags = "--gfn 2 --grad"
-dir = "s0"
+chrg = 0
+
 {% endcapture %}
 {% include codecell.html content=infile style="font-size:12px" %}
 
 As can be seen from this example, the file is hierarchically structured.
 At the top level, things like the input coord file name, runtype, and parallelization are specified.
 The calculation group (defined by `[ ]`) includes some settings about the internal calculation
- settings and printouts, while its level subgroup (defined by `[[ ]]`) provides the actual method and `xtb` binary.
+ settings and printouts, while its level subgroup (defined by `[[ ]]`) provides the actual method and calculation information.
 {: .text-justify }
+
+Some more input file example can be found here:
+
+[Go to Example Input Files <i class="fa-solid fa-book"></i>](inputfiles_examples.html){: .btn .btn-blue }
+
 
 The documentation of blocks and keywords can be found in the following.
 
@@ -67,7 +75,7 @@ The documentation of blocks and keywords can be found in the following.
 {:toc}
 
 
-{% include important.html content="The following lists are incomplete and will be expanded over time until the actual release of CREST 3.0" %}
+{% include important.html content="The following lists not extensive and will be expanded over time." %}
 
 ---
 
@@ -92,12 +100,6 @@ the used programs, and system specific data such as the molecular charge or numb
 
 {% include kv.html obj=site.data.inputkv.calclevel %}
 
-
----
-### `[[calculation.mecp]]` sub-blocks
-A special type of the `[[calculation.level]]` sub-block that is used *only* for the MECP screening workflow.
-Instead of setting up a single calculations, this block will set up *two* identical calculations that differ only with regards to their multiplicities (`uhf` parameter).
-Input arguments are identical to the [`[[calculation.level]]` options {{site.data.icons.aup}}](#calculationlevel-sub-blocks) but should *not* include any `uhf` or directory specifications.
 
 ---
 ### `[[calculation.constraints]]` sub-blocks

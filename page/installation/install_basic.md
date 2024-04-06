@@ -105,7 +105,21 @@ There, you will have the option to either clone the project with `git` via the c
 git clone {{ site.project }}.git /directory/of/your/choice
 ```
 
-or simply download the ZIP file.
+If you chose to build the program from source, it is advisable to download any motential subprojects that will be build into CREST.
+To do so, go to the project directory that you just have set up, and execute
+```bash
+git submodule init
+git submodule update
+```
+which should check out all the subprojects.
+To update the submodule sources from the respective remote branches
+```bash
+git submodule update --remote
+```
+can be used.
+
+
+
 After you have obtained the source code, you will need to build the program.
 Instructions on this can be found on the next page.
 {: .text-justify }

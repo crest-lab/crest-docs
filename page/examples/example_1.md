@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Example 1
+title: Conformational Sampling
 parent: "Examples and Guides"
 nav_order: 1
 toc: false
-summary: "A simple conformational search with CREST."
+summary: "A simple conformational search."
 permalink: /page/examples/example_1.html
 ---
 

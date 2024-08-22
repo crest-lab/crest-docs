@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Release 3.0
+title: Release 3.0.x
 parent: Releases
 nav_order: 3
 toc: false
@@ -8,21 +8,36 @@ summary: "Release notes for most current CREST version"
 permalink: /page/releases/release_current.html
 ---
 
-# CREST Release 3.0
+# CREST Release 3.0.x
 {: .no_toc }
 
 <div class="label label-green">CREST 3.0</div>
 
 ---
 
+## CREST 3.0.1 (CREST 3.0 Hotfixes) 
+### What's Changed
+* Address errors of issues [#281](https://github.com/crest-lab/crest/issues/281) 
+* Restore printout of kpush, mentioned in [#284](https://github.com/crest-lab/crest/issues/284) 
+* Address thread OpenMP handling issues of [#284](https://github.com/crest-lab/crest/issues/284) and [#285](https://github.com/crest-lab/crest/issues/285), see [#289](https://github.com/crest-lab/crest/pull/289)  
+* Fix uninitialized boolean bug in gcc build [#287](https://github.com/crest-lab/crest/pull/287) 
+* Fix axis bug causing [#296](https://github.com/crest-lab/crest/issues/296) 
+* Address QCG issues [#297](https://github.com/crest-lab/crest/issues/297) and [#294](https://github.com/crest-lab/crest/issues/294)
+* Singlepoint and optimization printout cleanup
+
+### Other Additions
+* Allow `tblite` parameter file read-in in [#303](https://github.com/crest-lab/crest/pull/303)
+* Implement dipole and atomic charges readout for tblite calculators, gfn0 and gfnff
+* CMake-based unit tests (run `make test` after building)
+
+
+---
 
 ## CREST 3.0 
 
 CREST 3.0 is a major overhaul of the previous code versions. A large part of the original source code was rewritten to implement calculators, optimization, and molecular dynamics routines *directly*, rather than relying only on the `xtb` program as a subprocess. 
 Consequently, there are performance improvements and a significant reduction of I/O operations.
 Read all about the new program version in the new open access article [**J. Chem. Phys. 2024, 160, 114110**](https://doi.org/10.1063/5.0197592).
-
-[Download the program here](https://github.com/grimme-lab/crest/releases/tag/v3.0){: .btn .btn-blue }
 
 Features include:
 - New [**input file reader** {{site.data.icons.book}}](../documentation/inputfiles.html              "Documentation / Input Files")

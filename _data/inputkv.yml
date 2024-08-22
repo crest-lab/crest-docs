@@ -15,7 +15,8 @@ general:
 
    - comm: "`bin`, `binary`"
      descript: >
-       Specify a `xtb` binary as a *string*. Used for *legacy* runtypes of CREST. 
+       Specify a `xtb` binary as a *string*. Used for *legacy* runtypes of CREST.
+       This is equivalent to the `--xnam` cmd argumnet.
        For new integrations use the `binary` option within the `[calculation.level]` block.
 
    - key: runtype
@@ -24,11 +25,22 @@ general:
        The possible values are:
      vals:
        - "`none` - do nothing"
+       - "`singlepoint`,`sp` - perform a single calculation for the input structure"
        - "`ancopt`,`optimize` - optimize the input structure"
-       - "`ancopt_ensemble`,`optimize_ensemble` - optimize the input ensemble, 
+       - "`numhess` - numerical calculation of second derivatives"
+       - "`ancopt_ensemble`,`optimize_ensemble`,`mdopt` - optimize the input ensemble, 
           similar to the `--mdopt` function."
+       - "`screen_ensemble`,`screen` - optimize the input ensemble in a multistep procedure
+          and sort, similar to the `--screen` function."
        - "`md`,`mtd`,`dynamics`,`metadynamics` - perform a (meta)dynamics simulation."
-       - "`mecp`,`mecp_search` - MECP search algorithm"
+       - "`imtd-mtd` - Standard  conformational sampling algo based on metadynamics"
+       - "`nci-mtd`,`nci` - perform sampling with a wall potential (NCI_MTD workflow)"
+       - "`entropy`,`imtd-smtd` - perform extensive sampling targeting configurational entropy"
+
+
+   - key: constraints
+     descript: >
+       Specify a file with the `xtb`-style structure constraints to be included in the calculation.
 
    - key: preopt
      descript: >
@@ -63,6 +75,14 @@ calculation:
        Activate/Deactivate the energy printout via `elog`.<br>
        Specify as *boolean* (`true`/`false`)
 
+   - key: opt_engine
+     descript: >
+       Select geometry optimization algorithm as a *string*.
+     vals:
+       - "`ancopt` - Use the ANCOPT algorithm (RFO with internal coordinates)"
+       - "`rfo` - Use a rational function algorithm (Cartesian coordinates)"
+       - "`gd` - Use  a simple gradient descent algorithm (Cartesian coordinates)"
+
    - key: hess_update
      descript: >
        Select the Hessian update method for ANCOPT as a *string*. 
@@ -73,7 +93,31 @@ calculation:
        - "`sr1` - Use the symmetric rank one (SR1) update method"
        - "`bofill` - Use the Bofill type update"
        - "`schlegel` - Use the Farkas-Schlegel type update"
-     
+ 
+   - key: maxcycle
+     descript: >
+       Specify maximum optimization cycles an *integer*
+
+   - key: optlev
+     descript: >
+       Specify default settings/convergence conditions in geometry optimization (see Tab. IV of      
+       https://doi.org/10.1063/5.0197592). Pre-defined levels are `crude`, `vloose`, `loose`, 
+       `normal`, `tight`, `vtight`, `extreme` and must be provided as a *string* 
+
+   - key: converge_e
+     descript: >
+       Specify energy convergence criterium for geometry optimization as a *real* in Hartree
+
+   - key: converge_g
+     descript: >
+       Specify gradient norm/RMS force convergence criterium for geometry optimization as a *real* in Hartree/Bohr
+
+   - key: freeze
+     descript: >
+       Provide a list of atoms which shall be enitrely frozen in geometry optimization and MD
+       simulations. The atom list should be given as a *string* in the [atom list format](../documentation/coords.html#atomlists)
+    
+    
 
 calclevel:
 
@@ -83,8 +127,17 @@ calclevel:
        This will instruct CREST on the format of energies and gradients that shall be read.
        Possible values are:
      vals:
+       - "`tblite` - Select [`tblite` <i class='fa-brands fa-github'></i>](https://github.com/tblite/tblite) as calculation backend, should be used in combination with the `tblite_level` argument"
+       - "`gfn2` - Quick selection of GFN2-xTB via [`tblite` <i class='fa-brands fa-github'></i>](https://github.com/tblite/tblite)"
+       - "`gfn1` - Quick selection of GFN1-xTB via [`tblite` <i class='fa-brands fa-github'></i>](https://github.com/tblite/tblite)"
+       - "`gfnff` - Select GFN-FF via the gfnff-submodule project"
+       - "`gfn0` - Select GFN0-xTB via the gfn0-submodule project"
+       - "`gfn0*` - Select a special GFN0-xTB calculator used for MECP calculations (see [https://doi.org/10.1021/acs.jpclett.3c00494](https://doi.org/10.1021/acs.jpclett.3c00494)"
        - "`xtb`,`gfn`,`gfn-xtb` - Select GFN*n*-xTB method calculations 
-          performed via the `xtb` program"
+          performed via the `xtb` program. Should be used in combination with the `binary` 
+          option within this block. However, this setting is not generally recommended because
+          it will be much slower than the `tblite` backend."
+       - "`orca` - ORCA subprocesses. Requires to use the arguments `orca_cmd` as well as `orca_template` in addition to this argument. "
        - "`generic` - Call a generic script. The script should process the coordinates that
           crest writes into a file `genericinp.xyz` and you must know how to obtain the gradient
           (see options `gradtype` and `gradfile` below)`"
@@ -92,14 +145,10 @@ calclevel:
    - comm: "`bin`, `binary`"
      descript: >
        Select the program/binary/script name to be executed by CREST in order to generate 
-       energies and gradients. Can be a full path. Specify as a *string*.
-
-   - key: flags
-     descript: >
-       Specify any arguments that are passed to the selected binary as a *string*.
-       This must exclude arguments generated by CREST, such as the molecular charge 
-       for `xtb` calculations.
-       Be careful not to abuse this option!
+       energies and gradients. Can be a full path. Specify as a *string*. Should not be 
+       confused with the `bin` command in the main block, nor with the `--xnam` functionality
+       via the command line settings. If addressing `xtb` via this option, include all command
+       line arguments like `-alpb` to this like you would call the binary on its own.
 
    - comm: "`dir`, `calcspace`"
      descript: >

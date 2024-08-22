@@ -24,28 +24,11 @@ summary: "This guide contains instructions for compiling CREST from source."
 
 In order to compile CREST from source you will need a Fortran and C compiler.
 We recommend either the Intel `ifort`/`icx` or GNU `gfortran`/`gcc` compilers.
-Both compilers can be obtained free-of-charge, but in our own developments we primairly use the Intel compilers.
+Both compilers can be obtained free-of-charge, but you'll only need one of them.
 A quick reference on where to obtain either one is proveded in the following.
 
-{% include note.html content="We recommend the `ifort`/`icx` compilers. The `icx` compiler replaces `icc`, for which Intel has now discontinued support." %}
 
-
-### 1. Intel compilers via oneAPI
-
-The `ifort` and `icx` compilers have become publically available only recently with the introduction of Intel's [oneAPI initiative {% include elink.html %}](https://www.oneapi.io/).
-You will need to first install the [Intel oneAPI Base Toolkit {% include elink.html %}](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#base-kit) and 
-afterwards the [Intel oneAPI HPC Toolkit {% include elink.html %}](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#hpc-kit).
-Follow the instructions and check the installation via
-```bash
-ifort -v
-```
-If this gives you a version number, set these compilers as your defaults:
-```bash
-export FC=ifort CC=icx
-```
-
-
-### 2. GNU compilers
+### 1. GNU compilers
 
 Installing the `gfortran` and `gcc` compilers on Unix systems is fairly straight-foward.
 The installation can be done directly via the commandline, e.g., with
@@ -72,6 +55,27 @@ If you decided on the GNU compilers, set them as your defaults:
 ```bash
 export FC=gfortran CC=gcc
 ```
+
+In case you are going for the GNU compilers, it also makes sense to install openBLAS as a linear algebra backend, for example on Ubuntu via
+```bash
+sudo apt-get install libopenblas-dev
+```
+
+
+### 2. Intel compilers via oneAPI
+
+The `ifort` and `icx` compilers have become publically available only recently with the introduction of Intel's [oneAPI initiative {% include elink.html %}](https://www.oneapi.io/).
+You will need to first install the [Intel oneAPI Base Toolkit {% include elink.html %}](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#base-kit) and 
+afterwards the [Intel oneAPI HPC Toolkit {% include elink.html %}](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#hpc-kit).
+Follow the instructions and check the installation via
+```bash
+ifort -v
+```
+If this gives you a version number, set these compilers as your defaults:
+```bash
+export FC=ifort CC=icx
+```
+
 
 ---
 

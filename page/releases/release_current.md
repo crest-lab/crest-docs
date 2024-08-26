@@ -15,6 +15,25 @@ permalink: /page/releases/release_current.html
 
 ---
 
+## CREST version 3.0.2 🛡️
+### Build updates and fixes 🛠️
+
+## What's Changed
+* 🪲 Minor bug fixes for MSREACT mode by @gorges97 in https://github.com/crest-lab/crest/pull/309
+* 🪲 Circumvent segfault due to optional arg in gcc build in https://github.com/crest-lab/crest/pull/318
+* 🪲 Fix for #320 in https://github.com/crest-lab/crest/pull/322
+* 🔒 Safer toml input parsing in https://github.com/crest-lab/crest/pull/325 Unrecognized keywords will now throw a warning and stop the program immediately
+* 🛠️ Maintenance of submodules in https://github.com/crest-lab/crest/pull/328
+* ⚙️ Update of GitHub workflows in https://github.com/crest-lab/crest/pull/335
+* 🛠️ Safer (but unfortunately still not fixed) MKL handling for ifort builds in https://github.com/crest-lab/crest/pull/331
+* 🌊 **Fixing implicit solvation in `tblite` submodule** in https://github.com/crest-lab/crest/pull/331 (most important change, should now be consistent with `xtb`)
+* 📦 Added a GNU/CMake static build for the continuous release, alongside the Intel build:<br>[![Download (GNU)](https://img.shields.io/badge/download-GNU_build_binary-green)](https://github.com/crest-lab/crest/releases/download/latest/crest-gnu-12-ubuntu-latest.tar.xz)
+
+<br>
+
+
+---
+
 ## CREST 3.0.1 (CREST 3.0 Hotfixes) 
 ### What's Changed
 * Address errors of issues [#281](https://github.com/crest-lab/crest/issues/281) 

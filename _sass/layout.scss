@@ -19,7 +19,8 @@
   }
 
   @include mq(lg) {
-    width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
+//    width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
+    width: calc(1.5 * #{$nav-width});
     min-width: $nav-width;
   }
 }
@@ -32,9 +33,10 @@
   }
 
   @include mq(lg) {
-    margin-left: calc(
-      (100% - #{$nav-width + $content-width}) / 2 + #{$nav-width}
-    );
+//    margin-left: calc(
+//      (100% - #{$nav-width + $content-width}) / 2 + #{$nav-width}
+//    );
+     margin-left: calc(1.5 * #{$nav-width});
   }
 }
 

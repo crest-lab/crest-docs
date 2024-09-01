@@ -2,7 +2,7 @@
 layout: default
 title: Compiling from Source
 parent: Installation
-nav_order: 2
+nav_order: 3
 permalink: /page/installation/install_compile.html
 summary: "This guide contains instructions for compiling CREST from source."
 ---
@@ -150,27 +150,3 @@ If the setup was successfull, initiate the build (still in the same directory) w
 ninja -C _build
 ```
 
----
-
-
-## Conda
-
-[![Conda Version](https://img.shields.io/conda/vn/conda-forge/crest.svg)](https://anaconda.org/conda-forge/crest)
-
-Installing CREST from the [`conda-forge` channel](https://conda-forge.org/) can be achieved by adding `conda-forge` to your channels with:
-
-```bash
-conda config --add channels conda-forge
-```
-
-Once the `conda-forge` channel has been enabled, CREST can be installed with:
-
-```bash
-conda install crest
-```
-
-It is possible to list all of the versions of CREST available on your platform with:
-
-```bash
-conda search crest --channel conda-forge
-```

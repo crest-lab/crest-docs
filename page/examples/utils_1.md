@@ -26,7 +26,7 @@ invoked by the `--mdopt` and `--screen` commands.
 
 `--mdopt <ensemble>` simply performs the optimization of each point on a given file
 and writes the optimized structure to a new ensemble file `crest_ensemble.xyz` *in the same order* as the original.
-In the below example, the input `input-esnemble.xyz` contains *n*-butane structures optimized at the GFN-FF level, while the refined ensemble has the GFN2-xTB energies and geometries.
+In the below example, the input `input-ensemble.xyz` contains *n*-butane structures optimized at the GFN-FF level, while the refined ensemble has the GFN2-xTB energies and geometries.
 Note, that for demonstration purposes the *highest* energy structure was placed as the first point in the input ensemble and `--mdopt` does not change this order.
 {: .text-justify }
 
@@ -152,7 +152,7 @@ Note, that for demonstration purposes the *highest* energy structure was placed 
 
 `--screen <ensemble>` does in principal the same as `--mdopt`.
 However, the final ensemble written to `crest_ensemble.xyz` *is additionally sorted with the CREGEN routine*.
-In the below example, the input `input-esnemble.xyz` again contains *n*-butane structures optimized at the GFN-FF level, while the refined ensemble has the GFN2-xTB energies and geometries.
+In the below example, the input `input-ensemble.xyz` again contains *n*-butane structures optimized at the GFN-FF level, while the refined ensemble has the GFN2-xTB energies and geometries.
 For demonstration purposes, the [`--ewin 1.0` command](../../documentation/keywords.html#ensemble-sorting-options) was added to this calculation.
 As can be seen, the output ensemble `crest_ensemble.xyz` contains only two structures due to the adjusted energy window.
 {: .text-justify }

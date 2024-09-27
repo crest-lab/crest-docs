@@ -21,7 +21,7 @@ general:
 
    - key: runtype
      descript: >
-       Select the CREST runtype, specify as as *string*.<br> 
+       Select the CREST runtype, specify as a *string*.<br> 
        The possible values are:
      vals:
        - "`none` - do nothing"
@@ -114,7 +114,7 @@ calculation:
 
    - key: freeze
      descript: >
-       Provide a list of atoms which shall be enitrely frozen in geometry optimization and MD
+       Provide a list of atoms which shall be entirely frozen in geometry optimization and MD
        simulations. The atom list should be given as a *string* in the [atom list format](../documentation/coords.html#atomlists)
     
     

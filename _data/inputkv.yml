@@ -33,7 +33,7 @@ general:
        - "`screen_ensemble`,`screen` - optimize the input ensemble in a multistep procedure
           and sort, similar to the `--screen` function."
        - "`md`,`mtd`,`dynamics`,`metadynamics` - perform a (meta)dynamics simulation."
-       - "`imtd-mtd` - Standard  conformational sampling algo based on metadynamics"
+       - "`imtd-gc` - Standard  conformational sampling algo based on metadynamics"
        - "`nci-mtd`,`nci` - perform sampling with a wall potential (NCI_MTD workflow)"
        - "`entropy`,`imtd-smtd` - perform extensive sampling targeting configurational entropy"
 

@@ -18,6 +18,6 @@ permalink: /page/about/contact.html
 
 - If you have questions about the theory, and in particular the GFN-xTB methods, benchmark sets, or free energy computations, feel free to contact [xtb@thch.uni-bonn.de {{ site.data.icons.mail }}](mailto:xtb@thch.uni-bonn.de)
 
-- For all other requests [get in contact directly {{ site.data.icons.mail }}](mailto:pp555@cam.ac.uk)
+- For all other requests [get in contact directly {{ site.data.icons.mail }}](mailto:research@philipp-pracht.de)
 
 

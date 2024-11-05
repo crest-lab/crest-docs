@@ -121,3 +121,11 @@ and metadynamics module. Note, that some `[calculation]` must have been defined.
 The `[[dynamics.meta]]` sub-block is used to define metadynamics parameters for a MD simulation in CREST. Multiple metadynamics potentials can be defined (as separate `[[dynamics.meta]]` sub-blocks) and added to the same MD (`[dynamics]` block).
 
 {% include kv.html obj=site.data.inputkv.metadynamics %}
+
+---
+## `[cregen]` block
+The `[cregen]` block is used for defining global options related to the ensemble sorting procedures.
+For more information on the CREGEN procedure see our recent publication in *J Chem Phys*.
+
+{% include kv.html obj=site.data.inputkv.cregen %}
+

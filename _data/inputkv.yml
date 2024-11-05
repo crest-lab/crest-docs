@@ -275,3 +275,32 @@ metadynamics:
      descript: >
        Specify the reference structure dump frequency for RMSD-based metadynamics 
        in **fs** (or **ps** for `dump_ps`) as a *real*.
+
+
+
+cregen:
+
+   - key: ewin
+     descript: >
+       Set the total energy window for CREGEN relative to the lowest energy of 
+       structures in the ensemble. Specify as *real* in kcal/mol. Default: 6.0
+ 
+   - key: rthr
+     descript: >
+       Set the Cartesian RMSD threshold for distinguishing two conformers. 
+       Specify as *real* in Angstroem. Default: 0.125
+
+   - key: ethr
+     descript: >
+       Set an energy threshold for distinguishing two conformers.
+       Specify as *real* in Angstroem. Default: 0.05
+
+   - key: bthr
+     descript: >
+       Set a rotational constant threshold for distinguishing two conformers.
+       Specify as *real* in MHz. Default: 0.01
+
+   - comm: "`eqv`, `nmr`"
+     descript: >
+       Try to determine nuclear equivalencies from the ensemble, e.g. for NMR applications.
+       Specify as *boolean*

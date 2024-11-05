@@ -44,7 +44,7 @@ A minimal example to perform a geometry optimization for the structure given in 
 #This is a CREST input file
 input='struc.xyz'
 runtype='ancopt'
-optelv='tight'
+optlev='tight'
 
 #calculation level
 [[calculation.level]]
@@ -129,7 +129,7 @@ An example for performing a geometry optimization while introducing geometrical 
 #This is a CREST input file
 input='struc.xyz'
 runtype='ancopt'
-optelv='tight'
+optlev='tight'
 constraints='xtbinput'
 
 #calculation level
@@ -148,7 +148,7 @@ $end
 #This is a CREST input file
 input='struc.xyz'
 runtype='ancopt'
-optelv='tight'
+optlev='tight'
 
 #calculation level
 [[calculation.level]]
@@ -168,7 +168,7 @@ A minimal example to perform a geometry optimization for multiple structures in 
 input='struc.xyz'
 ensemble_input='ensemble.xyz'
 runtype='ancopt_ensemble'
-optelv='tight'
+optlev='tight'
 
 threads=10
 

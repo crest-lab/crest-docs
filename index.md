@@ -75,6 +75,3 @@ Quick links to different sections of the documentation can be found below.
   <h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
   <p>{{ post.excerpt }}</p>
 {% endfor %}
-
-
-{% include twitter.html %}

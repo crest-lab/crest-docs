@@ -18,5 +18,3 @@ permalink: /page/about/news.html
   <p>{{ post.excerpt }}</p>
 {% endfor %}
 
-
-{% include twitter.html %}

@@ -26,7 +26,7 @@ permalink: /page/examples/msreact/example_1.html
 
 
 We want to investigate the fragmentation reactions of 2-pentanone in an EI-MS experiment. Therefore, we need to specify the charge ('-chrg')
-after the ionization and the number of unpaired electrons at the specific charge ('-uhf). We provide the lowest conformer found by `CREST` at charge +1 as input <2-pentanone.xyz>. Since we only want to get unique fragments we use the -msmolbar flag to sort out duplicates with `molbar`.  Before starting crest, we should make sure that `molbar` is properly installed and can be executed globally. 
+after the ionization and the number of unpaired electrons at the specific charge ('-uhf'). We provide the lowest conformer found by `CREST` at charge +1 as input <2-pentanone.xyz>. Since we only want to get unique fragments we use the -msmolbar flag to sort out duplicates with `molbar`.  Before starting crest, we should make sure that `molbar` is properly installed and can be executed globally. 
 {: .text-justify }
 
 

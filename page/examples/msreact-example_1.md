@@ -25,7 +25,8 @@ permalink: /page/examples/msreact/example_1.html
 {% include image.html file="msreact-example-1-1.png" alt="Bacillaene at GFN-FF level" caption="Most stable gas-phase structure of 2-pentanone at charge +1 with GFN2-xTB." max-width=400 %}
 
 
-We want to investigate the fragmentation reactions of 2-pentanone in an EI-MS experiment. Therefore, we provide the lowest conformer found by `CREST` at charge +1 as input <2-pentanone.xyz>. We only want to get unique fragments so we use the -msmolbar flag to sort out duplicates with `molbar`.  Before starting crest, we should make sure that `molbar` is properly installed and can be executed globally. 
+We want to investigate the fragmentation reactions of 2-pentanone in an EI-MS experiment. Therefore, we need to specify the charge ('-chrg')
+after the ionization and the number of unpaired electrons at the specific charge ('-uhf). We provide the lowest conformer found by `CREST` at charge +1 as input <2-pentanone.xyz>. Since we only want to get unique fragments we use the -msmolbar flag to sort out duplicates with `molbar`.  Before starting crest, we should make sure that `molbar` is properly installed and can be executed globally. 
 {: .text-justify }
 
 
@@ -38,8 +39,7 @@ We want to investigate the fragmentation reactions of 2-pentanone in an EI-MS ex
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
-{% include command.html cmd='crest 2-pentanone.xyz <span class="nt">--msreact</span> <span class="nt">--chrg</span> 1 <span class="nt">--msmolbar</span> <span class="nt">--T</span> 16
-' %}
+{% include command.html cmd='crest 2-pentanone.xyz <span class="nt">--msreact</span> <span class="nt">--chrg</span> 1 <span class="nt">--uhf</span> 1 <span class="nt">--msmolbar</span> <span class="nt">--T</span> 16' %}
 </div>
 
 <div id="tab-1-2" class="tabcontent tab-id-1" style="text-align:justify">

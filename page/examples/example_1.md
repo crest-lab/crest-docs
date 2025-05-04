@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Conformational Sampling
+title: "Metadynamics-based Conformational Sampling"
 # parent: "Examples and Guides"
 parent: "Sampling Applications"
 grand_parent: "Examples and Guides"
 nav_order: 1
 toc: false
-summary: "A simple conformational search."
+summary: "A simple conformational search based on metadynamics simulations."
 permalink: /page/examples/example_1.html
 ---
 
@@ -36,7 +36,7 @@ Assuming further that our initial input structure (atomic coordinates, here in Ã
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'command', 'tab-1-1')" id="defaultOpen">{{ site.data.icons.code }} <code>command</code></button>
-  <button class="tablinks tab-1-1" onclick="openTabId(event, 'toml', 'tab-1-1')" id="defaultOpen">{{ site.data.icons.code }} <code>input.toml</code></button> 
+  <button class="tablinks tab-1-1" onclick="openTabId(event, 'toml', 'tab-1-1')" id="defaultOpen">{{ site.data.icons.codefile }} <code>input.toml</code></button> 
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'struc', 'tab-1-1')">{{ site.data.icons.codefile }}  <code>struc.xyz</code></button>
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'output', 'tab-1-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
@@ -96,237 +96,7 @@ H     3.572730    -0.688405    -1.154998
 </div>
 <div id="output" class="tabcontent tab-1-1" style="font-size:10px">
 {% capture output_file %}
-    ==============================================
-    |                                            |
-    |                 C R E S T                  |
-    |                                            |
-    |  Conformer-Rotamer Ensemble Sampling Tool  |
-    |          based on the GFN methods          |
-    |             P.Pracht, S.Grimme             |
-    |          Universitaet Bonn, MCTC           |
-    ==============================================
-    Version 2.11, Tue 13. Jul 16:11:14 CEST 2021
-Using the xTB program. Compatible with xTB version 6.4.0
-
-Cite work conducted with this code as
-
-P. Pracht, F. Bohle, S. Grimme, PCCP, 2020, 22, 7169-7192.
-
-and  S. Grimme, JCTC, 2019, 15, 2847-2862.
-
-with help from:
-C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
-P.Pracht, S. Spicher
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-Command line input:
-> crest struc.xyz --gfn2 --gbsa h2o -T 4
-
--gfn2 : Use of GFN2-xTB requested.
---gbsa h2o : implicit solvation
--T 4 (CPUs/Threads selected)
-
--------------------------
-xTB Geometry Optimization
--------------------------
-Geometry successfully optimized.
-
-------------------------------------------------
-Generating MTD length from a flexibility measure
-------------------------------------------------
-Calculating WBOs... done.
-Calculating NCI flexibility... done.
-    covalent flexibility measure :   0.450
-non-covalent flexibility measure :   0.823
-flexibility measure :   0.501
-t(MTD) / ps    :     5.0
-Î£(t(MTD)) / ps :    70.0 (14 MTDs)
-
--------------------------------------
-Starting a trial MTD to test settings
--------------------------------------
-Estimated runtime for one MTD (5.0 ps) on a single thread: 19 sec
-Estimated runtime for a batch of 14 MTDs on 4 threads: 1 min 15 sec
-
-list of Vbias parameters applied:
-$metadyn    0.00300   1.300
-$metadyn    0.00150   1.300
-$metadyn    0.00075   1.300
-$metadyn    0.00300   0.780
-$metadyn    0.00150   0.780
-$metadyn    0.00075   0.780
-$metadyn    0.00300   0.468
-$metadyn    0.00150   0.468
-$metadyn    0.00075   0.468
-$metadyn    0.00300   0.281
-$metadyn    0.00150   0.281
-$metadyn    0.00075   0.281
-$metadyn    0.00100   0.100
-$metadyn    0.00500   0.800
-
-*******************************************************************************************
-**                        N E W    I T E R A T I O N    C Y C L E                        **
-*******************************************************************************************
-
-========================================
-            MTD Iteration  1
-========================================
-
-    ========================================
-    |         Meta-MD (MTD) Sampling       |
-    ========================================
-
-<.......>
-
------------------------
-Multilevel Optimization
------------------------
-
--------------------------
-1. crude pre-optimization
--------------------------
-Optimizing all 686 structures from file "crest_rotamers_0.xyz" ...
-<.......>
-done.
-running RMSDs...
-done.
-E lowest :   -33.87998
-654 structures remain within    12.00 kcal/mol window
-
--------------------------------------
-2. optimization with tight thresholds
--------------------------------------
-Optimizing all 655 structures from file "crest_rotamers_1.xyz" ...
-<.......>
-done.
-running RMSDs...
-done.
-E lowest :   -33.88023
-119 structures remain within     6.00 kcal/mol window
-
-
-========================================
-            MTD Iteration  2
-========================================
-<.......>
-<.......>
-
-========================================
-            MTD Iterations done
-========================================
-Collecting ensmbles.
-running RMSDs...
-done.
-E lowest :   -33.88023
-146 structures remain within     6.00 kcal/mol window
-
------------------------------------------------
-Additional regular MDs on lowest 4 conformer(s)
------------------------------------------------
-<.......>
-Appending file crest_rotamers_1.xyz with new structures
-
--------------------------------------------
-Ensemble optimization with tight thresholds
--------------------------------------------
-Optimizing all 338 structures from file "crest_rotamers_1.xyz" ...
-<.......>
-done.
-running RMSDs...
-done.
-E lowest :   -33.88023
-159 structures remain within     6.00 kcal/mol window
-
-
-    ========================================
-    |        Structure Crossing (GC)       |
-    ========================================
-=============================
-# threads =           4
-=============================
-input  file name : crest_rotamers_3.xyz
-number of atoms                :    20
-number of points on xyz files  :   159
-conformer energy window  /kcal :    6.00
-CN per atom difference cut-off :  0.3000
-RMSD threshold                 :  0.2500
-max. # of generated structures : 250
-reading xyz file ...
-# in E window                159
-generating pairs ...       12719
-66.0 % done
-generated pairs           :       10762
-number of clash discarded :        1799
-average rmsd w.r.t input  : 2.82636
-sd of ensemble            : 0.63885
-number of new structures      :          98
-removed identical structures  :         402
-<.......>
-<.......>
-
-
-================================================
-|           Final Geometry Optimization        |
-================================================
-------------------------------------------------
-Ensemble optimization with very tight thresholds
-------------------------------------------------
-Optimizing all 170 structures from file "crest_rotamers_4.xyz" ...
-<.......>
-done.
-running RMSDs...
-done.
-E lowest :   -33.88023
-147 structures remain within     6.00 kcal/mol window
-
-input  file name : crest_rotamers_5.xyz
-output file name : crest_rotamers_6.xyz
-number of atoms                :   20
-number of points on xyz files  :   170
-RMSD threshold                 :   0.1250
-Bconst threshold               :   0.0100
-population threshold           :   0.0500
-conformer energy window  /kcal :   6.0000
-# fragment in coord            :     1
-# bonds in reference structure :    19
-number of reliable points      :   170
-reference state Etot :  -33.8802280500000
-number of doubles removed by rot/RMSD         :          23
-total number unique points considered further :         147
-    Erel/kcal        Etot weight/tot  conformer     set   degen     origin
-    1   0.000   -33.88023    0.04207    0.25214       1       6     gc
-    2   0.000   -33.88023    0.04204                                mtd1
-    3   0.001   -33.88023    0.04203                                mtd9
-    4   0.001   -33.88023    0.04200                                gc
-    5   0.001   -33.88023    0.04200                                mtd3
-    6   0.001   -33.88023    0.04200                                mtd9
-    7   0.050   -33.88015    0.03865    0.19312       2       5     mtd3
-    8   0.050   -33.88015    0.03864                                mtd14
-    9   0.051   -33.88015    0.03862                                mtd10
-    10   0.051   -33.88015    0.03861                                md5
-    11   0.051   -33.88015    0.03860                                mtd9
-    12   0.476   -33.87947    0.01884    0.09414       3       5     md6
-    13   0.476   -33.87947    0.01884                                mtd12
-    14   ...
-    15   ...
-
-<.......>
-
-T /K                                  :   298.15
-E lowest                              :   -33.88023
-ensemble average energy (kcal)        :    0.550
-ensemble entropy (J/mol K, cal/mol K) :   34.054    8.139
-ensemble free energy (kcal/mol)       :   -2.427
-population of lowest in %             :   25.214
-number of unique conformers for further calc           61
-list of relative energies saved as "crest.energies"
-
-<.......>
-
-CREST terminated normally.
+  {% include outputs/example_1_output.txt %}
 {% endcapture %}
 {% include codecell.html content=output_file %}
 </div>

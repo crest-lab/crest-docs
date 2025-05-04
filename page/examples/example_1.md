@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Conformational Sampling
-parent: "Examples and Guides"
+# parent: "Examples and Guides"
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
 nav_order: 1
 toc: false
 summary: "A simple conformational search."
@@ -34,20 +36,37 @@ Assuming further that our initial input structure (atomic coordinates, here in Ã
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'command', 'tab-1-1')" id="defaultOpen">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-1-1" onclick="openTabId(event, 'toml', 'tab-1-1')" id="defaultOpen">{{ site.data.icons.code }} <code>input.toml</code></button> 
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'struc', 'tab-1-1')">{{ site.data.icons.codefile }}  <code>struc.xyz</code></button>
   <button class="tablinks tab-1-1" onclick="openTabId(event, 'output', 'tab-1-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="command" class="tabcontent tab-1-1" style="text-align:justify">
+ {% include command.html cmd="crest input.toml" %}   
+<b>OR</b> use
 {% include command.html cmd="crest struc.xyz --gfn2 --gbsa h2o -T 4" %}
 <span markdown="span">
-This is the command that needs to be executed from the command line. 
-`--gfn2` specifies   the usage of the SQM level GFN2-xTB, `--gbsa h2o` implements 
+These commands need to be executed from the command line. In the first case, settings are provided entirely via a separate `input.toml` file (CREST >= 3.0), while the second version is the standard CMD version.
+Here, `--gfn2` specifies   the usage of the SQM level GFN2-xTB, `--gbsa h2o` implements 
 the GBSA implicit solvation  for water, and `-T 4` requests the usage of 4 CPU threads.
 You can save the terminal output of this command by adding `> crest.out` at the end of the line.
 The output will look something like the one in the `output` tab above.
 </span>
 </div>
+<div id="toml" class="tabcontent tab-1-1" style="font-size:10px"> 
+{% capture toml_input %}
+# This is a CREST input file
+input = "struc.xyz"
+runtype = "imtd-gc"
+threads = 4
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+alpb = "h2o"
+{% endcapture %}                                                   
+{% include codecell.html content=toml_input %}                      
+</div>                                                             
 <div id="struc" class="tabcontent tab-1-1" style="font-size:10px">
 {% capture struc_xyz %}
  20

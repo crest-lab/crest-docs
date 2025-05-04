@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Constrained Sampling
-parent: "Examples and Guides"
+# parent: "Examples and Guides"
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
 nav_order: 4
 toc: false
 summary: "A guide to <i>constrained</i> conformational sampling."

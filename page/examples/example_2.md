@@ -55,21 +55,36 @@ The answer is given here:
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'command', 'tab-id-1')" id="tab-id-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'struc', 'tab-id-1')">{{ site.data.icons.codefile }} <code>struc.xyz</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'ensemble', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input-ensemble.xyz</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'output', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="command" class="tabcontent tab-id-1" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd="crest struc.xyz --cregen input-ensemble.xyz" %}
 <span markdown="span">
-This is the command that needs to be executed from the command line. 
 The `--cregen` command activates the ensemble sorting.
-The ensemble file (`input-ensemble.xyz`) is passed as an argument to the `--cregen` command.
+The ensemble file (`input-ensemble.xyz`) is passed as an argument to `--cregen`.
 A CREST input structure (`struc.xyz`) has to be provided to get a reference topology.
-The output will look something like the one in the `output` tab above.
-Note again, that the ensemble must satisfy the format requiements from the [**Input Formats** section.]({{site.baseurl}}/page/documentation/coords.html#ensemble-and-trajectory-files)
+In the TOML variant all settings are provided in `input.toml` (CREST >= 3.0).
+Note that the ensemble must satisfy the format requirements from the [**Input Formats** section.]({{site.baseurl}}/page/documentation/coords.html#ensemble-and-trajectory-files)
 </span>
+</div>
+<div id="toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_input %}
+# This is a CREST input file
+input          = "struc.xyz"
+input_ensemble = "input-ensemble.xyz"
+runtype        = "cregen"
+
+[cregen]
+ewin = 6.0
+rthr = 0.125
+{% endcapture %}
+{% include codecell.html content=toml_input %}
 </div>
 <div id="struc" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture struc_xyz %}
@@ -546,95 +561,7 @@ H     3.572730    -0.688405    -1.154998
 </div>
 <div id="output" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture output_file %}
- 
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
-  Using the xTB program. Compatible with xTB version 6.4.0
- 
-   Cite work conducted with this code as
-
-   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
-   • S.Grimme, JCTC, 2019, 15, 2847-2862.
-
-   and for works involving QCG as
-
-   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
-     JCTC, 2022, 18 (5), 3174-3189.
- 
-   with help from:
-   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
-   C.Plett, P.Pracht, S.Spicher
- 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
- Command line input:
- > crest struc.xyz --cregen input-ensemble.xyz
-
-  --cregen : CREGEN standalone usage. Sorting file "input-ensemble.xyz"
- Using only the cregen sorting routine.
- input  file name : input-ensemble.xyz
- output file name : input-ensemble.xyz.sorted
- number of atoms                :   20
- number of points on xyz files  :   20
- RMSD threshold                 :   0.1250
- Bconst threshold               :   0.0100
- population threshold           :   0.0500
- conformer energy window  /kcal :   6.0000
- # fragment in coord            :     1
- # bonds in reference structure :    19
- number of reliable points      :    20
- reference state Etot :  -33.8616567100000     
- running RMSDs...
- done.
- number of doubles removed by rot/RMSD         :           2
- total number unique points considered further :          18
-       Erel/kcal        Etot weight/tot  conformer     set   degen     origin
-       1   0.000   -33.86166    0.21411    0.42820       1       2     
-       2   0.000   -33.86166    0.21409                                
-       3   0.398   -33.86102    0.10936    0.10936       2       1     
-       4   0.581   -33.86073    0.08039    0.16071       3       2     
-       5   0.581   -33.86073    0.08031                                
-       6   0.681   -33.86057    0.06790    0.06790       4       1     
-       7   0.902   -33.86022    0.04678    0.09351       5       2     
-       8   0.902   -33.86022    0.04674                                
-       9   1.033   -33.86001    0.03748    0.03748       6       1     
-      10   1.205   -33.85974    0.02806    0.02806       7       1     
-      11   1.259   -33.85965    0.02563    0.02563       8       1     
-      12   1.401   -33.85942    0.02015    0.02015       9       1     
-      13   1.477   -33.85930    0.01774    0.01774      10       1     
-      14   2.535   -33.85762    0.00298    0.00298      11       1     
-      15   2.551   -33.85759    0.00290    0.00290      12       1     
-      16   2.636   -33.85746    0.00251    0.00251      13       1     
-      17   2.939   -33.85697    0.00151    0.00151      14       1     
-      18   2.996   -33.85688    0.00137    0.00137      15       1     
-T /K                                  :   298.15
-E lowest                              :   -33.86166
-ensemble average energy (kcal)        :    0.457
-ensemble entropy (J/mol K, cal/mol K) :   19.222    4.594
-ensemble free energy (kcal/mol)       :   -1.370
-population of lowest in %             :   42.820
- number of unique conformers for further calc           15
- list of relative energies saved as "crest.energies"
- 
- -----------------
- Wall Time Summary
- -----------------
-              CREGEN wall time :         0h : 0m : 0s
---------------------
-Overall wall time  : 0h : 0m : 0s
- 
- CREST terminated normally.
-
+  {% include outputs/example_2_output.txt %}
 {% endcapture %}
 {% include codecell.html content=output_file %}
 </div>

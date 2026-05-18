@@ -32,7 +32,8 @@ It can be called *via* the new [**input file reader** {{site.data.icons.book}}](
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-2', 'tab-id-1')">{{ site.data.icons.codefile }} <code>struc.xyz</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.  icons.codefile }} <code>input.toml</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-out', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
@@ -92,9 +93,15 @@ gapdiff2 = [10.0, 0.005, 0.25]  #bias parameter to minimize the gap, [10, 0.005,
 {% endcapture %}
 {% include codecell.html content=toml_file style="font-size:10px" %}
 </div>
+<div id="tab-1-out" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture output_file %}
+  {% include outputs/mecp_1_output.txt %}
+{% endcapture %}
+{% include codecell.html content=output_file %}
+</div>
 {% include defaulttab.html id="open-1" %}
 
-The optimization trajectory (written to `crestopt.log`) will look like something in the following. Notice that the gap minimization between the two states (shown in red) is the initial driving force of the procedure.
+The optimization trajectory (written to `crestopt.log.xyz`) will look like something in the following. Notice that the gap minimization between the two states (shown in red) is the initial driving force of the procedure.
 {: .text-justify }
 
 {% include image.html file="example-mecp-1.png" alt="Benzene MECP optimization" caption="Optimization of the GFN2-xTB S<sub>0</sub>/T<sub>1</sub> MECP for benzene, starting from the ground state structure." max-width=700%}

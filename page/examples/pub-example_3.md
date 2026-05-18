@@ -34,12 +34,36 @@ The SHAKE constraint is turned off (`--shake 0`), the timestep is reduced to 1 f
 <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-2', 'tab-id-1')">{{ site.data.icons.codefile }} <code>coord</code>/<code>coord.ref</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.  icons.codefile }} <code>constraints.inp</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.icons.codefile }} <code>constraints.inp</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-out', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd='crest coord <span class="nt">--subrmsd</span> <span class="nt">--shake</span> 0 <span class="nt">--tstep</span> 1 <span class="nt">--cinp</span> constraints.inp' %}
+</div>
+<div id="tab-1-toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_pub3 %}
+# This is a CREST input file
+input   = "coord"
+runtype = "imtd-gc"
+threads = 4
+
+constraints = "constraints.inp"
+subrmsd     = true
+
+[dynamics]
+tstep = 1.0
+shake = 0
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_pub3 %}
 </div>
 <div id="tab-1-2" class="tabcontent tab-id-1" style="text-align:justify">
 {% capture struc_file %}
@@ -335,6 +359,12 @@ $metadyn
 $end
 {% endcapture %}
 {% include codecell.html content=struc_file style="font-size:10px" %}
+</div>
+<div id="tab-1-out" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture output_file %}
+  {% include outputs/pub_example_3_output.txt %}
+{% endcapture %}
+{% include codecell.html content=output_file %}
 </div>
 {% include defaulttab.html id="open-1" %}
 

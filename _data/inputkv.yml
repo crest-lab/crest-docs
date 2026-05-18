@@ -21,21 +21,27 @@ general:
 
    - key: runtype
      descript: >
-       Select the CREST runtype, specify as a *string*.<br> 
+       Select the CREST runtype, specify as a *string*.<br>
        The possible values are:
      vals:
        - "`none` - do nothing"
        - "`singlepoint`,`sp` - perform a single calculation for the input structure"
        - "`ancopt`,`optimize` - optimize the input structure"
        - "`numhess` - numerical calculation of second derivatives"
-       - "`ancopt_ensemble`,`optimize_ensemble`,`mdopt` - optimize the input ensemble, 
+       - "`ancopt_ensemble`,`optimize_ensemble`,`mdopt` - optimize the input ensemble,
           similar to the `--mdopt` function."
        - "`screen_ensemble`,`screen` - optimize the input ensemble in a multistep procedure
           and sort, similar to the `--screen` function."
        - "`md`,`mtd`,`dynamics`,`metadynamics` - perform a (meta)dynamics simulation."
-       - "`imtd-gc` - Standard  conformational sampling algo based on metadynamics"
+       - "`imtd-gc` - Standard conformational sampling algo based on metadynamics"
        - "`nci-mtd`,`nci` - perform sampling with a wall potential (NCI_MTD workflow)"
        - "`entropy`,`imtd-smtd` - perform extensive sampling targeting configurational entropy"
+       - "`cregen`,`sort` - <span class='label label-green'>CREST 3.1</span>
+          run the CREGEN ensemble sorting/filtering as a standalone step"
+       - "`basinhopping`,`bh` - <span class='label label-green'>CREST 3.1</span>
+          basin-hopping global optimization (settings via `[basinhopping]` block)"
+       - "`ensemblehess` - <span class='label label-green'>CREST 3.1</span>
+          compute Hessians and thermochemistry for every structure in an ensemble"
 
 
    - key: constraints
@@ -81,7 +87,11 @@ calculation:
      vals:
        - "`ancopt` - Use the ANCOPT algorithm (RFO with internal coordinates)"
        - "`rfo` - Use a rational function algorithm (Cartesian coordinates)"
-       - "`gd` - Use  a simple gradient descent algorithm (Cartesian coordinates)"
+       - "`gd` - Use a simple gradient descent algorithm (Cartesian coordinates)"
+       - "`lbfgs` - <span class='label label-green'>CREST 3.1</span>
+          Use the limited-memory BFGS optimizer"
+       - "`nr` - <span class='label label-green'>CREST 3.1</span>
+          Use the Newton–Raphson optimizer (second-order, requires Hessian)"
 
    - key: hess_update
      descript: >
@@ -133,11 +143,18 @@ calclevel:
        - "`gfnff` - Select GFN-FF via the gfnff-submodule project"
        - "`gfn0` - Select GFN0-xTB via the gfn0-submodule project"
        - "`gfn0*` - Select a special GFN0-xTB calculator used for MECP calculations (see [https://doi.org/10.1021/acs.jpclett.3c00494](https://doi.org/10.1021/acs.jpclett.3c00494)"
-       - "`xtb`,`gfn`,`gfn-xtb` - Select GFN*n*-xTB method calculations 
-          performed via the `xtb` program. Should be used in combination with the `binary` 
+       - "`xtb`,`gfn`,`gfn-xtb` - Select GFN*n*-xTB method calculations
+          performed via the `xtb` program. Should be used in combination with the `binary`
           option within this block. However, this setting is not generally recommended because
           it will be much slower than the `tblite` backend."
-       - "`orca` - ORCA subprocesses. Requires to use the arguments `orca_cmd` as well as `orca_template` in addition to this argument. "
+       - "`gxtb`,`g-xtb` - <span class='label label-green'>CREST 3.1</span>
+          Select g-xTB via tblite. g-xTB is the generalized extended tight-binding model
+          and the designated successor of GFN*n*-xTB.
+          Requires a build with g-xTB support."
+#       - "`mace-off` - <span class='label label-green'>CREST 3.1</span>
+#          Select a MACE-OFF ML potential via fmlip-relay. Also requires `modelpath` and
+#          optionally `modelsize` in this block. Requires a build with fmlip-relay support."
+       - "`orca` - ORCA subprocesses. Requires to use the arguments `orca_cmd` as well as `orca_template` in addition to this argument."
        - "`generic` - Call a generic script. The script should process the coordinates that
           crest writes into a file `genericinp.xyz` and you must know how to obtain the gradient
           (see options `gradtype` and `gradfile` below)`"
@@ -190,6 +207,47 @@ calclevel:
        Specify as *string*. Available options are:
      vals:
        - "`engrad` - the *.engrad* format used by e.g. xtb and ORCA."
+
+   - key: spin_polarized
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Activate spin-polarized (open-shell) treatment for tblite-based methods.
+       Specify as *boolean* (`true`/`false`).
+       Must be combined with `uhf > 0` to define the spin state.
+
+   - key: efield
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Apply a homogeneous external electric field to tblite single-points and
+       optimizations. Specify as a *list of three reals* `[Ex, Ey, Ez]` in V/Å.
+       Example: `efield = [0.0, 0.0, 0.05]`
+
+   - key: ceh_guess
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Use CEH (Charge Extended Hückel) partial charges as the initial guess before
+       the first tblite or GFN-FF call.
+       Specify as *boolean* (`true`/`false`).
+
+#   - key: modelpath
+#     descript: >
+#       <span class='label label-green'>CREST 3.1</span>
+#       Path to the ML potential model file when `method = "mace-off"` is selected.
+#       Specify as a *string*.
+#
+#   - key: modelsize
+#     descript: >
+#       <span class='label label-green'>CREST 3.1</span>
+#       Size variant of the ML potential model when `method = "mace-off"` is selected.
+#       Specify as a *string* (e.g. `"medium"`).
+#
+#   - comm: "`penalty`, `rmsdbias`"
+#     descript: >
+#       <span class='label label-green'>CREST 3.1</span>
+#       Attach a static RMSD-based repulsive bias potential to this calculator level.
+#       The argument is a *list of reals* `[kpush, alpha]`, where *kpush* is the
+#       Gaussian penalty height and *alpha* is the width. Reference structures are
+#       read from the file named by `rmsdbias` (or `penalty`).
 
 
 
@@ -251,6 +309,16 @@ dynamics:
        Set the hydrogen mass in **amu**. The argument is specified as a *real*.
        Increasing the hydrogen mass helps the simulation to run more stable.
 
+   - key: thermostat
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Select the thermostat algorithm. Specify as a *string*.
+     vals:
+       - "`berendsen` - Berendsen velocity rescaling [default]"
+       - "`langevin` - Langevin stochastic thermostat (friction + random noise)"
+       - "`csvr`,`bdp` - Bussi–Donadio–Parrinello canonical thermostat
+          (correct NVT ensemble distribution)"
+
 
 
 metadynamics:
@@ -304,3 +372,27 @@ cregen:
      descript: >
        Try to determine nuclear equivalencies from the ensemble, e.g. for NMR applications.
        Specify as *boolean*
+
+
+
+basinhopping:
+
+   - key: temperature
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Metropolis MC acceptance temperature in **K**. Specify as a *real*.
+
+   - key: steps
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Number of Monte Carlo iterations. Specify as an *integer*.
+
+   - key: stepsize
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Dihedral angle perturbation step size in degrees. Specify as a *real*.
+
+   - key: seed
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Random number generator seed for reproducible runs. Specify as an *integer*.

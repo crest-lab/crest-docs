@@ -31,12 +31,28 @@ systems were provided: *trans*-Cu(II)(L-valine)<sub>2</sub> and
 <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-2', 'tab-id-1')">{{ site.data.icons.codefile }} <code>coord</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.  icons.checkfile }} <code>output</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd='crest coord <span class="nt">--nci</span>' %}
+</div>
+<div id="tab-1-toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_pub2a %}
+# This is a CREST input file
+input   = "coord"
+runtype = "nci-mtd"
+threads = 4
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_pub2a %}
 </div>
 <div id="tab-1-2" class="tabcontent tab-id-1" style="text-align:justify">
 {% capture struc_file %}
@@ -82,43 +98,11 @@ $end
 {% endcapture %}
 {% include codecell.html content=struc_file style="font-size:10px" %}
 </div>
-<div id="tab-1-3" class="tabcontent tab-id-1" style="text-align:justify">
-{% capture struc_file %}
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.11, Tue 13. Jul 16:11:14 CEST 2021
-  Using the xTB program. Compatible with xTB version 6.4.0
-
-<.......>
-
-T /K                                  :   298.15
-E lowest                              :   -57.69401
-ensemble average energy (kcal)        :    0.430
-ensemble entropy (J/mol K, cal/mol K) :   45.253   10.816
-ensemble free energy (kcal/mol)       :   -3.225
-population of lowest in %             :    7.134
- number of unique conformers for further calc           52
- list of relative energies saved as "crest.energies"
-
- -----------------
- Wall Time Summary
- -----------------
-             test MD wall time :         0h : 0m : 5s
-                 MTD wall time :         0h :15m :51s
-      multilevel OPT wall time :         0h :49m :17s
---------------------
-Overall wall time  : 1h : 6m :47s
-
- CREST terminated normally.
+<div id="tab-1-3" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture output_file_cu %}
+  {% include outputs/pub_example_2_output.txt %}
 {% endcapture %}
-{% include codecell.html content=struc_file style="font-size:10px" %}
+{% include codecell.html content=output_file_cu %}
 </div>
 {% include defaulttab.html id="open-1" %}
 
@@ -137,12 +121,30 @@ Results in 52 conformers within an energy window of 6 kcal/mol.
 <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-1', 'tab-id-2')" id="open-2">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-toml', 'tab-id-2')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-2', 'tab-id-2')">{{ site.data.icons.codefile }} <code>coord</code></button>
-  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-3', 'tab-id-2')">{{ site.data.  icons.checkfile }} <code>output</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-3', 'tab-id-2')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-2-1" class="tabcontent tab-id-2" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd='crest coord <span class="nt">--gbsa</span> methanol <span class="nt">--ewin</span> 10' %}
+</div>
+<div id="tab-2-toml" class="tabcontent tab-id-2" style="font-size:10px">
+{% capture toml_pub2b %}
+# This is a CREST input file
+input   = "coord"
+runtype = "imtd-gc"
+threads = 4
+ewin    = 10.0
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+alpb   = "methanol"
+{% endcapture %}
+{% include codecell.html content=toml_pub2b %}
 </div>
 <div id="tab-2-2" class="tabcontent tab-id-2" style="text-align:justify">
 {% capture struc_file %}
@@ -197,45 +199,11 @@ $end
 {% endcapture %}
 {% include codecell.html content=struc_file style="font-size:10px" %}
 </div>
-<div id="tab-2-3" class="tabcontent tab-id-2" style="text-align:justify">
-{% capture struc_file %}
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.11, Tue 13. Jul 16:11:14 CEST 2021
-  Using the xTB program. Compatible with xTB version 6.4.0
-
-<.......>
-
-T /K                                  :   298.15
-E lowest                              :   -78.08070
-ensemble average energy (kcal)        :    0.551
-ensemble entropy (J/mol K, cal/mol K) :   37.238    8.900
-ensemble free energy (kcal/mol)       :   -2.654
-population of lowest in %             :   43.032
- number of unique conformers for further calc           43
- list of relative energies saved as "crest.energies"
-
- -----------------
- Wall Time Summary
- -----------------
-             test MD wall time :         0h : 0m :11s
-                 MTD wall time :         0h :24m : 9s
-      multilevel OPT wall time :         0h :55m : 9s
-                  MD wall time :         0h :13m :46s
-                  GC wall time :         0h : 0m :14s
---------------------
-Overall wall time  : 1h :36m :42s
-
- CREST terminated normally.
+<div id="tab-2-3" class="tabcontent tab-id-2" style="font-size:10px">
+{% capture output_file_pt %}
+  {% include outputs/pub_example_2b_output.txt %}
 {% endcapture %}
-{% include codecell.html content=struc_file style="font-size:10px" %}
+{% include codecell.html content=output_file_pt %}
 </div>
 {% include defaulttab.html id="open-2" %}
 

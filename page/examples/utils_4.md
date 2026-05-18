@@ -122,97 +122,9 @@ $end
 {% endcapture %}
 {% include codecell.html content=vibfile style="font-size:10px" %}
 </div>
-<div id="tab-1-4" class="tabcontent tab-id-1" style="text-align:justify">
+<div id="tab-1-4" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture outfile %}
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
-  Using the xTB program. Compatible with xTB version 6.4.0
- 
-   Cite work conducted with this code as
-
-   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
-   • S.Grimme, JCTC, 2019, 15, 2847-2862.
-
-   and for works involving QCG as
-
-   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
-     JCTC, 2022, 18 (5), 3174-3189.
- 
-   with help from:
-   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
-   C.Plett, P.Pracht, S.Spicher
- 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
- Command line input:
- > crest --thermo struc.xyz
-
-Mol. weight /amu  :   126.11
-Rot. const. /MHz  :  3209.69 1425.53  993.12
-Rot. const. /cm-1 :     0.11    0.05    0.03
-Symmetry:    cs 
-
-          ...................................................
-          :                      SETUP                      :
-          :.................................................:
-          :  # frequencies                          39      :
-          :  # imaginary freq.                       0      :
-          :  linear?                                 F      :
-          :  symmetry                               cs      :
-          :  rotational number                       1      :
-          :  scaling factor                  1.0000000      :
-          :  rotor cutoff                   25.0000000 cm⁻¹ :
-          :  imag. cutoff                  -50.0000000 cm⁻¹ :
-          :.................................................:
-
-    mode    ω/cm⁻¹     T·S(HO)/kcal·mol⁻¹    T·S(FR)/kcal·mol⁻¹   T·S(vib)
-   ------------------------------------------------------------------------
-       1     70.05    -1.23790 ( 98.40%)    -0.95645 (  1.60%)    -1.23341
-       2    105.13    -1.00086 ( 99.68%)    -0.83625 (  0.32%)    -1.00034
-       3    147.88    -0.80480 ( 99.92%)    -0.73521 (  0.08%)    -0.80475
-       4    261.06    -0.49334 ( 99.99%)    -0.56689 (  0.01%)    -0.49335
-   ------------------------------------------------------------------------
-
-   temp. (K)  partition function   enthalpy   heat capacity  entropy
-                                   cal/mol     cal/K/mol   cal/K/mol   J/K/mol
- 298.15  VIB   79.3                 3380.390     24.301     20.012
-         ROT  0.407E+06              888.752      2.981     28.650
-         INT  0.323E+08             4269.143     27.282     48.662
-         TR   0.137E+28             1481.254      4.968     40.391
-         TOT                        5750.3966    32.2500    89.0530   372.5979
-
-       T/K    H(0)-H(T)+PV         H(T)/Eh          T*S/Eh         G(T)/Eh
-   ------------------------------------------------------------------------
-    278.15    0.816352E-02    0.118775E+00    0.385087E-01    0.802659E-01
-    288.15    0.865677E-02    0.119268E+00    0.403947E-01    0.788731E-01
-    298.15    0.916384E-02    0.119775E+00    0.423120E-01    0.774629E-01 (used)
-    308.15    0.968460E-02    0.120296E+00    0.442601E-01    0.760355E-01
-    318.15    0.102189E-01    0.120830E+00    0.462389E-01    0.745910E-01
-    328.15    0.107666E-01    0.121378E+00    0.482481E-01    0.731295E-01
-    338.15    0.113275E-01    0.121939E+00    0.502874E-01    0.716511E-01
-    348.15    0.119015E-01    0.122513E+00    0.523565E-01    0.701560E-01
-    358.15    0.124883E-01    0.123099E+00    0.544552E-01    0.686442E-01
-    368.15    0.130878E-01    0.123699E+00    0.565831E-01    0.671158E-01
-    378.15    0.136998E-01    0.124311E+00    0.587399E-01    0.655710E-01
-   ------------------------------------------------------------------------
- 
- -----------------
- Wall Time Summary
- -----------------
---------------------
-Overall wall time  : 0h : 0m : 0s
- 
- CREST terminated normally.
+  {% include outputs/utils_4_output.txt %}
 {% endcapture %}
 {% include codecell.html content=outfile style="font-size:10px" %}
 </div>

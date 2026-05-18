@@ -60,6 +60,13 @@ general:
       [**Input File Documentation** <i class='fa-solid fa-book'></i>](./inputfiles.html
       'Documentation / Input File Documentation').
 
+  - cmd: "--allowrestart"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Enable the checkpoint-based restart mechanism for conformer searches.
+      When active, CREST writes a `crest.restart` file at each stage boundary,
+      allowing an interrupted run to be resumed from the last completed stage.
+
   - cmd: "--legacy"
     descript: >
       <span class='label label-green'>CREST 3.0</span>
@@ -98,7 +105,7 @@ runtype:
       consisting out of a metadynamics approach and genetic structure crossing. 
       This workflow is **deprecated**.
     
-  - comm: "`--v2i`, `--v3`"
+  - comm: "`--v2i`, `--v3`, `--itmdgc`"
     type: iMTD-GC sampling
     descript: >
       Iterative version of the MTD-GC workflow, which is the [default] runtype of CREST.
@@ -113,6 +120,14 @@ runtype:
     url:
       text: See here.
       link: /page/overview/workflows.html#conformational-entropy-calculations
+
+  - comm: "`--bh`, `-GMIN`"
+    type: Basin-hopping global optimization
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Basin-hopping global optimization of the input structure. Combines Metropolis
+      Monte Carlo moves on dihedral angles with local geometry optimizations.
+      Settings can be controlled via the `[basinhopping]` TOML block.
     
   - cmd: --entropy 
     type: Confromational Entropy Algorithm 
@@ -123,34 +138,70 @@ runtype:
       text: See here.
       link: /page/overview/workflows.html#conformational-entropy-calculations
     
-  - cmd: --protonate 
-    type: Protonation site sampling 
+  - cmd: --protonate
+    type: Protonation site sampling
     descript: >
-      Workflow for sampling protonation sites. 
+      Workflow for sampling protonation sites. Output ensemble: `protonated.xyz`.
     url:
-      link: See here.
+      text: See here.
       link: /page/overview/workflows.html#protonation-site-screening
-    
-  - cmd: --deprotonate 
-    type: Deprotonation site sampling 
+
+  - cmd: --deprotonate
+    type: Deprotonation site sampling
     descript: >
-      Workflow for sampling protonation sites. This is related to the `--protonate` option.
-    
-  - cmd: --tautomerize 
-    type: Prototropic Tautomer sampling 
+      Workflow for sampling deprotonation sites. This is related to the `--protonate` option.
+      Output ensemble: `deprotonated.xyz`.
+
+  - cmd: --tautomerize
+    type: Prototropic Tautomer sampling
     descript: >
-      Workflow for sampling prototropic tautomers. 
-      This is related to the `--protonate` option.
+      Workflow for sampling prototropic tautomers.
+      This is related to the `--protonate` option. Output ensemble: `tautomers.xyz`.
     
-  - cmd: --cregen <FILE> 
+  - comm: "`--cregen [<FILE>]`, `--sort`"
     anchor: cregen
-    type: CREGEN ensemble sorting routine 
+    type: CREGEN ensemble sorting routine
     descript: >
       The standalone option for sorting an ensemble or a
-      trajectory into conformers and rotamers.
+      trajectory into conformers and rotamers. Use `--sort irmsd`
+      to invoke the permutation-invariant iRMSD sorter
+      (<span class='label label-green'>CREST 3.1</span>), which writes aligned
+      structures to `irmsd.xyz`. The `--inversion` flag controls whether
+      mirror images are treated as identical during iRMSD comparison.
     url:
       text: See below. <i class="fa-solid fa-circle-down"></i>
       link: /page/documentation/keywords.html#ensemble-sorting-options
+
+  - comm: "`--ensemblehess [<FILE>]`, `--mdhess [<FILE>]`"
+    type: Ensemble Hessian and thermochemistry
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Compute a numerical Hessian and thermochemistry for every structure
+      in an ensemble. The optional `<FILE>` argument specifies the ensemble;
+      the lowest-energy structure is extracted as the thermochemical reference.
+
+  - cmd: "--finalhess"
+    type: Post-search Hessian re-ranking
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Add a Hessian + free-energy re-ranking step after a conformer search.
+      Each conformer receives a proper *ΔG* so that the final Boltzmann weights
+      are based on free energies rather than electronic energies.
+
+  - cmd: "--rerank <METHOD>"
+    type: Post-search single-point re-ranking
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Re-compute single-point energies at `<METHOD>` on the final conformer
+      ensemble and re-sort by those energies. Molecular geometries are unchanged.
+      Valid method tokens: `gfn0`, `gfn1`, `gfn2`, `gxtb`, `gfnff`.
+
+  - cmd: "--reopt <METHOD>"
+    type: Post-search geometry re-optimization
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Re-optimize all conformers in the final ensemble at `<METHOD>` and re-sort
+      via CREGEN. Valid method tokens: `gfn0`, `gfn1`, `gfn2`, `gxtb`, `gfnff`.
     
   - cmd: --qcg 
     type: QCG tool 
@@ -175,35 +226,72 @@ runtype:
 leveloftheory:
 
   - subheader: "**GFN*n*-xTB method selection**"
-    
-  - cmd: --gfn1 
+
+  - cmd: --gfn1
     descript: Use [GFN1-xTB](https://doi.org/10.1021/acs.jctc.7b00118)
-    
-  - cmd: --gfn2 
+
+  - cmd: --gfn2
     descript: Use [GFN2-xTB](https://doi.org/10.1021/acs.jctc.8b01176)
-    
+
   - comm: "`--gff`, `--gfnff`"
     descript: Use [GFN-FF](https://doi.org/10.1002/anie.202004239)
 
-    
-  - cmd: --gfn2//gfnff
+  - cmd: --gxtb
     descript: >
-      Use the GFN2-xTB//GFN-FF composite method. 
-      Sampling and optimizations are done at GFN-FF level, 
-      which is appended by a GFN2-xTB singlepoint calculation.
-    
+      <span class='label label-green'>CREST 3.1</span>
+      Use the g-xTB method, the generalized extended tight-binding model and
+      designated successor of GFN*n*-xTB.
+      Requires a build with g-xTB support (`-DWITH_GXTB=ON` / `-Dgxtb=enabled`).
+
+  - subheader: "<br>**Composite / multi-level methods**"
+
+  - comm: "`--<A>@<B>`"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Two-level method: run MD/MTD sampling at the faster method `<B>`, then
+      re-optimize all final conformers at the higher-level method `<A>`.
+      Example: `--gfn2@gfnff` samples at GFN-FF and refines with GFN2-xTB.
+      Valid tokens for `<A>` and `<B>`: `gfn0`, `gfn1`, `gfn2`, `gxtb`, `gfnff`.
+
+  - comm: "`--<A>//<B>`, `--<A>/sp/<B>`"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Inline single-point refinement: run sampling at `<B>`, insert a single-point
+      at `<A>` after each optimization step.
+      Example: `--gfn2//gfnff`.
+
+  - comm: "`--<A>/opt/<B>`"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Inline geometry re-optimization: run sampling at `<B>`, re-optimize at `<A>`
+      after each optimization step.
+
   - subheader: <br>**Charge and multiplicity selection**
-    
-  - cmd: --chrg <INT> 
+
+  - cmd: --chrg <INT>
     descript: >
       Set molecular charge to `<INT>`. Only required if `<INT>`≠0.
-    
-  - cmd: --uhf <INT> 
+
+  - cmd: --uhf <INT>
     descript: >
-      Set the number of $$N_\alpha - N_\beta$$ electrons. 
+      Set the number of $$N_\alpha - N_\beta$$ electrons.
       For example, `<INT>`=0 for the neutral *S*<sub>0</sub> state,
       `<INT>`=2 for an *S*<sub>1</sub> state, etc. Only required if `<INT>`≠0.
-    
+
+  - cmd: "--spin-polarized"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Activate spin-polarized (open-shell) treatment via tblite.
+      Equivalent to setting `spin_polarized = true` in the TOML input.
+
+  - subheader: "<br>**External field**"
+
+  - comm: "`--efield <Ex> <Ey> <Ez>`"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Apply a homogeneous external electric field in V/Å along the *x*, *y*, *z* axes.
+      Equivalent to `efield = [Ex, Ey, Ez]` in the TOML `[[calculation.level]]` block.
+
   - subheader: <br>**Implicit solvation**
     
   - cmd: --gbsa <SOLVENT> 
@@ -220,15 +308,22 @@ leveloftheory:
       [`xtb` documentation](https://xtb-docs.readthedocs.io/en/latest/gbsa.html#gbsa). 
       The solvent input is not case-sensitive.
     
-  - subheader: <br>**Geometry optimization**
-    
-  - cmd: --optlev <LEVEL> 
+  - cmd: "--ceh_guess"
     descript: >
-      Set the optimization accuracy for ANCOPT optimizations. 
-      In CREST's multilevel approach, only the *final* geometry optimization 
-      is affected by this setting. For available `<LEVEL>` see the 
+      <span class='label label-green'>CREST 3.1</span>
+      Use CEH (Charge Extended Hückel) charges as the initial partial-charge
+      guess before the first xTB or GFN-FF call, improving starting conditions
+      for systems with unusual charge distributions.
+
+  - subheader: <br>**Geometry optimization**
+
+  - cmd: --optlev <LEVEL>
+    descript: >
+      Set the optimization accuracy for ANCOPT optimizations.
+      In CREST's multilevel approach, only the *final* geometry optimization
+      is affected by this setting. For available `<LEVEL>` see the
       [`xtb` documentation](https://xtb-docs.readthedocs.io/en/latest/optimization.html#geometry-optimization). The [default] is `<LEVEL>`=*vtight*.
-       
+
 
 
 mdsettings:
@@ -525,13 +620,21 @@ sortingsettings:
     anchor: notopo
     descript: >
       Turn off the topology checks in CREGEN for structures in the ensemble.
-      The optional `[atomlist]` argument can be used to select specific atoms 
+      The optional `[atomlist]` argument can be used to select specific atoms
       that should be ignored in the topology checks.
       For the `atomlist` format see the [**Input Formats**](coords.html#atomlists) section.
-      Do not confuse with 
+      Do not confuse with
     url:
       text: "`--noreftopo` <i class='fa-solid fa-triangle-exclamation'></i>"
       link: "/page/documentation/keywords.html#noreftopo"
+
+  - comm: "`--inversion <auto|on|off>`"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Control mirror-image inversion during iRMSD comparison.
+      `auto` (default) = automatic detection; `on` = always allow mirror images
+      to match; `off` = never allow mirror-image matching.
+      Used with `--sort irmsd` and the `--cregen` iRMSD sorting mode.
 
 
 
@@ -635,16 +738,31 @@ standalonetools:
       test: entropy mode settings. <i class="fa-solid fa-circle-up"></i>
       link: /page/documentation/keywords.html#entropy-mode-settings
 
-  - comm: "`--for <FILE>`, `--forall <FILE>`" 
+  - cmd: "--ensemblesp / -mdsp [&lt;FILE&gt;]"
     type: Ensemble processing
     descript: >
-      Calculate some things for the ensemble specified as `<FILE>`. 
-      This option is to be used with the `--prop ...` option 
+      Run singlepoint energy calculations on all structures in an ensemble file.
+      The output ensemble is sorted with CREGEN.
+      <span class='label label-green'>CREST 3.1</span>
+
+  - cmd: "--forall <FILE>"
+    type: Ensemble processing
+    descript: >
+      Run the selected property calculation on every structure in the given ensemble.
+      To be used with the `--prop ...` option
       ([see above <i class="fa-solid fa-circle-up"></i>](#propopt)).
-      Also applicable for a standalone use of the 
+      Also applicable for a standalone use of the
     url:
       text: '`--cluster` option. <i class="fa-solid fa-circle-up"></i>'
       link: /page/documentation/keywords.html#pca-clustering-options
+
+  - cmd: "--alkylize"
+    type: Alkyl group substitution
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Substitute a selected functional group in the input structure with an alkyl
+      chain. Functional groups are classified automatically from connectivity.
+      Additional arguments `full` or `sample` control enumeration depth.
 
   - cmd: --splitfile <FILE> [from] [to]
     type: Ensemble file splitting
@@ -709,6 +827,14 @@ constrainment:
   - cmd: --fc <REAL>
     descript: >
       Specify a force constant for the applied constraints (default
-      value 0.02 *E*<sub>h</sub>). 
+      value 0.02 *E*<sub>h</sub>).
       Note: Only one force constant is applied for all constraints!
+
+  - cmd: "--freeze <atomlist>"
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Freeze the specified atoms entirely in all geometry optimizations and MD
+      simulations (no forces on frozen atoms). For the `atomlist` format see the
+      [**Input Formats**](coords.html#atomlists) section.
+      Equivalent to the `freeze` keyword in the TOML input file.
 

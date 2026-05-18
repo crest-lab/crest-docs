@@ -57,9 +57,9 @@ The respective calculation can be invoked by the `--rrhoav` command.
 {% endcapture %}
 {% include codecell.html content=inputfile style="font-size:10px" %}
 </div>
-<div id="tab-1-4" class="tabcontent tab-id-1" style="text-align:justify">
+<div id="tab-1-4" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture outputfile %}
-
+  {% include outputs/utils_5_output.txt %}
 {% endcapture %}
 {% include codecell.html content=outputfile style="font-size:10px" %}
 </div>

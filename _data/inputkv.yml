@@ -40,6 +40,9 @@ general:
           run the CREGEN ensemble sorting/filtering as a standalone step"
        - "`basinhopping`,`bh` - <span class='label label-green'>CREST 3.1</span>
           basin-hopping global optimization (settings via `[basinhopping]` block)"
+       - "`ttconf` - <span class='label label-green'>CREST 3.1</span>
+          TTConf tensor-train conformer search, a reimplementation of the method of
+          Zurek *et al.* (settings via `[ttconf]` block)"
        - "`ensemblehess` - <span class='label label-green'>CREST 3.1</span>
           compute Hessians and thermochemistry for every structure in an ensemble"
 
@@ -396,3 +399,86 @@ basinhopping:
      descript: >
        <span class='label label-green'>CREST 3.1</span>
        Random number generator seed for reproducible runs. Specify as an *integer*.
+
+
+ttconf:
+
+   - key: preset
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Apply a named preset as a *string*: `fast` (rank 2, 2 sweeps),
+       `normal` (rank 3, 8 sweeps, the default) or `accurate` (rank 6, 6 sweeps).
+       Other keys in this block override the preset.
+
+   - comm: "`rank`, `r`"
+     descript: >
+       TT rank *r*. Specify as an *integer*. Default: `3`.
+
+   - comm: "`sweeps`, `s`"
+     descript: >
+       Number of TT-cross sweeps *s*. Specify as an *integer*. Default: `8`.
+
+   - comm: "`grid`, `ngrid`"
+     descript: >
+       Number of dihedral grid points (spacing = 360/*n* degrees).
+       Specify as an *integer*. Default: `6`.
+
+   - key: ninit
+     descript: >
+       Number of random initial tail seeds. Specify as an *integer*. Default: `3`.
+
+   - key: ewin
+     descript: >
+       Conformer energy window in kcal/mol. Specify as a *real*. Default: `6.0`.
+
+   - comm: "`kt`, `temperature`"
+     descript: >
+       Maxvol energy→weight temperature in kcal/mol. Specify as a *real*. Default: `6.0`.
+
+   - comm: "`bruteforce`, `oracle`"
+     descript: >
+       If `true`, use the exhaustive brute-force oracle instead of the TT-cross
+       sweep. Specify as a *boolean* (`true`/`false`). Default: `false`.
+
+   - comm: "`sp`, `singlepoint`, `sponly`"
+     descript: >
+       If `true`, evaluate singlepoints only; no geometry optimization anywhere
+       in the run. Specify as a *boolean* (`true`/`false`). Default: `false`.
+
+   - comm: "`cache`, `ecache`"
+     descript: >
+       Energy cache on/off. Specify as a *boolean* (`true`/`false`);
+       `false` is equivalent to the `-ttnocache` flag. Default: `true`.
+
+   - key: ringsample
+     descript: >
+       If `true`, sample ring conformations as additional TT sites
+       (equivalent to `-ttrings`). Specify as a *boolean*. Default: `false`.
+
+   - key: ringbonds
+     descript: >
+       If `true`, in-ring bonds may become TT variables (equivalent to
+       `-ttringbonds`). Specify as a *boolean*. Default: `false`.
+
+   - comm: "`ringmethod`, `ringsampler`"
+     descript: >
+       Ring-conformation generator as a *string*: `mtd` (GFN-FF metadynamics on
+       an isolated ring cut-out) or `template`. The `mtd` generator is a drop-in
+       replacement for the ring handling of the original method. Default: `mtd`.
+
+   - key: seed
+     descript: >
+       RNG seed for a reproducible run. Specify as an *integer*;
+       a value `< 0` (the default, −1) makes the run non-deterministic.
+
+   - comm: "`bonds`, `userbonds`"
+     descript: >
+       **TOML-only, no CLI form.** User-defined set of rotatable bonds that
+       become the TT variables, given as an *array* of atom pairs. Each entry is
+       `[A, B]`, or `[A, B, npoints]` to override the global `grid` for that
+       bond; a single flat pair `[A, B]` is also accepted. Specifying `bonds`
+       **replaces** the automatic bond selection entirely; the auto-detected
+       bonds are then shown as `user-excl` in the dihedral table. A listed pair
+       must be a rotatable bond in the Z-matrix (either atom order); a pair that
+       is not is warned about and ignored. Example:
+       `bonds = [[1, 2], [3, 4, 12]]`.

@@ -129,3 +129,18 @@ For more information on the CREGEN procedure see our recent publication in *J Ch
 
 {% include kv.html obj=site.data.inputkv.cregen %}
 
+---
+## `[ttconf]` block
+<span class="label label-green">CREST 3.1</span>
+
+The `[ttconf]` block controls the TTConf tensor-train conformer search (a reimplementation of the
+method of Zurek *et al.*), selected with
+`runtype = "ttconf"` (or the `-ttconf` command line flag). All keys are optional; a `preset`
+can be used as a starting point and any individual key overrides it. Every key except `bonds`
+has an equivalent command line flag (see the
+[**TTConf Options** <i class='fa-solid fa-book'></i>]({{site.baseurl}}/page/documentation/keywords.html#ttconf-options)),
+and command line flags override the values read from the file. A worked example is given on the
+[TTConf example page]({{site.baseurl}}/page/examples/ttconf.html).
+
+{% include kv.html obj=site.data.inputkv.ttconf %}
+

@@ -81,6 +81,24 @@ The following options modify some algorithmic aspects and thresholds of the conf
 
 ---
 
+## TTConf Options
+<span class="label label-green">CREST 3.1</span>
+
+The `-ttconf` runtype is a reimplementation of the tensor-train conformer search of
+[Zurek *et al.*, *J. Chem. Theory Comput.* **2025**](https://doi.org/10.1021/acs.jctc.4c01275).
+Rotatable dihedrals (and, optionally, flexible rings) are placed on a discrete grid and the
+low-energy region of that grid is explored either by a TT-cross sweep (default) or an exhaustive
+brute-force oracle. All flags below share the `-tt…` prefix; individual flags override the chosen
+preset. Every flag also has an equivalent key in the [`[ttconf]` TOML block]({{site.baseurl}}/page/documentation/inputfiles.html#ttconf-block).
+A worked walkthrough is given in the [TTConf example]({{site.baseurl}}/page/examples/ttconf.html).
+{: .text-justify }
+
+{% include 2tab.html obj=site.data.keywords.ttconf %}
+
+
+
+---
+
 ## Ensemble Sorting Options
 The options in this section are used to modify the CREGEN sorting algorithm, in both the 
 [standalone version (`--cregen <FILE>`) <i class="fa-solid fa-circle-up"></i>]({{site.baseurl}}/page/documentation/keywords.html#cregen) and tied in to the conformational sampling.

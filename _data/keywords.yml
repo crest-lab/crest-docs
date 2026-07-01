@@ -121,6 +121,22 @@ runtype:
       text: See here.
       link: /page/overview/workflows.html#conformational-entropy-calculations
 
+  - comm: "`-ttconf [<preset>]`"
+    type: TTConf conformer search
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Reimplementation of the tensor-train conformer search of
+      Zurek *et al.*, *J. Chem. Theory Comput.* **2025**.
+      Rotatable dihedrals (optionally flexible rings) are placed on a discrete
+      grid whose low-energy region is explored by a TT-cross sweep (default) or
+      an exhaustive brute-force oracle. The optional `[<preset>]` is a preset
+      name (`fast`, `normal`, `accurate`) or the literal `bruteforce`
+      (aliases `brute`, `oracle`). Individual `-tt…` flags override the preset.
+      Settings can also be given via the `[ttconf]` TOML block.
+    url:
+      text: See the TTConf parameters and example.
+      link: /page/documentation/keywords.html#ttconf-options
+
   - comm: "`--bh`, `-GMIN`"
     type: Basin-hopping global optimization
     descript: >
@@ -837,4 +853,77 @@ constrainment:
       simulations (no forces on frozen atoms). For the `atomlist` format see the
       [**Input Formats**](coords.html#atomlists) section.
       Equivalent to the `freeze` keyword in the TOML input file.
+
+
+ttconf:
+
+  - subheader: "**Search control**"
+
+  - cmd: "-ttconf [<preset>]"
+    anchor: ttconf
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Select the TTConf conformer search (a reimplementation of the method of
+      Zurek *et al.*). The optional `[<preset>]` is a
+      preset name (`fast`, `normal`, `accurate`) or the literal `bruteforce`
+      (aliases `brute`, `oracle`) to switch from the TT-cross sweep to the
+      exhaustive oracle. Presets set the TT rank *r* and sweep count *s*:
+      `fast` (*r*=2, *s*=2), `normal` (*r*=3, *s*=8, the [default]),
+      `accurate` (*r*=6, *s*=6). Individual flags below override the preset.
+
+  - cmd: "-ttrank <int>"
+    descript: >
+      TT rank *r*. [Default]: 3.
+
+  - cmd: "-ttsweeps <int>"
+    descript: >
+      Number of TT-cross sweeps *s*. [Default]: 8.
+
+  - cmd: "-ttgrid <int>"
+    descript: >
+      Number of dihedral grid points (grid spacing = 360/*n* degrees). [Default]: 6.
+
+  - cmd: "-ttninit <int>"
+    descript: >
+      Number of random initial tail seeds. [Default]: 3.
+
+  - cmd: "-ttewin <float>"
+    descript: >
+      Conformer energy window in kcal/mol. [Default]: 6.0.
+
+  - cmd: "-ttkt <float>"
+    descript: >
+      Maxvol energy→weight temperature in kcal/mol. [Default]: 6.0.
+
+  - cmd: "-ttseed <int>"
+    descript: >
+      Fix the RNG seed for a reproducible run. A value `< 0` (the [default], −1)
+      makes the run non-deterministic.
+
+  - subheader: "**Evaluation and caching**"
+
+  - cmd: "-ttsp"
+    descript: >
+      Evaluate singlepoints only; perform no geometry optimization anywhere in
+      the run. [Default]: off.
+
+  - cmd: "-ttnocache"
+    descript: >
+      Disable the TTConf energy cache (the cache is on by default).
+
+  - subheader: "**Ring sampling**"
+
+  - cmd: "-ttrings"
+    descript: >
+      Sample ring conformations as additional TT sites. [Default]: off.
+
+  - cmd: "-ttringbonds"
+    descript: >
+      Allow in-ring bonds to be treated as TT variables. [Default]: off.
+
+  - cmd: "-ttringmethod <str>"
+    descript: >
+      Ring-conformation generator: `mtd` (GFN-FF metadynamics on an isolated
+      ring cut-out) or `template`. The `mtd` generator is a drop-in replacement
+      for the ring handling of the original method. [Default]: `mtd`.
 

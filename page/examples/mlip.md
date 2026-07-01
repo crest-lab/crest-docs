@@ -40,6 +40,7 @@ The following backends are available out of the box:
 | `mace_off` | MACE-OFF organic foundation model (H, C, N, O, P, S, F, Cl, Br, I) | `mace-torch`, `ase` |
 | `mace_mp` | MACE-MP foundation model (89 elements, Materials Project) | `mace-torch`, `ase` |
 | `mace` | Custom MACE model from a `.model` file | `mace-torch`, `ase` |
+| `uma` | FairChem UMA universal foundation model (Meta FAIR), multi-task | `fairchem-core`, `ase` |
 | `dummy` | Random numbers (testing only) | `numpy` only |
 
 
@@ -58,6 +59,15 @@ To include the optional MACE dependencies (for `mace`, `mace_mp`, and `mace_off`
 {: .text-justify }
 
 {% include command.html cmd="pip install './subprojects/fmlip_relay[mace]'" %}
+
+For the FairChem UMA backend, install the `uma` extra instead:
+{: .text-justify }
+
+{% include command.html cmd="pip install './subprojects/fmlip_relay[uma]'" %}
+
+{% include note.html content="The UMA checkpoints are gated on the Hugging Face Hub. Authenticate once with <code>huggingface-cli login</code> (and request access to the model on Hugging Face) before the <code>uma</code> backend can download them." %}
+
+{% include tip.html content="The <code>[mace]</code> and <code>[uma]</code> extras pull in <code>mace-torch</code> / <code>fairchem-core</code> with default settings, which may not match your platform (CUDA version, PyTorch build). For a working GPU setup, follow the official installation instructions of <a href='https://github.com/ACEsuit/mace'>MACE</a> and <a href='https://github.com/facebookresearch/fairchem'>fairchem/UMA</a>." %}
 
 After installation, verify that the server executable and backends are available:
 {: .text-justify }
@@ -217,6 +227,77 @@ mlip_modelpath = "/path/to/my_model.model"
 ---
 
 
+## Example 3: FairChem UMA
+
+The `uma` backend serves the [FairChem UMA {{ site.data.icons.ext }}](https://github.com/facebookresearch/fairchem) universal foundation model from Meta FAIR.
+It is a multi-task model: the `mlip_uma_task` keyword selects the domain head, and `mlip_uma_model` selects the checkpoint.
+The `uma` backend requires `fairchem-core` and `ase` (install with the `[uma]` extra) and a one-time `huggingface-cli login`.
+{: .text-justify }
+
+For molecular systems, use the `omol` task, which consumes the total charge and spin multiplicity passed through from CREST.
+{: .text-justify }
+
+
+<!-- Tab links -->
+<div class="tab card">
+  <button class="tablinks tab-mlip-3" onclick="openTabId(event, 'mlip-3-cmd', 'tab-mlip-3')" id="open3">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-mlip-3" onclick="openTabId(event, 'mlip-3-toml', 'tab-mlip-3')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
+</div>
+<!-- Tab content -->
+<div id="mlip-3-cmd" class="tabcontent tab-mlip-3" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+</div>
+<div id="mlip-3-toml" class="tabcontent tab-mlip-3" style="font-size:10px">
+{% capture toml_uma %}
+# Geometry optimisation with the FairChem UMA foundation model
+input   = "struc.xyz"
+runtype = "optimize"
+
+[calculation]
+optlev = "tight"
+
+[[calculation.level]]
+method        = "mlip"        # use fmlip-relay socket server
+mlip_backend  = "uma"         # FairChem UMA universal model
+mlip_uma_task = "omol"        # domain head: omol / omat / omc / oc20 / odac
+mlip_uma_model = "uma-s-1p2"  # checkpoint (default; also uma-s-1, uma-s-1p1, uma-m-1)
+mlip_device   = "cuda"        # torch device: cpu (default) / cuda / cuda:0
+{% endcapture %}
+{% include codecell.html content=toml_uma %}
+</div>
+{% include defaulttab.html id="open3" %}
+
+
+The available task heads are `omol` (molecules), `omat` (materials), `omc` (molecular crystals), `oc20` (catalysis), and `odac` (MOFs/direct air capture).
+Only the `omol` task uses the per-structure charge and spin multiplicity.
+{: .text-justify }
+
+{% include tip.html content="UMA is a torch-based model and benefits greatly from a GPU. Set <code>mlip_device = &quot;cuda&quot;</code> to run on the GPU; the default is <code>&quot;cpu&quot;</code>." %}
+
+
+---
+
+
+## Command-Line Shortcuts
+
+For quick setups without writing a TOML file, two ML potentials are available directly on the command line via the `-mlip` flag:
+{: .text-justify }
+
+{% include command.html cmd="crest struc.xyz -mlip uma" %}
+
+selects the UMA foundation model with the `omol` task, and
+{: .text-justify }
+
+{% include command.html cmd="crest struc.xyz -mlip maceoff" %}
+
+selects the MACE-OFF23 (medium) organic force field.
+For finer control (model size, task, device, custom checkpoints), use the TOML `[[calculation.level]]` block as shown in the examples above.
+{: .text-justify }
+
+
+---
+
+
 ## MLIP TOML Keywords Reference
 
 The following keywords can be set within a `[[calculation.level]]` block when using the fmlip-relay interface:
@@ -225,9 +306,14 @@ The following keywords can be set within a `[[calculation.level]]` block when us
 | Keyword | Description | Values |
 |---------|-------------|--------|
 | `method` | Calculator selection, must be `"mlip"` | `"mlip"` |
-| `mlip_backend` | Backend to use | `"lj"`, `"mace"`, `"mace_mp"`, `"mace_off"`, `"dummy"` |
+| `mlip_backend` | Backend to use | `"lj"`, `"mace"`, `"mace_mp"`, `"mace_off"`, `"uma"`, `"dummy"` |
 | `mlip_modelpath` | Path to a custom MACE `.model` file | file path string |
-| `mlip_modelsize` | Size variant for foundation models | `"small"`, `"medium"`, `"large"` |
+| `mlip_modelsize` | Size variant for MACE foundation models | `"small"`, `"medium"`, `"large"` |
+| `mlip_device` | Torch device for NN backends (`mace*`, `uma`) | `"cpu"` (default), `"cuda"`, `"cuda:0"` |
+| `mlip_uma_task` | UMA domain head (`uma` backend) | `"omol"`, `"omat"`, `"omc"`, `"oc20"`, `"odac"` |
+| `mlip_uma_model` | UMA checkpoint (`uma` backend) | `"uma-s-1p2"` (default), `"uma-s-1"`, `"uma-s-1p1"`, `"uma-m-1"` |
+| `mlip_port` | Base TCP port for the socket server | integer (default `54320`) |
+| `mlip_timeout` | Server startup timeout in seconds | integer (default `120`) |
 
 
 ---

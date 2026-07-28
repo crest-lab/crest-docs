@@ -1,8 +1,9 @@
 ---
 layout: default
 title: MSREACT Examples
-parent: "Examples and Guides"
-nav_order: 9
+parent: "Specialized Runtypes"
+grand_parent: "Examples and Guides"
+nav_order: 2
 has_children: true
 permalink: /page/examples/msreact
 summary: "A collection of examples for the MSREACT subprogram."

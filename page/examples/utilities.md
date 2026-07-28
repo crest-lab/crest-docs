@@ -1,8 +1,8 @@
 ---
 layout: default
-title: "Utility Tools"
+title: "Other"
 parent: "Examples and Guides"
-nav_order: 10
+nav_order: 5
 has_children: true
 permalink: /page/utilities
 summary: "This section contains an overview of utility applications."

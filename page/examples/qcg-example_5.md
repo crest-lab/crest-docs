@@ -1,8 +1,8 @@
 ---
 layout: default
 title: QCG Example 5
-parent: QCG Examples
-grand_parent: "Examples and Guides"
+parent: "QCG Examples"
+ancestor: "Examples and Guides"
 nav_order: 5
 toc: false
 summary: "An example for solvating specific atoms and groups of the solute."

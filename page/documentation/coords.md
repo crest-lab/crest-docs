@@ -27,6 +27,8 @@ permalink: /page/documentation/coords.html
 The program supports molecular `[INPUT]` files in the
 - Turbomole coord format (**.coord** extension, Bohr)
 - Xmol format (**.xyz** extension, Ångström)
+- extended XYZ format (**.extxyz** extension, or **.xyz**, Ångström,
+  [see below {{site.data.icons.adown}}](#the-extended-xyz-extxyz-format))
 - MDL molfile format (V2000,V3000, **.sdf**/**.mol** extension, Ångström)
 
 Example coordinates are shown for the caffeine molecule below.
@@ -179,6 +181,56 @@ $$$$
 
 ---
 
+## The extended XYZ (extxyz) format
+<span class="label label-green">CREST 3.1</span>
+
+The **extended XYZ** format is an ordinary XYZ file in which the comment line carries
+structured `key=value` information, and in which each atom line may have additional
+columns beyond the element symbol and the coordinates.
+It is the format used by most ML potential codes (ASE, MACE, FairChem, ...), which is
+why CREST reads it directly.
+{: .text-justify }
+
+{% include important.html content="extxyz files very often carry the plain <b>.xyz</b> extension. CREST therefore does <em>not</em> rely on the file name: any <code>.xyz</code>, <code>.trj</code> or <code>.sorted</code> file that contains a <code>Properties=</code> tag is automatically treated as extxyz. The dedicated <b>.extxyz</b> extension is recognized as well." %}
+
+{% capture struc_extxyz %}
+3
+Lattice="10.0 0.0 0.0 0.0 10.0 0.0 0.0 0.0 10.0" Properties=species:S:1:pos:R:3:forces:R:3 energy=-2073.7395 pbc="T T T"
+O        0.00000000       0.00000000       0.11730000      0.00000000      0.00000000     -0.02310000
+H        0.00000000       0.75720000      -0.46920000      0.00000000     -0.01120000      0.01155000
+H        0.00000000      -0.75720000      -0.46920000      0.00000000      0.01120000      0.01155000
+{% endcapture %}
+{% include codecell.html content=struc_extxyz style="font-size:10px" %}
+
+The following entries of the comment line are evaluated by CREST:
+{: .text-justify }
+
+| Key | Description |
+|-----|-------------|
+| `Properties` | **required**, the column layout of the atom lines as `name:type:count` triples |
+| `energy` | the energy of the structure, used *e.g.* by the ensemble sorting routines |
+| `energy_units` | unit of `energy`. **The default is eV**; use `energy_units=hartree` for atomic units |
+| `forces_units` | unit of the `forces` columns. The default is eV/Å; `ha/bohr` is also understood |
+| `Lattice` | the three lattice vectors in Å (row-wise). A structure carrying a lattice is treated as a periodic system |
+
+Of the per-atom columns declared in `Properties`, CREST uses `species` (the element),
+`pos` (the Cartesian coordinates in Å) and, if present, `forces`. Further columns are
+parsed but ignored.
+{: .text-justify }
+
+{% include warning.html content="Mind the units. Following the extxyz convention, an <code>energy</code> without an explicit <code>energy_units</code> entry is interpreted as <b>eV</b> and converted to Hartree internally — in contrast to a plain <b>.xyz</b> file, where the comment line energy is read as Hartree. A file written by another program in atomic units must therefore state <code>energy_units=hartree</code>." %}
+
+Structures written by CREST in this format use Hartree by default. This can be changed
+with the `extxyz_units` entry of a
+[TOML input file]({{site.baseurl}}/page/documentation/inputfiles.html):
+{: .text-justify }
+
+{% capture extxyz_units_toml %}
+extxyz_units = "ev"   # write extxyz energies in eV instead of Hartree
+{% endcapture %}
+{% include codecell.html content=extxyz_units_toml style="font-size:12px" %}
+
+---
 ## Ensemble and Trajectory Files
 
 Ensemble (.xyz) and trajectory (.trj) files in CREST are given in the **.xyz** format as specified above.
@@ -243,6 +295,11 @@ An example for an *n*-butane ensemble can be seen here:
 {% include codecell.html content=struc_xyz style="font-size:10px" %}
 
 {% include tip.html content="Ensemble and trajectory files in the above format can be opened with [molden](https://www3.cmbi.umcn.nl/molden/) and [VMD](https://www.ks.uiuc.edu/Research/vmd/)." %}
+
+Multi-frame [extxyz](#the-extended-xyz-extxyz-format) files can be used as ensembles in
+the same way; each frame carries its own comment line, so the energies are taken from
+the `energy` entries rather than from the bare comment line.
+{: .text-justify }
 
 
 ---

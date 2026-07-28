@@ -1,8 +1,8 @@
 ---
 layout: default
 title: QCG Example 1
-parent: QCG Examples
-grand_parent: "Examples and Guides"
+parent: "QCG Examples"
+ancestor: "Examples and Guides"
 nav_order: 1
 toc: false
 summary: "An example for building up solvent shells around a molecule."

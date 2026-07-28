@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Ensemble Sorting
-parent: "Examples and Guides"
-nav_order: 2
+parent: "Sorting"
+grand_parent: "Examples and Guides"
+nav_order: 1
 toc: false
 summary: "A guide to sorting ensembles."
 permalink: /page/examples/example_2.html

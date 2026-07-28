@@ -1,8 +1,8 @@
 ---
 layout: default
 title: QCG Example 2
-parent: QCG Examples
-grand_parent: "Examples and Guides"
+parent: "QCG Examples"
+ancestor: "Examples and Guides"
 nav_order: 2
 toc: false
 summary: "An example for generating an ensemble of microsolvation structures."

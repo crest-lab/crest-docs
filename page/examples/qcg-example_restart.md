@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Restarting QCG
-parent: QCG Examples
-grand_parent: "Examples and Guides"
+parent: "QCG Examples"
+ancestor: "Examples and Guides"
 nav_order: 6
 toc: false
 summary: "A guide on how to restart QCG calculations."

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Protonation Site Calculation
-parent: "Examples and Guides"
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
 nav_order: 5
 toc: false
 summary: "A guide to protonation/deprotonation sampling."

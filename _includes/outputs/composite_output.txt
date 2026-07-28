@@ -1,0 +1,65 @@
+ Command line input:
+ $ crest struc.xyz --imtdgc --gfn2//gfnff -T 8
+
+  --imtdgc : iMTD-GC
+  gfn2//gfnff : inline singlepoint re-ranking
+  -T 8 (CPUs/Threads selected)
+
+> All CLI arguments successfully processed.
+ ----------------
+ Calculation info
+ ----------------
+> User-defined calculation level 1:
+ : GFN-FF calculation via GFNFF lib
+ :   Molecular charge    : 0
+> User-defined calculation level 2:
+ : xTB calculation via tblite lib
+ : GFN2-xTB level
+ :   refinement stage    : singlepoint
+ :   Molecular charge    : 0
+ :   Fermi temperature   : 300.00000
+ :   Accuracy            : 1.00000
+ :   max SCC cycles      : 500
+ 
+> Energy and gradient processing:
+ Energies and gradients of all calculation levels will be added according to their weights
+ 
+ 
+ -----------------------------
+ Initial Geometry Optimization
+ -----------------------------
+ Geometry successfully optimized.
+ 
+
+                            [ ... sampling ... ]
+
+ -------------------
+ ensemble refinement
+ -------------------
+> Singlepoint re-ranking for 826 structures
+ ↳ singlepoints: 8 parallel jobs × 1 core/job  (8 threads)
+ |>0.1% |>10.0% |>20.1% |>30.0% |>40.1% |>50.0% |>60.0% |>70.1% |>80.0% |>90.1% |>100.0%
+ done.
+> 826 of 826 structures successfully evaluated (100.0% success)
+> Total runtime for 826 singlepoint calculations:
+ * wall-time:     0 d,  0 h,  0 min,  0.593 sec
+ *  cpu-time:     0 d,  0 h,  0 min,  4.704 sec
+ * ratio c/w:     7.938 speedup
+> Corresponding to approximately 0.001 sec per processed structure
+ 
+                            [ ... ]
+
+ number of doubles removed by rot/RMSD :       289 ( 33.92%)
+ number of unique structures remaining :       563 ( 66.08%)
+ number of unique conformers identified:       208 ( 36.94% of 563)
+********************************************************************************
+                            [ ... ]
+
+ * wall-time:     0 d,  0 h,  0 min, 17.958 sec
+ *  cpu-time:     0 d,  0 h,  2 min, 20.170 sec
+ * ratio c/w:     7.806 speedup
+ ------------------------------------------------------------------
+ * Peak RSS:   145.96 MiB
+ * Total number of energy+grad calls:  2.8463E+05
+ 
+ CREST terminated normally.

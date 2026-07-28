@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Ensemble Optimization
-parent: Utility Tools
+parent: "Other"
 grand_parent: "Examples and Guides"
 nav_order: 1
 toc: false

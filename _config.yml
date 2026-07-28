@@ -120,6 +120,7 @@ color_scheme: custom
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-redirect-from   # keeps old URLs alive after page restructuring
 
 
 # Markdown processing

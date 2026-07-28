@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Conformational Entropy
-parent: "Examples and Guides"
-nav_order: 6
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
+nav_order: 4
 toc: false
 summary: "A guide to the calculation of conformational entropies with CREST."
 permalink: /page/examples/entropy.html

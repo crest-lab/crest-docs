@@ -2,7 +2,7 @@
 layout: default
 title: "TTConf Conformer Search"
 parent: "Examples and Guides"
-nav_order: 12
+nav_order: 2
 has_children: false
 toc: true
 summary: "The tensor-train (TTConf) conformer search: what it is, how to tune it, and a worked example."

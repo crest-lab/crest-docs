@@ -1,8 +1,9 @@
 ---
 layout: default
 title: ML Interatomic Potentials (via <code>fmlip-relay</code>)
-parent: "Examples and Guides"
-nav_order: 11
+parent: "Special Calculators"
+grand_parent: "Examples and Guides"
+nav_order: 2
 toc: false
 summary: "Using CREST with ML interatomic potentials via the fmlip-relay Python server."
 permalink: /page/examples/mlip.html
@@ -30,6 +31,8 @@ CREST can use ML interatomic potentials (MLIPs) and classical potentials through
 When CREST encounters an MLIP calculation, it automatically spawns the server, which loads the model once at startup and then communicates with CREST over a local TCP socket.
 This architecture avoids the overhead of repeated Python interpreter startup during iterative calculations such as geometry optimizations or molecular dynamics.
 {: .text-justify }
+
+{% include warning.html content="MLIP evaluations are <em>not</em> cheap compared to the semiempirical methods CREST is built around. For small and medium-sized molecules a single GFN-FF or GFN2-xTB gradient is orders of magnitude faster than one round-trip through the socket server, so running a full conformational search directly at an MLIP level is <b>not recommended</b> — a search easily needs 10<sup>5</sup>–10<sup>6</sup> energy+gradient calls. Sample with a semiempirical workhorse and use the MLIP only to refine the final ensemble, see <a href='composite.html'>Composite calculators</a>." %}
 
 The following backends are available out of the box:
 {: .text-justify }
@@ -278,6 +281,50 @@ Only the `omol` task uses the per-structure charge and spin multiplicity.
 ---
 
 
+## Parallelization and CPU Threads
+
+In parallel workflows (ensemble optimizations, ensemble refinement, metadynamics) CREST spawns **one server instance per parallel job**, each holding its own copy of the model.
+On the CPU this is a problem: torch and the underlying BLAS libraries grab *all* available cores by default, so several server instances running at the same time would heavily oversubscribe the machine and each of them would become slower than if it ran alone.
+{: .text-justify }
+
+To avoid this, the `threads` key (alias `ncores`) can be set inside the `[[calculation.level]]` block.
+It is passed on to every server instance as `--max-threads`, which caps the inference thread pools (`OMP_NUM_THREADS`, `MKL_NUM_THREADS`, `torch.set_num_threads`, ...), and at the same time tells CREST to run only as many concurrent jobs as fit into the global thread budget:
+{: .text-justify }
+
+{% capture toml_threads %}
+# Optimization of an existing ensemble with MACE-OFF on 16 cores
+input           = "struc.xyz"
+ensemble_input  = "crest_conformers.xyz"
+runtype         = "optimize_ensemble"
+threads         = 16          # total cores available to CREST
+
+[[calculation.level]]
+method         = "mlip"
+mlip_backend   = "mace_off"
+mlip_modelsize = "medium"
+threads        = 4            # cores per server -> 4 servers x 4 threads
+{% endcapture %}
+{% include codecell.html content=toml_threads %}
+
+Here CREST runs **4 parallel jobs**, each with its own fmlip-relay server that is limited to 4 CPU threads &mdash; instead of 16 servers all fighting over the same 16 cores.
+The setting is echoed in the calculation summary printout as `Server thread cap`.
+The same applies when the MLIP is used as the refinement level of a
+[composite setup](composite.html), which is the recommended way to combine it with a
+conformational search.
+{: .text-justify }
+
+{% include note.html content="Without <code>threads</code>, CREST keeps its historical behavior: one job per core, and each server inherits <code>OMP_NUM_THREADS</code> from the environment. For the cheap <code>lj</code> or <code>dummy</code> backends this is perfectly fine; for torch-based models it is usually not." %}
+
+The general rules for the per-level `threads` reservation (idle-core warnings, interaction with the global `threads`) are described in the
+[Input File Documentation]({{site.baseurl}}/page/documentation/inputfiles.html#per-level-thread-reservation).
+{: .text-justify }
+
+{% include tip.html content="On the GPU (<code>mlip_device = &quot;cuda&quot;</code>) the CPU thread cap matters much less &mdash; there the limit is GPU memory, since every parallel server loads its own copy of the model onto the device. Reducing the number of parallel jobs with a larger <code>threads</code> value is also the simplest way to keep the GPU memory footprint in check." %}
+
+
+---
+
+
 ## Command-Line Shortcuts
 
 For quick setups without writing a TOML file, two ML potentials are available directly on the command line via the `-mlip` flag:
@@ -314,6 +361,7 @@ The following keywords can be set within a `[[calculation.level]]` block when us
 | `mlip_uma_model` | UMA checkpoint (`uma` backend) | `"uma-s-1p2"` (default), `"uma-s-1"`, `"uma-s-1p1"`, `"uma-m-1"` |
 | `mlip_port` | Base TCP port for the socket server | integer (default `54320`) |
 | `mlip_timeout` | Server startup timeout in seconds | integer (default `120`) |
+| `threads` (`ncores`) | CPU threads per server instance (`--max-threads`), also caps the number of parallel jobs | integer (default unset) |
 
 
 ---

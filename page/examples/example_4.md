@@ -4,7 +4,7 @@ title: Constrained Sampling
 # parent: "Examples and Guides"
 parent: "Sampling Applications"
 grand_parent: "Examples and Guides"
-nav_order: 4
+nav_order: 3
 toc: false
 summary: "A guide to <i>constrained</i> conformational sampling."
 permalink: /page/examples/example_4.html

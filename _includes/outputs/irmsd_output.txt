@@ -55,7 +55,7 @@
    GNU Lesser General Public License (LGPL) for more details.
 
  Command line input:
- $ crest --rmsd struc1.xyz struc2.xyz
+ $ crest --irmsd struc1.xyz struc2.xyz
 
 
 > All CLI arguments successfully processed.
@@ -63,4 +63,14 @@
 > Setting up backup calculator ... done.
 > Reading files struc1.xyz and struc2.xyz
  
- Calculated RMSD (Å):      0.48518876
+ iRMSD algorithm
+ reference: struc1.xyz
+ processed: struc2.xyz
+ 
+ false enantiomers possible?:  F
+ allow inversion?:             T
+ using canonical atom identities as rank backend
+ 
+ aligned structures written to irmsd.xyz
+ 
+ Calculated iRMSD (Å):      0.00008793

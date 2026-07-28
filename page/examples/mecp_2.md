@@ -2,7 +2,7 @@
 layout: default
 title: MECP Screening
 parent: "MECP Calculations"
-grand_parent: "Examples and Guides"
+ancestor: "Examples and Guides"
 nav_order: 2
 toc: false
 summary: "(Semi-automated) Screening of benzene MECPs with GFN2-xTB"
@@ -24,7 +24,7 @@ permalink: /page/examples/mecp/mecp_screen.html
 
 An extension of the [minimum energy crossing point optimization](mecp_opt.html "Examples / MECP Optimization"), is the
 metadynamics-based screening (analogously to conformational sampling).
-It can be called *via* the new [**input file reader** {{site.data.icons.book}}](../documentation/inputfiles.html  "Documentation / Input Files").
+It can be called *via* the new [**input file reader** {{site.data.icons.book}}]({{site.baseurl}}/page/documentation/inputfiles.html  "Documentation / Input Files").
 Again, for the GFN2-xTB *S*<sub>0</sub>/*T*<sub>1</sub> MECPs of benzene:
 {: .text-justify }
 

@@ -14,7 +14,7 @@ permalink: /page/documentation/keywords.html
 
 This page contains the documentation of all available command line keywords for CREST.
 The command line arguments are grouped according to different functions.
-For the general command line usage [see the parent page.]({{site.baseurl}}/page/documentation/#general-usage) 
+For the general command line usage [see the parent page.]({{site.baseurl}}/page/documentation.html#general-usage) 
 This page specifies the `[OPTIONS]`. Required arguments will be marked with `< >`, optional arguments are marked by brackets `[ ]`.
 {: .fs-6 .fw-300 .text-justify }
 

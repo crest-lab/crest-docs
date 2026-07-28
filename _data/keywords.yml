@@ -179,10 +179,12 @@ runtype:
     type: CREGEN ensemble sorting routine
     descript: >
       The standalone option for sorting an ensemble or a
-      trajectory into conformers and rotamers. Use `--sort irmsd`
-      to invoke the permutation-invariant iRMSD sorter
-      (<span class='label label-green'>CREST 3.1</span>), which writes aligned
-      structures to `irmsd.xyz`. The `--inversion` flag controls whether
+      trajectory into conformers and rotamers.
+      With `--sort <FILE> isort` the permutation-invariant iRMSD sorter
+      (<span class='label label-green'>CREST 3.1</span>) is used instead of the
+      empirical CREGEN criteria; further modes are `isort_noid` and `all`
+      (see the [iRMSD page](../examples/irmsd.html)).
+      The `--inversion` flag controls whether
       mirror images are treated as identical during iRMSD comparison.
     url:
       text: See below. <i class="fa-solid fa-circle-down"></i>
@@ -203,6 +205,14 @@ runtype:
       Add a Hessian + free-energy re-ranking step after a conformer search.
       Each conformer receives a proper *ΔG* so that the final Boltzmann weights
       are based on free energies rather than electronic energies.
+
+  - comm: "`--refine <METHOD>`, `--rsp <METHOD>`"
+    type: Inline ensemble refinement
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Add a single-point refinement at `<METHOD>` on top of the sampling level,
+      equivalent to the composite `--<METHOD>//<B>` notation.
+      See the [composite calculators page](../examples/composite.html).
 
   - cmd: "--rerank <METHOD>"
     type: Post-search single-point re-ranking
@@ -650,7 +660,8 @@ sortingsettings:
       Control mirror-image inversion during iRMSD comparison.
       `auto` (default) = automatic detection; `on` = always allow mirror images
       to match; `off` = never allow mirror-image matching.
-      Used with `--sort irmsd` and the `--cregen` iRMSD sorting mode.
+      Used with `--irmsd` and the iRMSD-based sorting modes of `--sort`
+      (see the [iRMSD page](../examples/irmsd.html)).
 
 
 
@@ -730,12 +741,24 @@ standalonetools:
       test: entropy mode settings. <i class="fa-solid fa-circle-up"></i>
       link: /page/documentation/keywords.html#entropy-mode-settings
 
-  - comm: "`--rmsd <FILE1> <FILE2>`, `--rmsdheavy <FILE1> <FILE2>`" 
+  - comm: "`--rmsd <FILE1> <FILE2>`, `--rmsdheavy <FILE1> <FILE2>`"
     type: Atomic RMSD calculation
     descript: >
-      Calculate the RMSD or heavy atom RMSD between two given structures. 
-      Input format of the two structures can be any of the formats that can 
+      Calculate the RMSD or heavy atom RMSD between two given structures.
+      Input format of the two structures can be any of the formats that can
       be read by CREST, output will always be the RMSD in Ångström.
+
+  - comm: "`--irmsd <FILE1> <FILE2>`, `--irmsd_noinv <FILE1> <FILE2>`"
+    type: Permutation-invariant RMSD (iRMSD)
+    descript: >
+      <span class='label label-green'>CREST 3.1</span>
+      Calculate the permutation-invariant RMSD between two given structures, *i.e.*,
+      an RMSD that is independent of the atom order and of symmetry-equivalent atom
+      exchanges. The aligned and reordered structures are written to `irmsd.xyz`.
+      Mirror images are considered automatically where chemically sensible; the
+      `_noinv` variant (equivalent to `--inversion off`) never does.
+      For details and examples see the
+      [iRMSD page](../examples/irmsd.html).
 
   - cmd: --testtopo <FILE>
     type: Topology information

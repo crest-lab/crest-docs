@@ -4,7 +4,7 @@ title: NCI Conformational Sampling
 # parent: "Examples and Guides"
 parent: "Sampling Applications"
 grand_parent: "Examples and Guides"
-nav_order: 3
+nav_order: 2
 toc: false
 summary: "A conformational search with CREST's NCI mode for non-covalent systems."
 permalink: /page/examples/example_3.html

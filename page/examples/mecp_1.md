@@ -2,7 +2,7 @@
 layout: default
 title: MECP Optimization
 parent: "MECP Calculations"
-grand_parent: "Examples and Guides"
+ancestor: "Examples and Guides"
 nav_order: 1
 toc: false
 summary: "Optimization of a benzene MECP with GFN2-xTB"
@@ -25,7 +25,7 @@ permalink: /page/examples/mecp/mecp_opt.html
 A specialized new feature of CREST 3 is the mixing of two potential energy surfaces with an
  additional bias potential to find minimum energy crossing points, as described in 
 [DOI: 10.1021/acs.jctc.2c00578](https://doi.org/10.1021/acs.jctc.2c00578 "Fast Screening of Minimum Energy Crossing Points with Semiempirical Tight-Binding Methods").
-It can be called *via* the new [**input file reader** {{site.data.icons.book}}](../documentation/inputfiles.html  "Documentation / Input Files"), e.g., for the GFN2-xTB *S*<sub>0</sub>/*T*<sub>1</sub> MECP of benzene:
+It can be called *via* the new [**input file reader** {{site.data.icons.book}}]({{site.baseurl}}/page/documentation/inputfiles.html  "Documentation / Input Files"), e.g., for the GFN2-xTB *S*<sub>0</sub>/*T*<sub>1</sub> MECP of benzene:
 {: .text-justify }
 
  <!-- Tab links -->

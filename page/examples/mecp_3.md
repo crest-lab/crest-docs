@@ -2,7 +2,7 @@
 layout: default
 title: Tristate MECP optimization
 parent: "MECP Calculations"
-grand_parent: "Examples and Guides"
+ancestor: "Examples and Guides"
 nav_order: 3
 toc: false
 summary: "S0/S1/S2 tristate MECP optimization with GFN0-xTB"

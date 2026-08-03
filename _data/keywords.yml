@@ -60,12 +60,14 @@ general:
       [**Input File Documentation** <i class='fa-solid fa-book'></i>](./inputfiles.html
       'Documentation / Input File Documentation').
 
-  - cmd: "--allowrestart"
+  - cmd: "--norestart"
     descript: >
       <span class='label label-green'>CREST 3.1</span>
-      Enable the checkpoint-based restart mechanism for conformer searches.
-      When active, CREST writes a `crest.restart` file at each stage boundary,
-      allowing an interrupted run to be resumed from the last completed stage.
+      Disable the checkpoint-based restart mechanism for conformer searches.
+      By [default] it is active, and CREST writes a `crest.restart` file at each
+      stage boundary, allowing an interrupted run to be resumed from the last
+      completed stage. See
+      [Example: Restarting a Conformational Search](../examples/restart.html).
 
   - cmd: "--legacy"
     descript: >

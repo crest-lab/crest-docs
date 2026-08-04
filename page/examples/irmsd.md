@@ -73,16 +73,16 @@ analogy to the classical `--rmsd`.
 The example below is taken from the publication: both files contain the *same* conformer
 of fluoxetine, but `struc2.xyz` has a completely scrambled atom order and an additional
 random rotation applied.
-The two figures show the identical molecule with the respective atom numbering — the
+The two figures show the identical molecule with the respective atom numbering. The
 oxygen, for instance, is atom 13 in the first and atom 38 in the second file:
 {: .text-justify }
 
 <div style="display:flex; flex-wrap:wrap; gap:1em; justify-content:center; align-items:flex-start">
 <div style="flex:1 1 320px">
-{% include image.html file="irmsd-fluoxetine-1.jpg" alt="Fluoxetine with the atom numbering of struc1.xyz" caption="<code>struc1.xyz</code> — fluoxetine with its original atom numbering." %}
+{% include image.html file="irmsd-fluoxetine-1.jpg" alt="Fluoxetine with the atom numbering of struc1.xyz" caption="<code>struc1.xyz</code>: fluoxetine with its original atom numbering." %}
 </div>
 <div style="flex:1 1 320px">
-{% include image.html file="irmsd-fluoxetine-2.jpg" alt="Fluoxetine with the scrambled atom numbering of struc2.xyz" caption="<code>struc2.xyz</code> — the same conformer, rotated and with scrambled atom numbering." %}
+{% include image.html file="irmsd-fluoxetine-2.jpg" alt="Fluoxetine with the scrambled atom numbering of struc2.xyz" caption="<code>struc2.xyz</code>: the same conformer, rotated and with scrambled atom numbering." %}
 </div>
 </div>
 
@@ -246,7 +246,7 @@ The same algorithm is available for entire ensembles through the sorting driver,
 | `cregen` | the original, empirical CREGEN procedure |
 
 As an example, `ensemble.xyz` below contains a single conformer of alanineglycine
-twice — the second entry only has its methyl group rotated by 120°, which permutes the
+twice. In the second entry only the methyl group is rotated by 120°, which permutes the
 three methyl hydrogens. Classical RMSD sees a difference of 0.687 Å, far above the
 default threshold of `RTHR = 0.125 Å`, and would keep both structures. The iRMSD-based
 sorting recognizes the rotamer and merges them into one group with degeneracy 2:

@@ -3,7 +3,7 @@ layout: default
 title: Topology Check
 parent: "Other"
 grand_parent: "Examples and Guides"
-nav_order: 2
+nav_order: 1
 toc: false
 summary: "Checking the molecular topology with CREST."
 permalink: /page/examples/utilities/utils_3.html

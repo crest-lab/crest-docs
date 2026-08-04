@@ -31,7 +31,7 @@ permalink: /page/examples/example_5.html
 
 ## Protonation site screening
 
-The protonation site screening is one of CREST's [original workflows](../overview/workflows.html#protonation-site-screeining). 
+The protonation site screening is one of CREST's [original workflows](../overview/workflows.html#protonation-site-screening). 
 In the following, it is demonstrated for the alanineglycine molecule from [Example 1](example_1.html).
 {: .text-justify }
 

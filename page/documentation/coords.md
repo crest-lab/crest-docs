@@ -218,7 +218,7 @@ Of the per-atom columns declared in `Properties`, CREST uses `species` (the elem
 parsed but ignored.
 {: .text-justify }
 
-{% include warning.html content="Mind the units. Following the extxyz convention, an <code>energy</code> without an explicit <code>energy_units</code> entry is interpreted as <b>eV</b> and converted to Hartree internally — in contrast to a plain <b>.xyz</b> file, where the comment line energy is read as Hartree. A file written by another program in atomic units must therefore state <code>energy_units=hartree</code>." %}
+{% include warning.html content="Mind the units. Following the extxyz convention, an <code>energy</code> without an explicit <code>energy_units</code> entry is interpreted as <b>eV</b> and converted to Hartree internally, in contrast to a plain <b>.xyz</b> file, where the comment line energy is read as Hartree. A file written by another program in atomic units must therefore state <code>energy_units=hartree</code>." %}
 
 Structures written by CREST in this format use Hartree by default. This can be changed
 with the `extxyz_units` entry of a

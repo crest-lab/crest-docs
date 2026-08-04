@@ -23,14 +23,14 @@ summary: "This guide contains instructions for compiling CREST from source."
 ## Choice of Compiler
 
 In order to compile CREST from source you will need a Fortran and C compiler.
-We recommend either the Intel `ifort`/`icx` or GNU `gfortran`/`gcc` compilers.
+We recommend either the Intel `ifx`/`icx` or GNU `gfortran`/`gcc` compilers.
 Both compilers can be obtained free-of-charge, but you'll only need one of them.
-A quick reference on where to obtain either one is proveded in the following.
+A quick reference on where to obtain either one is provided in the following.
 
 
 ### 1. GNU compilers
 
-Installing the `gfortran` and `gcc` compilers on Unix systems is fairly straight-foward.
+Installing the `gfortran` and `gcc` compilers on Unix systems is fairly straightforward.
 The installation can be done directly via the commandline, e.g., with
 ```bash
 sudo apt-get install gfortran
@@ -44,7 +44,7 @@ The `gcc` compiler is included in the `build-essential` package and there is a g
 If not, try installing it via
 ```bash
 sudo apt update
-sudo apt-get install build-essentials
+sudo apt-get install build-essential
 ```
 and check the `gcc` version with
 ```bash
@@ -82,10 +82,10 @@ export FC=ifx CC=icx
 ## Install via CMake
 
 CMake is one of the most widely used multiplatform build systems.
-Starting with CREST 3.0, we will focus primarily on this build, although the meson build may still be used 
+Starting with CREST 3.0, we will focus primarily on this build, although the Meson build may still be used.
 
 It can be used with [Ninja {{site.data.icons.github}}](https://github.com/ninja-build/ninja) or the regular `make` as a backend.
-CMake can be installed in different ways. For example from the [official webiste](https://cmake.org/install/), or via   `pip`
+CMake can be installed in different ways. For example from the [official website](https://cmake.org/install/), or via `pip`
 
 ```bash
 pip install cmake
@@ -151,6 +151,13 @@ This will prepare the directory `_build` in which the program will be compiled.
 {% include tip.html content="You may need to specify the linear algebra backend in the setup step. This is done by adding the <code>-Dlapack=&lt;option&gt;</code> keyword to the setup command. Available options are <code>auto</code> (default), <code>openblas</code>, <code>mkl</code>, <code>netlib</code>, and <code>custom</code>. For example, add <code>-Dlapack=mkl</code> to use the shared MKL library." %}
 
 {% include tip.html content="To build a fully static binary, add <code>-Dstatic=true</code> to the Meson setup command. This attempts to link OpenMP and LAPACK runtimes statically and is useful for deployment on clusters without matching system libraries." %}
+
+The optional features listed for the CMake build have Meson counterparts (add to the `meson setup _build` command):
+
+| Flag | Effect |
+|---|---|
+| `-Dgxtb=true` | Enable g-xTB via tblite (also requires `-Dtblite=enabled`) |
+| `-Dfmlip-relay=enabled` | Enable ML potential interface via fmlip-relay |
 
 If the setup was successful, initiate the build (still in the same directory) with
 ```bash

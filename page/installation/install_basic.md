@@ -29,13 +29,13 @@ Installation instructions shown in the following were tested on *Ubuntu 20.04 LT
 
 Requirements for the installation can depend on whether you decide to install CREST from
 the precompiled binaries, or build the program on yourself locally:
-- In general, [compiling the program from source](/page/installation/install_basic.html#compiling-from-source) will provide you with a binary more tailored to your specific computer/architecture.
+- In general, [compiling the program from source](#option-3-compiling-from-source) will provide you with a binary more tailored to your specific computer/architecture.
   Furthermore, you will be able to get the newest developments and code updates more quickly.
   However, building the program from source will require some effort.
 - The installation of {% include tooltip.html tool="statically compiled binaries" tip=site.data.glossary.static_binary %} from GitHub {{ site.data.icons.github }} is faster and will in most cases be sufficient.
   However, in rare cases you might encounter runtime errors.
   Additionally, the precompiled program is updated only periodically with a new release, so some code updates might not yet be included.
-- We also provide a `conda` installation (see *Option 2* below), which is probably the most straighforward way of obtaining the program. 
+- We also provide a `conda` installation (see *Option 2* below), which is probably the most straightforward way of obtaining the program. 
 {: .text-justify }
 
 Most CREST applications will require access to the [`xtb` program. {{ site.data.icons.ext }}](https://github.com/grimme-lab/xtb)
@@ -52,7 +52,7 @@ If you plan on using QCG, you can either use the recommended `aISS` docking algo
 [![Github Downloads All Releases](https://img.shields.io/github/downloads/crest-lab/crest/total)](https://github.com/crest-lab/crest/releases)
 
 The *statically linked* binaries can be found at the [release page](https://github.com/crest-lab/crest/releases) of this repository.
-The most recent program version is automatically build (both Meson/Intel and CMake/GNU) from the main branch and can be found at the [continous release page](https://github.com/crest-lab/crest/          releases/tag/latest), or directly download them here:
+The most recent program version is automatically built (both Meson/Intel and CMake/GNU) from the master branch and can be found at the [continuous release page](https://github.com/crest-lab/crest/releases/tag/latest), or directly download them here:
 
 [![Download (GNU)](https://img.shields.io/badge/download-GNU_build_binary-green)](https://github.com/crest-lab/crest/releases/download/latest/crest-gnu-12-ubuntu-latest.tar.xz)
 [![Download (ifort)](https://img.shields.io/badge/download-ifort_build_binary-blue.svg)](https://github.com/crest-lab/crest/releases/download/latest/crest-intel-2023.1.0-ubuntu-latest.tar.xz)
@@ -68,8 +68,7 @@ Downloading the binary from one of those links skips step 1 and 2 in the followi
    {% include image.html file="install-2.png" max-width=400 %}
 
 3. Move the packed tarball (which includes the binary and license files) to some place of your choice (e.g., `/home/$USER/bin/`) and
-   unpack it there
-   Simply unpack the binary  and add it to your *PATH* variable.
+   unpack it there with
    ```bash
    tar -xf crest-gnu-12-ubuntu-latest.tar.xz
    ```
@@ -106,8 +105,8 @@ which should print the program header to the terminal.
 ---
 
 ## **Option 2**: Conda
-[![Conda Version](https://img.shields.io/conda/vn/conda-forge/crest?color=khaki)](https://anaconda.  org/conda-forge/crest)
-[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/crest.svg)](https://anaconda.org/    conda-forge/crest)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/crest?color=khaki)](https://anaconda.org/conda-forge/crest)
+[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/crest.svg)](https://anaconda.org/conda-forge/crest)
 
 A [conda-forge](https://github.com/conda-forge) feedstock is maintained at <https://github.com/conda-forge/crest-feedstock>.
 
@@ -140,12 +139,12 @@ either fork it (if you are familiar with GitHub), or locate the "*Code*" button.
 
 {% include image.html file="install-3.png" max-width=400 %}
 
-There, you will have the option to either clone the project with `git` via the command line
+There, you will have the option to either download the source as a ZIP archive, or to clone the project with `git` via the command line
 ```bash
 git clone {{ site.project }}.git /directory/of/your/choice
 ```
 
-If you chose to build the program from source, it is advisable to download any motential subprojects that will be build into CREST.
+If you chose to build the program from source, it is advisable to download any potential subprojects that will be built into CREST.
 To do so, go to the project directory that you just have set up, and execute
 ```bash
 git submodule init

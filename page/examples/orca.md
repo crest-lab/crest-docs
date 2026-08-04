@@ -185,12 +185,12 @@ memory **per core** in MB, so the memory of a single ORCA call is roughly
 times the number of parallel jobs.
 {: .text-justify }
 
-{% include warning.html content="Setting <code>threads</code> per level is strongly recommended for ORCA. Without it CREST assumes one core per energy+gradient call and will start as many concurrent jobs as there are cores &mdash; each of which would then launch its own (potentially parallel) ORCA process." %}
+{% include warning.html content="Setting <code>threads</code> per level is strongly recommended for ORCA. Without it CREST assumes one core per energy+gradient call and will start as many concurrent jobs as there are cores, each of which would then launch its own (potentially parallel) ORCA process." %}
 
 More details on how the reservation influences the job/core split are given in the
 [Input File Documentation]({{site.baseurl}}/page/documentation/inputfiles.html#per-level-thread-reservation).
 The same settings apply when ORCA is used as the refinement level of a
-[composite setup](composite.html) — the recommended way to get DFT energies for a
+[composite setup](composite.html), the recommended way to get DFT energies for a
 conformer ensemble.
 {: .text-justify }
 
@@ -242,13 +242,13 @@ If `threads` is set for the level, CREST takes ownership of the parallel setup: 
 removed and replaced by CREST's own `%pal nprocs <threads> end` line.
 The same happens to `%maxcore` if `orca_memory` is given.
 Without both keys the template is written out verbatim, *i.e.*, the parallelization is
-entirely up to the template &mdash; which is also the behavior of CREST versions before
+entirely up to the template, which is also the behavior of CREST versions before
 3.1.
 {: .text-justify }
 
 {% include important.html content="<code>orca_input</code> and <code>orca_template</code> are mutually exclusive; specifying both aborts the run." %}
 
-{% include note.html content="The coordinate block of the template file is irrelevant and can be omitted &mdash; CREST always appends the current structure itself." %}
+{% include note.html content="The coordinate block of the template file is irrelevant and can be omitted; CREST always appends the current structure itself." %}
 
 ---
 

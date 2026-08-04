@@ -2,7 +2,7 @@
 layout: default
 title: "Other"
 parent: "Examples and Guides"
-nav_order: 5
+nav_order: 6
 has_children: true
 permalink: /page/utilities
 summary: "This section contains an overview of utility applications."

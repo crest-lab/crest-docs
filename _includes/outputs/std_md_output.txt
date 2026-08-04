@@ -1,0 +1,30 @@
+ ─────────────── Molecular Dynamics Settings ──────────────
+  Simulation type       :       NVT
+  MD time (length)      :      2.00 ps
+  dt (timetep)          :      2.00 fs
+  temperature           :    300.00 K
+  max steps             :      1000
+  block length (av.)    :      2500
+  dumpstep(trj) /fs     :    100.00 (50)
+  # deg. of freedom     :        25
+  thermostat            : Berendsen
+  SHAKE constraint      :      true
+  # SHAKE bonds         :        11 (all bonds)
+  hydrogen mass /u      :   2.00000
+ ──────────────────────────────────────────────────────────
+
+                            [ ... ]
+
+ average properties
+ ------------------------------------------
+ &lt;Epot&gt;                  -14.53223496 Eh
+ &lt;Ekin&gt;                    0.01111890 Eh
+ &lt;Etot&gt;                  -14.52111606 Eh
+ &lt;T&gt;                           280.89 K
+ Tvar                         5362.51 K²
+ σ(T)                           73.23 K
+ ------------------------------------------
+
+ normal MD termination
+ MD run completed successfully
+ Trajectory written to crest_dynamics.trj.xyz

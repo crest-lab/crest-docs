@@ -29,8 +29,8 @@ permalink: /page/examples/composite.html
 
 A conformational search is dominated by the sheer *number* of energy and gradient
 evaluations, not by the cost of a single one.
-The small example at the bottom of this page — a conformer search for *n*-pentane, all
-of 17 atoms — needs about 2.8 &times; 10<sup>5</sup> energy+gradient calls.
+The small example at the bottom of this page, a conformer search for alanineglycine with
+all of 20 atoms, needs about 2.8 &times; 10<sup>5</sup> energy+gradient calls.
 At GFN-FF this takes 18 seconds; at a DFT level it would take weeks.
 {: .text-justify }
 
@@ -72,7 +72,7 @@ input file, [see below {{site.data.icons.adown}}](#the-same-thing-in-toml).
 
 ### Example
 
-The following runs the iMTD-GC conformer search of *n*-pentane at GFN-FF and re-ranks
+The following runs the iMTD-GC conformer search of alanineglycine at GFN-FF and re-ranks
 the ensemble with GFN2-xTB single-points:
 {: .text-justify }
 
@@ -178,7 +178,7 @@ The `refine` key accepts:
 | `freq`, `deltag` | Hessian/free-energy (*δG*) correction |
 
 Since this is an ordinary `[[calculation.level]]` block, **any** calculator can serve as
-the quality level — including the ones that are far too expensive to drive a search
+the quality level, including the ones that are far too expensive to drive a search
 themselves:
 {: .text-justify }
 

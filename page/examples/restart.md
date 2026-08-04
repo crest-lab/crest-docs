@@ -30,7 +30,7 @@ checkpoint file called `crest.restart` at every stage boundary of the algorithm.
 {: .text-justify }
 
 The checkpoint is a plain text file recording *where* the algorithm was, not *what* it
-found — no ensemble data is stored in it. The actual structures stay in the
+found. No ensemble data is stored in it. The actual structures stay in the
 backup files (`.cre_*.xyz`) that CREST writes anyway after each metadynamics iteration:
 {: .text-justify }
 

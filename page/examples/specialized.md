@@ -2,7 +2,7 @@
 layout: default
 title: "Specialized Runtypes"
 parent: "Examples and Guides"
-nav_order: 1
+nav_order: 2
 has_children: true
 permalink: /page/examples/specialized.html
 summary: "Guides and examples for the specialized runtypes and subprograms of CREST."

@@ -2,7 +2,7 @@
 layout: default
 title: "Special Calculators"
 parent: "Examples and Guides"
-nav_order: 4
+nav_order: 5
 has_children: true
 permalink: /page/examples/calculators.html
 summary: "Energy and gradient backends beyond the built-in semiempirical methods."

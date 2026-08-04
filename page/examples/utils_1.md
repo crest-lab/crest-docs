@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Ensemble Optimization
-parent: "Other"
+parent: "Standard Runtypes"
 grand_parent: "Examples and Guides"
-nav_order: 1
+nav_order: 4
 toc: false
 summary: "An example on how te (re-)optimize ensembles with CREST."
 permalink: /page/examples/utilities/utils_1.html

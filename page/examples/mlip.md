@@ -32,7 +32,7 @@ When CREST encounters an MLIP calculation, it automatically spawns the server, w
 This architecture avoids the overhead of repeated Python interpreter startup during iterative calculations such as geometry optimizations or molecular dynamics.
 {: .text-justify }
 
-{% include warning.html content="MLIP evaluations are <em>not</em> cheap compared to the semiempirical methods CREST is built around. For small and medium-sized molecules a single GFN-FF or GFN2-xTB gradient is orders of magnitude faster than one round-trip through the socket server, so running a full conformational search directly at an MLIP level is <b>not recommended</b> — a search easily needs 10<sup>5</sup>–10<sup>6</sup> energy+gradient calls. Sample with a semiempirical workhorse and use the MLIP only to refine the final ensemble, see <a href='composite.html'>Composite calculators</a>." %}
+{% include warning.html content="MLIP evaluations are <em>not</em> cheap compared to the semiempirical methods CREST is built around. For small and medium-sized molecules a single GFN-FF or GFN2-xTB gradient is orders of magnitude faster than one round-trip through the socket server, so running a full conformational search directly at an MLIP level is <b>not recommended</b>; a search easily needs 10<sup>5</sup>–10<sup>6</sup> energy+gradient calls. Sample with a semiempirical workhorse and use the MLIP only to refine the final ensemble, see <a href='composite.html'>Composite calculators</a>." %}
 
 The following backends are available out of the box:
 {: .text-justify }
@@ -306,7 +306,7 @@ threads        = 4            # cores per server -> 4 servers x 4 threads
 {% endcapture %}
 {% include codecell.html content=toml_threads %}
 
-Here CREST runs **4 parallel jobs**, each with its own fmlip-relay server that is limited to 4 CPU threads &mdash; instead of 16 servers all fighting over the same 16 cores.
+Here CREST runs **4 parallel jobs**, each with its own fmlip-relay server that is limited to 4 CPU threads, instead of 16 servers all fighting over the same 16 cores.
 The setting is echoed in the calculation summary printout as `Server thread cap`.
 The same applies when the MLIP is used as the refinement level of a
 [composite setup](composite.html), which is the recommended way to combine it with a
@@ -319,7 +319,7 @@ The general rules for the per-level `threads` reservation (idle-core warnings, i
 [Input File Documentation]({{site.baseurl}}/page/documentation/inputfiles.html#per-level-thread-reservation).
 {: .text-justify }
 
-{% include tip.html content="On the GPU (<code>mlip_device = &quot;cuda&quot;</code>) the CPU thread cap matters much less &mdash; there the limit is GPU memory, since every parallel server loads its own copy of the model onto the device. Reducing the number of parallel jobs with a larger <code>threads</code> value is also the simplest way to keep the GPU memory footprint in check." %}
+{% include tip.html content="On the GPU (<code>mlip_device = &quot;cuda&quot;</code>) the CPU thread cap matters much less; there the limit is GPU memory, since every parallel server loads its own copy of the model onto the device. Reducing the number of parallel jobs with a larger <code>threads</code> value is also the simplest way to keep the GPU memory footprint in check." %}
 
 
 ---

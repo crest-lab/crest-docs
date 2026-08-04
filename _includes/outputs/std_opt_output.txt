@@ -1,0 +1,42 @@
+          │           GEOMETRY OPTIMIZATION SETUP           │
+          ┝━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┥
+          │   algorithm                     ANCOPT          │
+          │   optimization level        normal (0)          │
+          │   max. optcycles                   200          │
+          │   ANC micro-cycles                  20          │
+          │   degrees of freedom                30          │
+          ├─────────────────────────────────────────────────┤
+          │   RF solver                   davidson          │
+          │   Hessian update                  bfgs          │
+          │   write crestopt.log.xyz          True          │
+          │   linear?                        False          │
+          │   energy convergence        0.5000000E-05 Eh    │
+          │   grad. convergence         0.1000000E-02 Eh/α  │
+          │   maximium RF displ.         1.0000000          │
+          │   Hlow (freq-cutoff)        0.1000000E-01       │
+          │   Hmax (freq-cutoff)         5.0000000          │
+          │   S6 in model hess.         20.0000000          │
+          └─────────────────────────────────────────────────┘
+
+                            [ ... ]
+
+│                                 CYCLE    5                                 │
+└────────────────────────────────────────────────────────────────────────────┘
+ * total energy  :   -14.5585939 Eh     change ΔE    -0.3534498E-05 Eh
+   gradient norm :     0.0004548 Eh/α   predicted    -0.3009033E-05 ( -14.87%)
+   displ. norm   :     0.0080889 α      lambda       -0.7691226E-06
+   maximum displ.:     0.0077877 α      in ANC's #1, #2, #3, ...
+   converged δE/grad :  True / True
+
+   *** GEOMETRY OPTIMIZATION CONVERGED AFTER 5 ITERATIONS ***
+
+                            [ ... ]
+
+ TOTAL ENERGY         -14.5585939330 Eh
+ GRADIENT NORM          0.0004548395 Eh/a0
+
+  Important files written by CREST during this run
+ ------------------------------------------------------------------------
+ crestopt.xyz                │ final optimized geometry
+ crestopt.log.xyz            │ step-by-step optimization trajectory
+ ------------------------------------------------------------------------

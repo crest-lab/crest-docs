@@ -2,7 +2,7 @@
 layout: default
 title: Sampling Applications
 parent: "Examples and Guides"
-nav_order: 0
+nav_order: 1
 has_children: true
 permalink: /page/examples/sampling.html
 summary: "A collection of guides and examples for different (conformational) sampling applications."

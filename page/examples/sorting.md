@@ -2,7 +2,7 @@
 layout: default
 title: "Sorting"
 parent: "Examples and Guides"
-nav_order: 3
+nav_order: 4
 has_children: true
 permalink: /page/examples/sorting.html
 summary: "Sorting, comparing and filtering structure ensembles."

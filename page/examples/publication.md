@@ -3,7 +3,7 @@ layout: default
 title: Publication Examples
 parent: "Other"
 grand_parent: "Examples and Guides"
-nav_order: 5
+nav_order: 4
 permalink: /page/examples/publication
 redirect_from:
   - /page/examples/publication/example_1.html

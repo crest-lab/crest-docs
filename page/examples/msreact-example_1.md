@@ -1,8 +1,8 @@
 ---
 layout: default
 title: MSREACT Example 1
-parent: MSREACT Examples
-grand_parent: "Examples and Guides"
+parent: "MSREACT Examples"
+ancestor: "Examples and Guides"
 nav_order: 1
 toc: false
 summary: "An example for generating EI-MS fragments for an organic molcecule."

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: MECP Calculations
-parent: "Examples and Guides"
-nav_order: 9
+parent: "Specialized Runtypes"
+grand_parent: "Examples and Guides"
+nav_order: 3
 has_children: true
 permalink: /page/examples/mecp
 summary: "Minimum energy crossing point applications implemented CREST."

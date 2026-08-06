@@ -1,8 +1,8 @@
 ---
 layout: default
 title: MSREACT Example 2
-parent: MSREACT Examples
-grand_parent: "Examples and Guides"
+parent: "MSREACT Examples"
+ancestor: "Examples and Guides"
 nav_order: 2
 toc: false
 summary: "An example for generating isomers for an organic molcecule."

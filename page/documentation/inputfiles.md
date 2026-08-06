@@ -19,7 +19,7 @@ This page contains a guide to CREST input files that can be used with program ve
 
 ---
 
-CREST program instructions via the various [command line arguments](./documentation.html) can become quite lengthy and tedious.
+CREST program instructions via the various [command line arguments]({{site.baseurl}}/page/documentation.html) can become quite lengthy and tedious.
 Therefore, following version 3.0 of CREST, input files will be available.
 Currently, the input files are based on the [**TOML format** {{site.data.icons.ext}}](https://toml.io/en/ "https://toml.io") and are parsed using [**TOML-F**](https://github.com/toml-f/toml-f).
 {: .text-justify }
@@ -102,6 +102,69 @@ the used programs, and system specific data such as the molecular charge or numb
 
 
 ---
+### Per-level thread reservation
+<span class="label label-green">CREST 3.1</span>
+
+Most CREST workflows (conformational sampling, ensemble optimizations, metadynamics)
+run **many jobs at the same time**, each of which requires energies and gradients.
+By default, CREST assumes that a single energy+gradient call uses one core and
+distributes the global `threads` over as many concurrent jobs as possible.
+{: .text-justify }
+
+This assumption breaks down for calculators that are themselves parallelized, such as
+ORCA subprocesses or ML potentials served by
+[`fmlip-relay`]({{site.baseurl}}/page/examples/mlip.html).
+For those, the `threads` (or `ncores`) key can be set **inside** a
+`[[calculation.level]]` block to reserve a fixed number of cores for each call of
+that level:
+{: .text-justify }
+
+{% capture thrfile %}
+# CREST 3 input file
+input   = "struc.xyz"
+runtype = "imtd-gc"
+threads = 12                 # total cores available to CREST
+
+[[calculation.level]]
+method      = "orca"
+orca_cmd    = "/path/to/orca"
+orca_input  = "! r2scan-3c def2/J TightSCF DefGrid3"
+threads     = 4              # cores per ORCA call -> %pal nprocs 4 end
+orca_memory = 3000           # -> %maxcore 3000 (per core, MB)
+{% endcapture %}
+{% include codecell.html content=thrfile style="font-size:12px" %}
+
+With this input CREST will run at most **3 concurrent jobs with 4 cores each** instead
+of 12 single-core jobs, and each of those jobs starts an ORCA calculation that is
+allowed to use exactly 4 cores.
+In general, the number of parallel jobs is capped such that
+{: .text-justify }
+
+$$
+  N_\text{jobs} \times N_\text{threads}^\text{level} \le N_\text{threads}^\text{total}
+$$
+
+where $$N_\text{threads}^\text{level}$$ is the largest `threads` value among all
+*active* levels. Two things are worth keeping in mind:
+{: .text-justify }
+
+- Levels that hand the reservation down explicitly (`orca` via `%pal`, `mlip` via
+  `--max-threads`) are **hard-capped**: they will use exactly that many cores.
+  If the total thread count is not a multiple of the reservation, the remaining cores
+  stay idle and CREST prints a corresponding `**NOTE**` at the start of the run.
+  Other calculators (internal ones, `xtb`, `generic` scripts) instead grow into the
+  cores per job via `OMP_NUM_THREADS` and thus soak up the remainder.
+- If a single level requests more cores than are available in total, CREST warns and
+  falls back to one job using all available cores.
+
+Leaving the per-level `threads` unset (the default) reproduces the behavior of earlier
+CREST versions exactly.
+{: .text-justify }
+
+{% include tip.html content="For expensive levels it is usually better to run <em>fewer, wider</em> jobs than to oversubscribe the machine. Choose the per-level <code>threads</code> as a divisor of the global <code>threads</code> to avoid idle cores." %}
+
+
+---
 ### `[[calculation.constraints]]` sub-blocks
 The `[[calculation.constraints]]` sub-blocks are used to introduce constraints.
 Constraints are calculated by CREST and added to the energies and gradients.
@@ -128,4 +191,19 @@ The `[cregen]` block is used for defining global options related to the ensemble
 For more information on the CREGEN procedure see our recent publication in *J Chem Phys*.
 
 {% include kv.html obj=site.data.inputkv.cregen %}
+
+---
+## `[ttconf]` block
+<span class="label label-green">CREST 3.1</span>
+
+The `[ttconf]` block controls the TTConf tensor-train conformer search (a reimplementation of the
+method of Zurek *et al.*), selected with
+`runtype = "ttconf"` (or the `-ttconf` command line flag). All keys are optional; a `preset`
+can be used as a starting point and any individual key overrides it. Every key except `bonds`
+has an equivalent command line flag (see the
+[**TTConf Options** <i class='fa-solid fa-book'></i>]({{site.baseurl}}/page/documentation/keywords.html#ttconf-options)),
+and command line flags override the values read from the file. A worked example is given on the
+[TTConf example page]({{site.baseurl}}/page/examples/ttconf.html).
+
+{% include kv.html obj=site.data.inputkv.ttconf %}
 

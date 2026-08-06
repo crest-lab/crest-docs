@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Conformational Entropy
-parent: "Examples and Guides"
-nav_order: 6
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
+nav_order: 4
 toc: false
 summary: "A guide to the calculation of conformational entropies with CREST."
 permalink: /page/examples/entropy.html
@@ -92,12 +93,41 @@ Use `--sthr 25.0` in order to be consistent with the publication and choose a sc
 
 Initiate the conformational entropy calculation in CREST by
 
-```bash
-crest <input> --entropy [other options]
-```
+ <!-- Tab links -->
+<div class="tab card">
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-ent-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-ent-toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-ent-out', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
+</div>
+<!-- Tab content -->
+<div id="tab-ent-1" class="tabcontent tab-id-1" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
+{% include command.html cmd="crest struc.xyz <span class='nt'>--entropy</span>" %}
+</div>
+<div id="tab-ent-toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_ent %}
+# This is a CREST input file
+input   = "struc.xyz"
+runtype = "imtd-smtd"
+threads = 4
 
-where `<input>` is your DFT-refined lowest conformer from steps 1/2.
-The usual method selection options such as the GFN method or implicit solvation are available as `[other options]`, but ***special runtypes*** such as `--nci` or `--quick` ***are incopatible with the entropy mode***.
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_ent %}
+</div>
+<div id="tab-ent-out" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture output_file %}
+  {% include outputs/entropy_output.txt %}
+{% endcapture %}
+{% include codecell.html content=output_file %}
+</div>
+{% include defaulttab.html id="open-1" %}
+
+where `struc.xyz` is your DFT-refined lowest conformer from steps 1/2.
+The usual method selection options such as the GFN method or implicit solvation are available as additional settings, but ***special runtypes*** such as `--nci` or `--quick` ***are incopatible with the entropy mode***.
 {: .text-justify }
 
 This will calculate the additive terms $$S'_\text{conf}$$ and $$\bar{S}_\text{msRRHO}$$ at the SQM or FF level.

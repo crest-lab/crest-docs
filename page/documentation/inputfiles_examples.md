@@ -216,6 +216,49 @@ method='gfn2'
 active=[1]
 ```
 ---
+## External ORCA calculation (with core/memory control)
+An example for a geometry optimization in which energies and gradients are provided by an
+external ORCA subprocess. The per-level `threads` reserves 4 cores for each ORCA call
+(written as `%pal nprocs 4 end`), while `orca_memory` sets ORCA's `%maxcore` in MB per core.
+Of the 12 total threads, CREST will therefore run at most 3 such calculations concurrently.
+A worked example can be found on the [ORCA example page](../examples/orca.html).
+```bash
+#This is a CREST input file
+input='struc.xyz'
+runtype='ancopt'
+
+#parallelization
+threads=12
+
+[[calculation.level]]
+orca_cmd='/path/to/orca'                        # ORCA executable (absolute path)
+orca_input='! r2scan-3c def2/J TightSCF'        # ORCA simple-input line
+threads=4                                       # cores per ORCA call
+orca_memory=3000                                # %maxcore in MB (per core)
+chrg=0
+uhf=0
+```
+---
+## ML potential with explicit thread control
+An example for conformational sampling with an ML interatomic potential served by
+[fmlip-relay](../examples/mlip.html). Each of the parallel jobs spawns its own server
+instance, and `threads=4` limits every one of them to 4 CPU threads
+(passed on as `--max-threads`), resulting in 4 concurrent jobs on the 16 available cores.
+```bash
+#This is a CREST input file
+input='struc.xyz'
+runtype='imtd-gc'
+
+#parallelization
+threads=16
+
+[[calculation.level]]
+method='mlip'
+mlip_backend='mace_off'
+mlip_modelsize='medium'
+threads=4          # CPU threads per server instance
+```
+---
 ## Multicenter ONIOM3 setup
 A commeted example for setting up a MC-ONIOM3 calculation.
 ```bash

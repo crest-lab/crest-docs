@@ -1,0 +1,66 @@
+ 
+       ╔════════════════════════════════════════════════╗
+       ║                                                ║
+       ║     ██████╗██████╗ ███████╗███████╗████████╗   ║
+       ║    ██╔════╝██╔══██╗██╔════╝██╔════╝╚══██╔══╝   ║
+       ║    ██║     ██████╔╝█████╗  ███████╗   ██║      ║
+       ║    ██║     ██╔══██╗██╔══╝  ╚════██║   ██║      ║
+       ║    ╚██████╗██║  ██║███████╗███████║   ██║      ║
+       ║     ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝      ║
+       ║                                                ║
+       ║    Conformer-Rotamer Ensemble Sampling Tool    ║
+       ║            based on the xTB methods            ║
+       ║                                                ║
+       ╚════════════════════════════════════════════════╝
+        Version 3.1.0, Thu, 16 July 12:19:58, 07/16/2026
+        commit (97f4fb8) compiled by 'usr@stellaris'
+ 
+   Cite work conducted with this code as
+
+   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
+   • S.Grimme, JCTC, 2019, 15, 2847-2862.
+   • P.Pracht, S.Grimme, C.Bannwarth, F.Bohle, S.Ehlert,
+     G.Feldmann, J.Gorges, M.Müller, T.Neudecker, C.Plett,
+     S.Spicher, P.Steinbach, P.Wesołowski, F.Zeller,
+     J. Chem. Phys., 2024, 160, 114110.
+
+   for works involving QCG cite
+
+   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
+     JCTC, 2022, 18 (5), 3174-3189.
+   • C.Plett, S. Grimme,
+     Angew. Chem. Int. Ed. 2023, 62, e202214477.
+
+   for works involving MECP screening cite
+
+   • P.Pracht, C.Bannwarth, JCTC, 2022, 18 (10), 6370-6385.
+
+   for works involving the TTConf reimplementaiton cite
+
+   • C.Zurek, et al., JCTC, 2025, 21, 1459-1475.
+ 
+   Original code
+     P.Pracht, S.Grimme, Universität Bonn, MCTC
+   with help from (alphabetical order):
+     C.Bannwarth, F.Bohle, S.Ehlert, G.Feldmann, J.Gorges,
+     S.Grimme, C.Plett, P.Pracht, L.Rindt, S.Spicher,
+     P.Steinbach, P.Wesolowski, F.Zeller
+ 
+   Online documentation is available at
+   https://crest-lab.github.io/crest-docs/
+ 
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License (LGPL) for more details.
+
+ Command line input:
+ $ crest --rmsd struc1.xyz struc2.xyz
+
+
+> All CLI arguments successfully processed.
+
+> Setting up backup calculator ... done.
+> Reading files struc1.xyz and struc2.xyz
+ 
+ Calculated RMSD (Å):      0.48518876

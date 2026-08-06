@@ -1,0 +1,138 @@
+ 
+       ╔════════════════════════════════════════════════╗
+       ║                                                ║
+       ║     ██████╗██████╗ ███████╗███████╗████████╗   ║
+       ║    ██╔════╝██╔══██╗██╔════╝██╔════╝╚══██╔══╝   ║
+       ║    ██║     ██████╔╝█████╗  ███████╗   ██║      ║
+       ║    ██║     ██╔══██╗██╔══╝  ╚════██║   ██║      ║
+       ║    ╚██████╗██║  ██║███████╗███████║   ██║      ║
+       ║     ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝      ║
+       ║                                                ║
+       ║    Conformer-Rotamer Ensemble Sampling Tool    ║
+       ║            based on the xTB methods            ║
+       ║                                                ║
+       ╚════════════════════════════════════════════════╝
+        Version 3.1.0, Thu, 16 July 12:19:58, 07/16/2026
+        commit (97f4fb8) compiled by 'usr@stellaris'
+ 
+   Cite work conducted with this code as
+
+   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
+   • S.Grimme, JCTC, 2019, 15, 2847-2862.
+   • P.Pracht, S.Grimme, C.Bannwarth, F.Bohle, S.Ehlert,
+     G.Feldmann, J.Gorges, M.Müller, T.Neudecker, C.Plett,
+     S.Spicher, P.Steinbach, P.Wesołowski, F.Zeller,
+     J. Chem. Phys., 2024, 160, 114110.
+
+   for works involving QCG cite
+
+   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
+     JCTC, 2022, 18 (5), 3174-3189.
+   • C.Plett, S. Grimme,
+     Angew. Chem. Int. Ed. 2023, 62, e202214477.
+
+   for works involving MECP screening cite
+
+   • P.Pracht, C.Bannwarth, JCTC, 2022, 18 (10), 6370-6385.
+
+   for works involving the TTConf reimplementaiton cite
+
+   • C.Zurek, et al., JCTC, 2025, 21, 1459-1475.
+ 
+   Original code
+     P.Pracht, S.Grimme, Universität Bonn, MCTC
+   with help from (alphabetical order):
+     C.Bannwarth, F.Bohle, S.Ehlert, G.Feldmann, J.Gorges,
+     S.Grimme, C.Plett, P.Pracht, L.Rindt, S.Spicher,
+     P.Steinbach, P.Wesolowski, F.Zeller
+ 
+   Online documentation is available at
+   https://crest-lab.github.io/crest-docs/
+ 
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Lesser General Public License (LGPL) for more details.
+
+ Command line input:
+ $ crest --sort ens2.xyz isort
+
+
+> All CLI arguments successfully processed.
+
+> Setting up backup calculator ... done.
+> Read ensemble ens2.xyz ... 2 structures!
+ 
+ Assigning conformers based on iRMSD and RTHR
+ --------------------------------------------
+CREGEN> Info for iRMSD sorting:
+  number of structures         :         2
+  RTHR (RMSD threshold)        :   0.12500 Å
+  ETHR (energy threshold)      :  7.97E-05 Ha
+  OpenMP threads               :         8
+  Individual atom IDs?         :     false
+  False rotamer check?         :      auto
+ 
+CREGEN> Sorting ensemble by energy ... done.
+CREGEN> Setting up canonical atom ranks ... done.                     
+ * wall-time:     0 d,  0 h,  0 min,  0.001 sec
+ *  cpu-time:     0 d,  0 h,  0 min,  0.003 sec
+ * ratio c/w:     4.731 speedup
+ * Corresponding to approximately .275 ms per processed RMSD
+ 
+CREGEN> Check for false rotamers (geometry inversion)? --> F
+CREGEN> Allocating iRMSD work cache ... done.
+ 
+CREGEN> Running all-pair iRMSDs ... done.                     
+ * wall-time:     0 d,  0 h,  0 min,  0.000 sec
+ *  cpu-time:     0 d,  0 h,  0 min,  0.000 sec
+ * ratio c/w:     4.964 speedup
+ 
+********************************************************************************
+               ΔE             Etot   weight  conf.weight conformer      
+     id  kcal/mol          hartree     p(i)     p(group)     group degen origin
+    ---- -------- ---------------- -------- ------------ --------- ----- ------
+       1   0.0000         0.000000  0.50000      1.00000         1     2
+       2   0.0000         0.000000  0.50000            .         .     . 
+********************************************************************************
+Statistics for *THIS* ensemble:
+-----------------------------------
+ Number of groups & total                :  1, 2
+ Temperature used for populations        :     298.15 K
+ Energy of lowest structure              :    0.000000E+00
+ Ensemble average energy (kcal/mol)      :      0.00000000
+ Ensemble entropy (J/mol K, cal/mol K)   :      5.763    1.377
+ Ensemble free energy (kcal/mol)         :     -0.41068161
+ Population of lowest strucure           :    100.000 %
+ Highest population & group              :    100.000 %, 1
+ Accum.population of lowest 10 groups    :    100.000 %
+ 50% accum.population for groups         :      1 - 1
+ 95% accum.population for groups         :      1 - 1
+********************************************************************************
+Number of unique conformers for further calculation: 1
+List of relative energies (kcal/mol) saved as "crest.energies"
+Unique-structure file written to: crest_ensemble.xyz
+ 
+ 
+  Important files written by CREST during this run
+ ------------------------------------------------------------------------
+ crest_conformers.xyz        │ unique conformers (1 per rotamer group), energy-sorted
+ crest_rotamers.xyz          │ all structures including rotamers
+ crest_best.xyz              │ lowest-energy structure
+ cregen.full                 │ full CREGEN output (written when terminal output is abbreviated)
+ ------------------------------------------------------------------------
+ 
+ -----------------
+ Wall Time Summary
+ -----------------
+ CREST runtime (total)               0 d,  0 h,  0 min,  0.025 sec
+ ------------------------------------------------------------------
+ Sorting                    ...        0 min,  0.001 sec (  4.226%)
+ I/O and setup              ...        0 min,  0.024 sec ( 95.774%)
+ ------------------------------------------------------------------
+ * wall-time:     0 d,  0 h,  0 min,  0.025 sec
+ *  cpu-time:     0 d,  0 h,  0 min,  0.104 sec
+ * ratio c/w:     4.169 speedup
+ ------------------------------------------------------------------
+ * Peak RSS:     9.89 MiB
+ CREST terminated normally.

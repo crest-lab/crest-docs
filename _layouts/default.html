@@ -102,15 +102,20 @@ layout: table_wrappers
     <div id="main-content-wrap" class="main-content-wrap">
       {% unless page.url == "/" %}
         {% if page.parent %}
+          {%- comment -%}
+            `nav_lvl2` is assigned in nav.html: the 2nd-level ancestor title of the
+            current page (from `grand_parent`, or looked up via `ancestor` on the
+            4th level).
+          {%- endcomment -%}
           {%- for node in pages_list -%}
             {%- if node.parent == nil -%}
-              {%- if page.parent == node.title or page.grand_parent == node.title -%}
+              {%- if page.parent == node.title or page.grand_parent == node.title or page.ancestor == node.title -%}
                 {%- assign first_level_url = node.url | absolute_url -%}
               {%- endif -%}
               {%- if node.has_children -%}
                 {%- assign children_list = pages_list | where: "parent", node.title -%}
                 {%- for child in children_list -%}
-                  {%- if page.url == child.url or page.parent == child.title -%}
+                  {%- if page.url == child.url or page.parent == child.title or nav_lvl2 == child.title -%}
                     {%- assign second_level_url = child.url | absolute_url -%}
                   {%- endif -%}
                 {%- endfor -%}
@@ -119,7 +124,11 @@ layout: table_wrappers
           {%- endfor -%}
           <nav aria-label="Breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb-nav-list">
-              {% if page.grand_parent %}
+              {% if page.ancestor %}
+                <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.ancestor }}</a></li>
+                <li class="breadcrumb-nav-list-item"><a href="{{ second_level_url }}">{{ nav_lvl2 }}</a></li>
+                <li class="breadcrumb-nav-list-item"><a href="{{ nav_parent_page.url | absolute_url }}">{{ page.parent }}</a></li>
+              {% elsif page.grand_parent %}
                 <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.grand_parent }}</a></li>
                 <li class="breadcrumb-nav-list-item"><a href="{{ second_level_url }}">{{ page.parent }}</a></li>
               {% else %}
@@ -141,7 +150,15 @@ layout: table_wrappers
           <hr>
           <h2 class="text-delta">Table of contents</h2>
           <ul>
-            {%- assign children_list = pages_list | where: "parent", page.title | where: "grand_parent", page.parent -%}
+            {%- comment -%}
+              Children of a 3rd-level page are on the 4th level and use `ancestor`
+              (the top-level title) instead of `grand_parent`.
+            {%- endcomment -%}
+            {%- if page.grand_parent -%}
+              {%- assign children_list = pages_list | where: "parent", page.title | where: "ancestor", page.grand_parent -%}
+            {%- else -%}
+              {%- assign children_list = pages_list | where: "parent", page.title | where: "grand_parent", page.parent -%}
+            {%- endif -%}
             {% for child in children_list %}
               <li>
                 <a href="{{ child.url | absolute_url }}">{{ child.title }}</a>{% if child.summary %} - {{ child.summary }}{% endif %}

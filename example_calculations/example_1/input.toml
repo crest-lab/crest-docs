@@ -1,0 +1,9 @@
+# This is a CREST input file
+input = "struc.xyz"
+runtype = "imtd-gc"
+threads = 4
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+alpb = "h2o"

@@ -1,0 +1,45 @@
+#### restricted ####
+
+ Command line input:
+ $ crest cocn6.xyz --gfn2 --sp --chrg -3 --uhf 4 -T 2
+
+
+ ----------------
+ Calculation info
+ ----------------
+> User-defined calculation level:
+ : xTB calculation via tblite lib
+ : GFN2-xTB level
+ :   Molecular charge    : -3
+ :   UHF parameter       : 4
+ :   Fermi temperature   : 300.00000
+ :   Accuracy            : 1.00000
+ :   max SCC cycles      : 500
+
+                            [ ... ]
+
+ TOTAL ENERGY         -33.8763843780 Eh
+
+
+#### spin-polarized ####
+
+ Command line input:
+ $ crest cocn6.xyz --gfn2 --sp --chrg -3 --uhf 4 -spinpol -T 2
+
+
+ ----------------
+ Calculation info
+ ----------------
+> User-defined calculation level:
+ : xTB calculation via tblite lib
+ : GFN2-xTB level
+ :   Molecular charge    : -3
+ :   UHF parameter       : 4
+ :   Spin-polarization   : yes
+ :   Fermi temperature   : 300.00000
+ :   Accuracy            : 1.00000
+ :   max SCC cycles      : 500
+
+                            [ ... ]
+
+ TOTAL ENERGY         -33.9478617068 Eh

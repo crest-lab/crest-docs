@@ -1,8 +1,8 @@
 ---
 layout: default
 title: QCG Example 4
-parent: QCG Examples
-grand_parent: "Examples and Guides"
+parent: "QCG Examples"
+ancestor: "Examples and Guides"
 nav_order: 4
 toc: false
 summary: "An example for the calculation of Solvation Free Energies with QCG."

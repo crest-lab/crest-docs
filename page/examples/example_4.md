@@ -1,8 +1,10 @@
 ---
 layout: default
 title: Constrained Sampling
-parent: "Examples and Guides"
-nav_order: 4
+# parent: "Examples and Guides"
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
+nav_order: 3
 toc: false
 summary: "A guide to <i>constrained</i> conformational sampling."
 permalink: /page/examples/example_4.html
@@ -33,7 +35,9 @@ Since we are choosing a SQM method (GFN*n*-xTB), it is possible for the system t
 freely form and break bonds.
 While it was shown in [Example 2](example_2.html#handling-topology-in-cregen) how to handle the resulting topology mismatches in the sorting algorithm,
 in some occasions it might be required for the user to constrain certain parts of the geometry.
-In CREST this is possible by passing the respective **constraints as a separate file** to `xtb`.
+CREST offers two complementary approaches for this:
+**atom freezing** via `--freeze` (completely removes forces on selected atoms, see [below](#fixing-of-entire-substructure-parts))
+and **distance/angle/dihedral constraints** specified in `xtb`-style syntax and passed to CREST via `--cinp`.
 {: .text-justify }
 
 A typical example are metal-organic compounds that can be sigificantly distorted at the GFN*n*-xTB level.
@@ -57,12 +61,30 @@ The input files and the CREST command are given as
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-2', 'tab-id-1')">{{ site.data.icons.codefile }} <code>struc.xyz</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.  icons.codefile }} <code>constraints.inp</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.icons.codefile }} <code>constraints.inp</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd="crest struc.xyz <span class='nt'>--cinp</span> constraints.inp" %}
+</div>
+<div id="tab-1-toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_input %}
+# This is a CREST input file
+input   = "struc.xyz"
+runtype = "imtd-gc"
+threads = 4
+
+constraints = "constraints.inp"
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_input %}
 </div>
 <div id="tab-1-2" class="tabcontent tab-id-1" style="text-align:justify">
 {% capture struc_file %}
@@ -113,39 +135,62 @@ methanol-acetamide structures which all have a H(2)-O(12) distance close to 1.85
 
 {% include image.html file="example-4-2.png" alt="Side-chain conformational sampling" caption="An    example where constraining an entire part of the structure is necessary: Sampling of side-chain      conformations. This system was investigated with CREST in <a href='https://doi.org/10.1039/D0CP04920D'>Phys. Chem. Chem. Phys., 2020, 22, 24282- 24290.</a>" %}
 
-Sometimes it is necessary to fix entire parts of the structure.
-While **complete freezing of atoms is not possible in CREST**,
-putting a **_constraint on a large part of the substructure is possible_**.
-In principle, the procedure is identical to the one [above {{ site.data.icons.aup }}](#constrained-conformational-sampling), but needs some simple additions.
+Sometimes it is necessary to fix entire parts of the structure during sampling.
+As of CREST 3.1, this is straightforward with the `--freeze <atomlist>` flag
+(or `freeze` in the TOML input), which **completely removes forces on the specified atoms**
+in all MD, MTD, and geometry optimization steps.
 {: .text-justify }
 
 As an example, a fictional system consisting out of a linear *n*-octane chain with a diglycine substituent is calculated.
-Here, the *entire* *n*-octane chain shall be fixed, so that it remains linear.
+Here, the *entire* *n*-octane chain (atoms 1–26) shall be fixed so that it remains linear,
+while the diglycine side chain (atoms 27–41) is sampled freely.
 {: .text-justify }
 
 {% include image.html file="example-4-3.png" alt="Side-chain conformational sampling example" caption="A fictional example for finding side-chain conformations. The linear n-octane chain (in orange) is fixed. Different side-chain conformers of the diglycine substituent are shown in transparent blue." max-width=400 %}
 
-To prepare the calculation, several things have to be done:
+To set up the calculation:
 
-1. A constraints file has to be created
-2. In this file, all atoms that shall be fixed must be added to the `$constrain` block with the `atoms:` keyword
-3. An *unchanged* reference geometry (= a copy of your input geometry) has to be added in the calculation directory and specified in the `$constrain` block with the `reference=` keyword
-4. All atoms that are *not* constrained (= your side chain to be sampled) must be added to the `$metadyn` block with the `atoms:` keyword
-5. The command line argument `--subrmsd` should be used in the CREST call
-6. (Optional) the MD/MTD time step should be reduced with `--tstep <REAL>`
+1. Pass the frozen atom list via `--freeze 1-26` (CLI) or `freeze = "1-26"` (TOML)
+2. Add `--subrmsd` so that CREGEN uses only the mobile atoms for RMSD comparisons
+3. (Optional) reduce the MD/MTD time step with `--tstep <REAL>`
 
-The final calculation and respective files will look like this:
+No additional files are needed.
+The calculation looks like this:
+{: .text-justify }
 
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-1', 'tab-id-2')" id="open-2">{{ site.data.icons.code }} <code>command</code></button>
-  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-2', 'tab-id-2')">{{ site.data.  icons.codefile }} <code>fictional.xyz</code></button>
-  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-3', 'tab-id-2')">{{ site.data.  icons.codefile }} <code>constraints.inp</code></button>
-  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-4', 'tab-id-2')">{{ site.data.  icons.checkfile }} <code>output</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-toml', 'tab-id-2')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-2', 'tab-id-2')">{{ site.data.icons.codefile }} <code>fictional.xyz</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-3', 'tab-id-2')">{{ site.data.icons.codefile }} <code>constraints.inp</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2-4', 'tab-id-2')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-2-1" class="tabcontent tab-id-2" style="text-align:justify">
-{% include command.html cmd="crest fictional.xyz <span class='nt'>--cinp</span> constraints.inp <span class='nt'>--subrmsd</span>" %}
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
+{% include command.html cmd="crest fictional.xyz <span class='nt'>--freeze</span> 1-26 <span class='nt'>--subrmsd</span>" %}
+<span markdown="span">
+The `constraints.inp` tab shows an alternative approach using `--cinp` that is useful when
+**additional bond, angle, or dihedral constraints** are needed on top of the frozen atoms.
+</span>
+</div>
+<div id="tab-2-toml" class="tabcontent tab-id-2" style="font-size:10px">
+{% capture toml_input2 %}
+# This is a CREST input file
+input   = "fictional.xyz"
+runtype = "imtd-gc"
+threads = 4
+
+freeze  = "1-26"
+subrmsd = true
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_input2 %}
 </div>
 <div id="tab-2-2" class="tabcontent tab-id-2" style="text-align:justify">
 {% capture struc_file %}
@@ -207,166 +252,11 @@ $end
 {% endcapture %}
 {% include codecell.html content=cons_file %}
 </div>
-<div id="tab-2-4" class="tabcontent tab-id-2" style="text-align:justify">
+<div id="tab-2-4" class="tabcontent tab-id-2" style="font-size:10px">
 {% capture output_file %}
- 
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
-  Using the xTB program. Compatible with xTB version 6.4.0
- 
-   Cite work conducted with this code as
-
-   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
-   • S.Grimme, JCTC, 2019, 15, 2847-2862.
-
-   and for works involving QCG as
-
-   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
-     JCTC, 2022, 18 (5), 3174-3189.
- 
-   with help from:
-   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
-   C.Plett, P.Pracht, S.Spicher
- 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
- Command line input:
- > crest fictional.xyz --cinp constraints.inp --subrmsd
-
-  -cinp : constraints.inp
-
- 'constraints.inp' file present.
- content of the constraining file (sorted):
-> $constrain
->   atoms: 1-26
->   force constant=0.5
->   reference=coord.ref
-> $metadyn
->   atoms: 27-41
- fix file: coord.ref
-  atoms: 27-41
-     # of atoms considered for RMSDs:15
- 
- -------------------------
- xTB Geometry Optimization
- -------------------------
- Geometry successfully optimized.
- 
-------------------------------------------------
-Generating MTD length from a flexibility measure
-------------------------------------------------
- Calculating WBOs... done.
- Calculating NCI flexibility... done.
-     covalent flexibility measure :   0.555
- non-covalent flexibility measure :   0.778
- flexibility measure :   0.567
- t(MTD) / ps    :     5.0
- Σ(t(MTD)) / ps :    70.0 (14 MTDs)
- 
--------------------------------------
-Starting a trial MTD to test settings
--------------------------------------
- Trial MTD 1 did not converge!
- Reducing the time step to 4 fs and trying again...
- 
- Trial MTD 2 did not converge!
- Reducing the time step to 3 fs and trying again...
- 
- Trial MTD 3 did not converge!
- Reducing the time step to 2 fs and trying again...
- 
- Estimated runtime for one MTD (5.0 ps) on a single thread: 50 sec
- Estimated runtime for a batch of 14 MTDs on 4 threads: 3 min 21 sec
- 
- list of Vbias parameters applied:
-$metadyn    0.00300   1.300
-$metadyn    0.00150   1.300
-$metadyn    0.00075   1.300
-$metadyn    0.00300   0.780
-$metadyn    0.00150   0.780
-$metadyn    0.00075   0.780
-$metadyn    0.00300   0.468
-$metadyn    0.00150   0.468
-$metadyn    0.00075   0.468
-$metadyn    0.00300   0.281
-$metadyn    0.00150   0.281
-$metadyn    0.00075   0.281
-$metadyn    0.00100   0.100
-$metadyn    0.00500   0.800
- 
-*******************************************************************************************
-**                        N E W    I T E R A T I O N    C Y C L E                        **
-*******************************************************************************************
-
-[....]
-
-[....]
- input  file name : crest_rotamers_6.xyz
- output file name : crest_rotamers_7.xyz
- number of atoms                :   41
- atoms included in RMSD         :   15
- number of points on xyz files  :   148
- RMSD threshold                 :   0.1250
- Bconst threshold               :   0.0100
- population threshold           :   0.0500
- conformer energy window  /kcal :   6.0000
- # fragment in coord            :     1
- # bonds in reference structure :    40
- number of reliable points      :   148
- reference state Etot :  -56.0076698600000
- number of doubles removed by rot/RMSD         :           8
- total number unique points considered further :         140
-       Erel/kcal        Etot weight/tot  conformer     set   degen     origin
-       1   0.000   -56.00767    0.07792    0.15581       1       2     md2
-       2   0.000   -56.00767    0.07789                                mtd10
-       3   0.139   -56.00745    0.06163    0.12319       2       2     md4
-       4   0.140   -56.00745    0.06157                                mtd10
-       5   0.289   -56.00721    0.04784    0.04784       3       1     mtd10
-       6   0.339   -56.00713    0.04398    0.08793       4       2     mtd10
-       7   0.340   -56.00713    0.04395                                md8
-       8   0.371   -56.00708    0.04170    0.04170       5       1     mtd9
-       9   0.414   -56.00701    0.03875    0.03875       6       1     hor
-      10   0.705   -56.00655    0.02373    0.02373       7       1     hor
-      11   0.764   -56.00645    0.02147    0.02147       8       1     hor
-      12   0.771   -56.00644    0.02124    0.02124       9       1     mtd2
-      13   0.797   -56.00640    0.02031    0.02031      10       1     mtd4
-      14   0.801   -56.00639    0.02017    0.02017      11       1     mtd10
-      15   0.915   -56.00621    0.01665    0.01665      12       1     mtd10
-[....]
-     138   5.912   -55.99825    0.00000                                gc
-     139   5.928   -55.99822    0.00000    0.00000     120       1     hor
-     140   5.994   -55.99812    0.00000    0.00000     121       1     gc
-T /K                                  :   298.15
-E lowest                              :   -56.00767
-ensemble average energy (kcal)        :    0.744
-ensemble entropy (J/mol K, cal/mol K) :   31.656    7.566
-ensemble free energy (kcal/mol)       :   -2.256
-population of lowest in %             :   15.581
- number of unique conformers for further calc          121
- list of relative energies saved as "crest.energies"
- 
- -----------------
- Wall Time Summary
- -----------------
-             test MD wall time :         0h : 0m :15s
-                 MTD wall time :         0h : 4m :18s
-      multilevel OPT wall time :         0h : 5m :28s
-                  MD wall time :         0h : 1m :14s
-                  GC wall time :         0h : 1m : 0s
---------------------
-Overall wall time  : 0h :12m :24s
+  {% include outputs/example_4_output.txt %}
 {% endcapture %}
-{% include codecell.html content=output_file style="font-size:10px" %}
+{% include codecell.html content=output_file %}
 </div>
 {% include defaulttab.html id="open-2" %}
 

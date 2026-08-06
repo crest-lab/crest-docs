@@ -1,0 +1,41 @@
+ Command line input:
+ $ crest struc.xyz --sp --gfn2 -T 4
+
+> Performing singlepoint calculations ... 
+tblite> Setting up GFN2-xTB calculation
+
+repulsion energy               1.6368518562165E-01 Eh
+dispersion energy              2.4049865674792E-06 Eh
+molecular charge               0.0000000000000E+00 e
+number of electrons            2.6000000000000E+01 e
+number of unpaired electrons   0.0000000000000E+00 e
+                            [ ... ]
+
+------------------------------------------------------------
+  cycle        total energy    energy error   density error
+------------------------------------------------------------
+      1     -14.51120576576  -1.4674893E+01   1.4975044E-01
+      2     -14.55175408392  -4.0548318E-02   6.7554353E-02
+      3     -14.55716998931  -5.4159054E-03   1.8210884E-02
+      4     -14.55742779148  -2.5780217E-04   8.7718360E-03
+      5     -14.55749003679  -6.2245313E-05   1.7048575E-03
+      6     -14.55749568269  -5.6459046E-06   8.7358810E-04
+      7     -14.55749602457  -3.4187404E-07   2.2161678E-04
+      8     -14.55749604441  -1.9841607E-08   6.9824095E-05
+      9     -14.55749604629  -1.8840414E-09   2.8216086E-05
+     10     -14.55749605006  -3.7701042E-09   5.8968088E-06
+------------------------------------------------------------
+
+electronic energy             -1.4721183640672E+01 Eh
+total energy                  -1.4557496050063E+01 Eh
+
+                            [ ... ]
+
+ Molecular dipole moments (a.u.):
+> Calculation level   1: GFN2-xTB
+                                 x         y         z   tot (Debye)
+  total dipole moment       -0.454     0.435    -0.510     2.058
+
+                            [ ... ]
+
+ TOTAL ENERGY         -14.5574960501 Eh

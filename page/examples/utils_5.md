@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Calculate <i>S</i><sub>msRRHO</sub>
-parent: Utility Tools
+parent: "Other"
 grand_parent: "Examples and Guides"
-nav_order: 5
+nav_order: 3
 toc: false
 summary: "How to calculating an <i>averaged</i> <i>S</i><sub>msRRHO</sub> for CREST's entropy mode."
 permalink: /page/examples/utilities/utils_5.html
@@ -57,9 +57,9 @@ The respective calculation can be invoked by the `--rrhoav` command.
 {% endcapture %}
 {% include codecell.html content=inputfile style="font-size:10px" %}
 </div>
-<div id="tab-1-4" class="tabcontent tab-id-1" style="text-align:justify">
+<div id="tab-1-4" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture outputfile %}
-
+  {% include outputs/utils_5_output.txt %}
 {% endcapture %}
 {% include codecell.html content=outputfile style="font-size:10px" %}
 </div>

@@ -1,8 +1,10 @@
 ---
 layout: default
 title: NCI Conformational Sampling
-parent: "Examples and Guides"
-nav_order: 3
+# parent: "Examples and Guides"
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
+nav_order: 2
 toc: false
 summary: "A conformational search with CREST's NCI mode for non-covalent systems."
 permalink: /page/examples/example_3.html
@@ -27,11 +29,32 @@ The application can be called by:
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-2', 'tab-id-1')">{{ site.data.icons.codefile }} <code>struc.xyz</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-out', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
-{% include command.html cmd="crest struc.xyz <span class='nt'>--nci</span>" %}
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
+{% include command.html cmd="crest struc.xyz --nci" %}
+<span markdown="span">
+The `--nci` flag activates the NCI cluster mode with a wall potential and specialised MTD bias settings.
+In the TOML variant, the same settings are provided in `input.toml` (CREST >= 3.0).
+</span>
+</div>
+<div id="tab-1-toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_input %}
+# This is a CREST input file
+input   = "struc.xyz"
+runtype = "nci-mtd"
+threads = 4
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_input %}
 </div>
 <div id="tab-1-2" class="tabcontent tab-id-1" style="text-align:justify">
 {% capture struc_file %}
@@ -57,6 +80,12 @@ The application can be called by:
  H     1.511729     0.488538     1.308001
 {% endcapture %}
 {% include codecell.html content=struc_file style="font-size:10px" %}
+</div>
+<div id="tab-1-out" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture output_file %}
+  {% include outputs/example_3_output.txt %}
+{% endcapture %}
+{% include codecell.html content=output_file %}
 </div>
 {% include defaulttab.html id="open-1" %}
 

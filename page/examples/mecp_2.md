@@ -2,7 +2,7 @@
 layout: default
 title: MECP Screening
 parent: "MECP Calculations"
-grand_parent: "Examples and Guides"
+ancestor: "Examples and Guides"
 nav_order: 2
 toc: false
 summary: "(Semi-automated) Screening of benzene MECPs with GFN2-xTB"
@@ -24,7 +24,7 @@ permalink: /page/examples/mecp/mecp_screen.html
 
 An extension of the [minimum energy crossing point optimization](mecp_opt.html "Examples / MECP Optimization"), is the
 metadynamics-based screening (analogously to conformational sampling).
-It can be called *via* the new [**input file reader** {{site.data.icons.book}}](../documentation/inputfiles.html  "Documentation / Input Files").
+It can be called *via* the new [**input file reader** {{site.data.icons.book}}]({{site.baseurl}}/page/documentation/inputfiles.html  "Documentation / Input Files").
 Again, for the GFN2-xTB *S*<sub>0</sub>/*T*<sub>1</sub> MECPs of benzene:
 {: .text-justify }
 
@@ -32,7 +32,8 @@ Again, for the GFN2-xTB *S*<sub>0</sub>/*T*<sub>1</sub> MECPs of benzene:
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-2', 'tab-id-1')">{{ site.data.icons.codefile }} <code>struc.xyz</code></button>
-  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.  icons.codefile }} <code>input.toml</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-out', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
@@ -88,6 +89,12 @@ hmass = 4
 
 {% endcapture %}
 {% include codecell.html content=toml_file style="font-size:10px" %}
+</div>
+<div id="tab-1-out" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture output_file %}
+  {% include outputs/mecp_2_output.txt %}
+{% endcapture %}
+{% include codecell.html content=output_file %}
 </div>
 {% include defaulttab.html id="open-1" %}
 

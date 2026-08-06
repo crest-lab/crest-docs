@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Protonation Site Calculation
-parent: "Examples and Guides"
+parent: "Sampling Applications"
+grand_parent: "Examples and Guides"
 nav_order: 5
 toc: false
 summary: "A guide to protonation/deprotonation sampling."
@@ -30,7 +31,7 @@ permalink: /page/examples/example_5.html
 
 ## Protonation site screening
 
-The protonation site screening is one of CREST's [original workflows](../overview/workflows.html#protonation-site-screeining). 
+The protonation site screening is one of CREST's [original workflows](../overview/workflows.html#protonation-site-screening). 
 In the following, it is demonstrated for the alanineglycine molecule from [Example 1](example_1.html).
 {: .text-justify }
 
@@ -44,15 +45,29 @@ Assuming the input coordinates are given as `struc.xyz`, then the screening proc
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'command', 'tab-id-1')" id="defaultOpen">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'struc', 'tab-id-1')">{{ site.data.icons.codefile }}  <code>struc.xyz</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'output', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>output</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'output2', 'tab-id-1')">{{ site.data.icons.checkfile }} <code>protonated.xyz</code></button>
 </div>
 <!-- Tab content -->
 <div id="command" class="tabcontent tab-id-1" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd="crest struc.xyz <span class='nt'>--protonate</span>" %}
-<span markdown="span">
-</span>
+</div>
+<div id="tab-1-toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_prot %}
+# This is a CREST input file
+input   = "struc.xyz"
+runtype = "protonate"
+threads = 4
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_prot %}
 </div>
 <div id="struc" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture struc_xyz %}
@@ -83,133 +98,7 @@ H     3.572730    -0.688405    -1.154998
 </div>
 <div id="output" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture output_file %}
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
-  Using the xTB program. Compatible with xTB version 6.4.0
- 
-   Cite work conducted with this code as
-
-   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
-   • S.Grimme, JCTC, 2019, 15, 2847-2862.
-
-   and for works involving QCG as
-
-   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
-     JCTC, 2022, 18 (5), 3174-3189.
- 
-   with help from:
-   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
-   C.Plett, P.Pracht, S.Spicher
- 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
- Command line input:
- > crest struc.xyz --protonate
-
-  --protonate : automated protonation script
-        __________________________________________
-       |                                          |
-       |       automated protonation script       |
-       |__________________________________________|
-  Universitaet Bonn, MCTC
-  P.Pracht, Wed 28. Nov 13:11:52 CEST 2018
- 
-  Cite as:
-  P.Pracht, C.A.Bauer, S.Grimme
-  JCC, 2017, 38, 2618–2631.
- 
- Input coordinate lines sorted:
- element   old   new
-      C      1     1
-      C      2     2
-      N      3     3
-      C      4     4
-      C      5     5
-      O      6     6
-      N      7     7
-      O      8     8
-      O      9     9
-      C     12    10
-      H     10    11
-      H     11    12
-      H     13    13
-      H     14    14
-      H     15    15
-      H     16    16
-      H     17    17
-      H     18    18
-      H     19    19
-      H     20    20
- 
- LMO calculation ... done.
- 
------------------------
-Multilevel Optimization
------------------------
- -------------------------
- 1. crude pre-optimization
- -------------------------
- Optimizing all 13 structures from file 'protonate_0.xyz' ...
- 1 2 3 4 5 6 7 8 9 10 11 12 13
- done.
- 12 structures remain within    90.00 kcal/mol window
- 
- ---------------------
- 2. loose optimization
- ---------------------
- Optimizing all 12 structures from file 'protonate_1.xyz' ...
- 1 2 3 4 5 6 7 8 9 10 11 12
- done.
- 12 structures remain within    60.00 kcal/mol window
- 
- --------------------------------------------
- 3. optimization with user-defined thresholds
- --------------------------------------------
- Optimizing all 12 structures from file 'protonate_2.xyz' ...
- 1 2 3 4 5 6 7 8 9 10 11 12
- done.
- 9 structures remain within    30.00 kcal/mol window
- 
- ===================================================
- Identifying topologically equivalent structures:
- Equivalent to 2. structure: 7 structure(s).
- Done.
- Appending file 'protonated.xyz' with structures.
- 
- Initial 9 structures from file protonate_3.xyz have
- been reduced to 3 topologically unique structures.
- 
-===================================================
-============= ordered structure list ==============
-===================================================
- written to file 'protonated.xyz'
- 
- structure    ΔE(kcal/mol)   Etot(Eh)
-    1            0.00        -33.953296
-    2            2.33        -33.949576
-    3           28.73        -33.907516
- 
- 
- -----------------
- Wall Time Summary
- -----------------
-           LMO calc. wall time :         0h : 0m : 0s
-      multilevel OPT wall time :         0h : 0m : 1s
---------------------
-Overall wall time  : 0h : 0m : 1s
- 
- CREST terminated normally.
-
+  {% include outputs/example_5_output.txt %}
 {% endcapture %}
 {% include codecell.html content=output_file %}
 </div>
@@ -331,15 +220,29 @@ Assuming the input coordinates are given as `struc.xyz`, then the screening proc
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-1', 'tab-id-2')" id="open2">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-deprot-toml', 'tab-id-2')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-2', 'tab-id-2')">{{ site.data.icons.codefile }}  <code>struc.xyz</code></button>
   <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-3', 'tab-id-2')">{{ site.data.icons.checkfile }} <code>output</code></button>
   <button class="tablinks tab-id-2" onclick="openTabId(event, 'tab-4', 'tab-id-2')">{{ site.data.icons.checkfile }} <code>deprotonated.xyz</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1" class="tabcontent tab-id-2" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd="crest struc.xyz <span class='nt'>--deprotonate</span>" %}
-<span markdown="span">
-</span>
+</div>
+<div id="tab-deprot-toml" class="tabcontent tab-id-2" style="font-size:10px">
+{% capture toml_deprot %}
+# This is a CREST input file
+input   = "struc.xyz"
+runtype = "deprotonate"
+threads = 4
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_deprot %}
 </div>
 <div id="tab-2" class="tabcontent tab-id-2" style="font-size:10px">
 {% capture struc_xyz %}
@@ -370,128 +273,7 @@ H     3.572730    -0.688405    -1.154998
 </div>
 <div id="tab-3" class="tabcontent tab-id-2" style="font-size:10px">
 {% capture output_file %}
-
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
-  Using the xTB program. Compatible with xTB version 6.4.0
- 
-   Cite work conducted with this code as
-
-   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
-   • S.Grimme, JCTC, 2019, 15, 2847-2862.
-
-   and for works involving QCG as
-
-   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
-     JCTC, 2022, 18 (5), 3174-3189.
- 
-   with help from:
-   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
-   C.Plett, P.Pracht, S.Spicher
- 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
- Command line input:
- > crest struc.xyz --deprotonate
-
-  --deprotonate : automated deprotonation script
-        __________________________________________
-       |                                          |
-       |      automated deprotonation script      |
-       |__________________________________________|
-  Universitaet Bonn, MCTC
-  P.Pracht, Wed 28. Nov 13:11:52 CEST 2018
- 
- Input coordinate lines sorted:
- element   old   new
-      C      1     1
-      C      2     2
-      N      3     3
-      C      4     4
-      C      5     5
-      O      6     6
-      N      7     7
-      O      8     8
-      O      9     9
-      C     12    10
-      H     10    11
-      H     11    12
-      H     13    13
-      H     14    14
-      H     15    15
-      H     16    16
-      H     17    17
-      H     18    18
-      H     19    19
-      H     20    20
------------------------
-Multilevel Optimization
------------------------
- -------------------------
- 1. crude pre-optimization
- -------------------------
- Optimizing all 10 structures from file "deprotonate_0.xyz" ...
- 1 2 3 4 5 6 7 8 9 10
- done.
- 9 structures remain within    90.00 kcal/mol window
- 
- ---------------------
- 2. loose optimization
- ---------------------
- Optimizing all 9 structures from file "deprotonate_1.xyz" ...
- 1 2 3 4 5 6 7 8 9
- done.
- 7 structures remain within    60.00 kcal/mol window
- 
- --------------------------------------------
- 3. optimization with user-defined thresholds
- --------------------------------------------
- Optimizing all 7 structures from file "deprotonate_2.xyz" ...
- 1 2 3 4 5 6 7
- done.
- 5 structures remain within    30.00 kcal/mol window
- 
- ===================================================
- Identifying topologically equivalent structures:
- Equivalent to 2. structure: 2 structure(s).
- Equivalent to 4. structure: 2 structure(s).
- Done.
- Appending file 'deprotonated.xyz' with structures.
- 
- Initial 5 structures from file deprotonate_3.xyz have
- been reduced to 3 topologically unique structures.
- 
-===================================================
-============= ordered structure list ==============
-===================================================
- written to file 'deprotonated.xyz'
- 
- structure    ΔE(kcal/mol)   Etot(Eh)
-    1            0.00        -33.597012
-    2           24.18        -33.558475
-    3           24.44        -33.558057
- 
- 
- -----------------
- Wall Time Summary
- -----------------
-    INPUT generation wall time :         0h : 0m : 0s
-      multilevel OPT wall time :         0h : 0m : 1s
---------------------
-Overall wall time  : 0h : 0m : 1s
- 
- CREST terminated normally.
-
+  {% include outputs/example_5_deprot_output.txt %}
 {% endcapture %}
 {% include codecell.html content=output_file %}
 </div>
@@ -592,14 +374,29 @@ However, since we expect zwitter ions as the possible tautomers of Ala-Gly, we a
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-3" onclick="openTabId(event, 'tab-new1', 'tab-id-3')" id="open3">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-3" onclick="openTabId(event, 'tab-taut-toml', 'tab-id-3')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-3" onclick="openTabId(event, 'tab-new2', 'tab-id-3')">{{ site.data.icons.codefile }}  <code>struc.xyz</code></button>
   <button class="tablinks tab-id-3" onclick="openTabId(event, 'tab-new3', 'tab-id-3')">{{ site.data.icons.checkfile }} <code>output</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-new1" class="tabcontent tab-id-3" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd="crest struc.xyz <span class='nt'>--tautomerize --alpb</span> water" %}
-<span markdown="span">
-</span>
+</div>
+<div id="tab-taut-toml" class="tabcontent tab-id-3" style="font-size:10px">
+{% capture toml_taut %}
+# This is a CREST input file
+input   = "struc.xyz"
+runtype = "tautomerize"
+threads = 4
+
+[calculation]
+[[calculation.level]]
+method  = "gfn2"
+alpb    = "water"
+{% endcapture %}
+{% include codecell.html content=toml_taut %}
 </div>
 <div id="tab-new2" class="tabcontent tab-id-3" style="font-size:10px">
 {% capture struc_xyz %}
@@ -630,225 +427,7 @@ H     3.572730    -0.688405    -1.154998
 </div>
 <div id="tab-new3" class="tabcontent tab-id-3" style="font-size:10px">
 {% capture output_file %}
- 
-       ==============================================
-       |                                            |
-       |                 C R E S T                  |
-       |                                            |
-       |  Conformer-Rotamer Ensemble Sampling Tool  |
-       |          based on the GFN methods          |
-       |             P.Pracht, S.Grimme             |
-       |          Universitaet Bonn, MCTC           |
-       ==============================================
-       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
-  Using the xTB program. Compatible with xTB version 6.4.0
- 
-   Cite work conducted with this code as
-
-   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
-   • S.Grimme, JCTC, 2019, 15, 2847-2862.
-
-   and for works involving QCG as
-
-   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
-     JCTC, 2022, 18 (5), 3174-3189.
- 
-   with help from:
-   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
-   C.Plett, P.Pracht, S.Spicher
- 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
- Command line input:
- > crest struc.xyz --tautomerize --alpb water
-
-  --tautomerize : automated tautomerization script
-  --alpb water : implicit solvation
-        __________________________________________
-       |                                          |
-       |     automated tautomerization script     |
-       |__________________________________________|
-  Universitaet Bonn, MCTC
-  P.Pracht, Wed 28. Nov 13:11:52 CEST 2018
- 
- Cite as:
- P.Pracht, R.Wilcken, A.Udvarhelyi, S.Rodde, S.Grimme
- JCAMD, 2018, 32, 1139-1149.
- 
- Input coordinate lines sorted:
- element   old   new
-      C      1     1
-      C      2     2
-      N      3     3
-      C      4     4
-      C      5     5
-      O      6     6
-      N      7     7
-      O      8     8
-      O      9     9
-      C     12    10
-      H     10    11
-      H     11    12
-      H     13    13
-      H     14    14
-      H     15    15
-      H     16    16
-      H     17    17
-      H     18    18
-      H     19    19
-      H     20    20
- 
-******************************************************************************************
-**                   P R O T O N A T I O N   C Y C L E     1 of 2                       **
-******************************************************************************************
- 
-[....]
- 
-******************************************************************************************
-**                 D E P R O T O N A T I O N   C Y C L E     1 of 2                     **
-******************************************************************************************
-
-[....] 
-
-******************************************************************************************
-**                   P R O T O N A T I O N   C Y C L E     2 of 2                       **
-******************************************************************************************
-Calculating LMOs for all structures in file 'tautomerize_1.xyz'
- 1 2 3 4 5 6 7 8 9 10 11 12 13 14 
-Collecting generated protomers ... done.
- 
------------------------
-Multilevel Optimization
------------------------
- -------------------------
- 1. crude pre-optimization
- -------------------------
- Optimizing all 178 structures from file "protomers.xyz" ... done.
- Structures sorted out due to dissociation:   12
- 160 structures remain within    60.00 kcal/mol window
- 
- ---------------------
- 2. loose optimization
- ---------------------
- Optimizing all 160 structures from file "protonate_0.xyz" ... done.
- Structures sorted out due to dissociation:    1
- 99 structures remain within    30.00 kcal/mol window
- 
- ===================================================
- Identifying topologically equivalent structures:
- Equivalent to 1. structure: 5 structure(s).
- Equivalent to 2. structure: 14 structure(s).
-[....]
- Done.
- Appending file 'protonated.xyz' with structures.
- 
- Initial 99 structures from file protonate_1.xyz have
- been reduced to 25 topologically unique structures.
- ===================================================
- ============= ordered structure list ==============
- ===================================================
- written to file 'protonated.xyz'
-
- structure    ΔE(kcal/mol)   Etot(Eh)
-    1            0.00        -34.071561
-    2            0.19        -34.071253
-    3            0.85        -34.070211
-[....]
-   24           28.60        -34.025982
-   25           29.34        -34.024801
- 
-******************************************************************************************
-**                 D E P R O T O N A T I O N   C Y C L E     2 of 2                     **
-******************************************************************************************
------------------------
-Multilevel Optimization
------------------------
- -------------------------
- 1. crude pre-optimization
- -------------------------
- Optimizing all 275 structures from file "deprotonate_0.xyz" ... done.
- Structures sorted out due to dissociation:   19
- 217 structures remain within    60.00 kcal/mol window
- 
- ---------------------
- 2. loose optimization
- ---------------------
- Optimizing all 217 structures from file "deprotonate_1.xyz" ... done.
- 167 structures remain within    30.00 kcal/mol window
- 
- ===================================================
- Identifying topologically equivalent structures:
- Equivalent to 1. structure: 5 structure(s).
- Equivalent to 3. structure: 6 structure(s).
-[...]
- Equivalent to 158. structure: 3 structure(s).
- Done.
- Appending file 'deprotonated.xyz' with structures.
- 
- Initial 167 structures from file deprotonate_2.xyz have
- been reduced to 69 topologically unique structures.
- ===================================================
- ============= ordered structure list ==============
- ===================================================
- written to file 'deprotonated.xyz'
-
- structure    ΔE(kcal/mol)   Etot(Eh)
-    1            0.00        -33.883352
-    2            0.16        -33.883094
-    3            0.21        -33.883010
-    4            0.36        -33.882783
-    5            1.12        -33.881568
-[....]
-   68           29.46        -33.836411
-   69           29.79        -33.835885
- 
-******************************************************************************************
-**                              T A U T O M E R I Z E                                   **
-******************************************************************************************
- ---------------------------
- Final Geometry Optimization
- ---------------------------
- Optimizing all 69 structures from file "tautomerize_3.xyz" ... done.
- 68 structures remain within    30.00 kcal/mol window
- 
- ===================================================
- Identifying topologically equivalent structures:
- Equivalent to 1. structure: 2 structure(s).
- Equivalent to 3. structure: 2 structure(s).
- Done.
- Appending file 'tautomers.xyz' with structures.
- 
- Initial 68 structures from file tautomerize_4.xyz have
- been reduced to 66 topologically unique structures.
- 
-===================================================
-============= ordered structure list ==============
-===================================================
- written to file 'tautomers.xyz'
- 
- structure    ΔE(kcal/mol)   Etot(Eh)
-    1            0.00        -33.883749
-    2            0.00        -33.883749
-    3            0.21        -33.883408
-    4            0.23        -33.883384
-    5            0.52        -33.882926
-[....]
-   65           29.56        -33.836645
-   66           29.61        -33.836570
- 
- 
- -----------------
- Wall Time Summary
- -----------------
-           LMO calc. wall time :         0h : 0m : 0s
-      multilevel OPT wall time :         0h : 0m :31s
---------------------
-Overall wall time  : 0h : 0m :31s
- 
- CREST terminated normally.
-
+  {% include outputs/example_5_taut_output.txt %}
 {% endcapture %}
 {% include codecell.html content=output_file %}
 </div>

@@ -21,21 +21,30 @@ general:
 
    - key: runtype
      descript: >
-       Select the CREST runtype, specify as a *string*.<br> 
+       Select the CREST runtype, specify as a *string*.<br>
        The possible values are:
      vals:
        - "`none` - do nothing"
        - "`singlepoint`,`sp` - perform a single calculation for the input structure"
        - "`ancopt`,`optimize` - optimize the input structure"
        - "`numhess` - numerical calculation of second derivatives"
-       - "`ancopt_ensemble`,`optimize_ensemble`,`mdopt` - optimize the input ensemble, 
+       - "`ancopt_ensemble`,`optimize_ensemble`,`mdopt` - optimize the input ensemble,
           similar to the `--mdopt` function."
        - "`screen_ensemble`,`screen` - optimize the input ensemble in a multistep procedure
           and sort, similar to the `--screen` function."
        - "`md`,`mtd`,`dynamics`,`metadynamics` - perform a (meta)dynamics simulation."
-       - "`imtd-gc` - Standard  conformational sampling algo based on metadynamics"
+       - "`imtd-gc` - Standard conformational sampling algo based on metadynamics"
        - "`nci-mtd`,`nci` - perform sampling with a wall potential (NCI_MTD workflow)"
        - "`entropy`,`imtd-smtd` - perform extensive sampling targeting configurational entropy"
+       - "`cregen`,`sort` - <span class='label label-green'>CREST 3.1</span>
+          run the CREGEN ensemble sorting/filtering as a standalone step"
+       - "`basinhopping`,`bh` - <span class='label label-green'>CREST 3.1</span>
+          basin-hopping global optimization (settings via `[basinhopping]` block)"
+       - "`ttconf` - <span class='label label-green'>CREST 3.1</span>
+          TTConf tensor-train conformer search, a reimplementation of the method of
+          Zurek *et al.* (settings via `[ttconf]` block)"
+       - "`ensemblehess` - <span class='label label-green'>CREST 3.1</span>
+          compute Hessians and thermochemistry for every structure in an ensemble"
 
 
    - key: constraints
@@ -81,7 +90,11 @@ calculation:
      vals:
        - "`ancopt` - Use the ANCOPT algorithm (RFO with internal coordinates)"
        - "`rfo` - Use a rational function algorithm (Cartesian coordinates)"
-       - "`gd` - Use  a simple gradient descent algorithm (Cartesian coordinates)"
+       - "`gd` - Use a simple gradient descent algorithm (Cartesian coordinates)"
+       - "`lbfgs` - <span class='label label-green'>CREST 3.1</span>
+          Use the limited-memory BFGS optimizer"
+       - "`nr` - <span class='label label-green'>CREST 3.1</span>
+          Use the Newton–Raphson optimizer (second-order, requires Hessian)"
 
    - key: hess_update
      descript: >
@@ -133,11 +146,24 @@ calclevel:
        - "`gfnff` - Select GFN-FF via the gfnff-submodule project"
        - "`gfn0` - Select GFN0-xTB via the gfn0-submodule project"
        - "`gfn0*` - Select a special GFN0-xTB calculator used for MECP calculations (see [https://doi.org/10.1021/acs.jpclett.3c00494](https://doi.org/10.1021/acs.jpclett.3c00494)"
-       - "`xtb`,`gfn`,`gfn-xtb` - Select GFN*n*-xTB method calculations 
-          performed via the `xtb` program. Should be used in combination with the `binary` 
+       - "`xtb`,`gfn`,`gfn-xtb` - Select GFN*n*-xTB method calculations
+          performed via the `xtb` program. Should be used in combination with the `binary`
           option within this block. However, this setting is not generally recommended because
           it will be much slower than the `tblite` backend."
-       - "`orca` - ORCA subprocesses. Requires to use the arguments `orca_cmd` as well as `orca_template` in addition to this argument. "
+       - "`gxtb`,`g-xtb` - <span class='label label-green'>CREST 3.1</span>
+          Select g-xTB via tblite. g-xTB is the generalized extended tight-binding model
+          and the designated successor of GFN*n*-xTB.
+          Requires a build with g-xTB support."
+#       - "`mace-off` - <span class='label label-green'>CREST 3.1</span>
+#          Select a MACE-OFF ML potential via fmlip-relay. Also requires `modelpath` and
+#          optionally `modelsize` in this block. Requires a build with fmlip-relay support."
+       - "`orca` - ORCA subprocesses. Requires the argument `orca_cmd`, plus either
+          `orca_input` or `orca_template` (see below) in addition to this argument."
+       - "`mlip` - <span class='label label-green'>CREST 3.1</span>
+          ML/classical interatomic potentials served by the
+          [`fmlip-relay`](../examples/mlip.html) socket server. Use in combination with
+          `mlip_backend` and the other `mlip_*` keys documented on the
+          [MLIP example page](../examples/mlip.html#mlip-toml-keywords-reference)."
        - "`generic` - Call a generic script. The script should process the coordinates that
           crest writes into a file `genericinp.xyz` and you must know how to obtain the gradient
           (see options `gradtype` and `gradfile` below)`"
@@ -154,6 +180,25 @@ calclevel:
      descript: >
        Specify the directory in which CREST shall perform this calculation as a *string*.
        Note, this is can be a *relative* OR *absolute* path to the directory.
+
+   - comm: "`threads`, `ncores`"
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Number of CPU cores reserved for **this** level in *every* energy+gradient call.
+       Specify as an *integer*; the default `0` means "unset" and reproduces the behavior
+       of earlier versions. Not to be confused with the global `threads` setting, which
+       defines the *total* number of cores available to CREST.
+       The reservation has two effects:
+     vals:
+       - "CREST reduces the number of *concurrent* jobs (e.g. parallel optimizations or
+          metadynamics) such that
+          $$N_\\text{jobs} \\times N_\\text{threads}^\\text{level} \\le N_\\text{threads}^\\text{total}$$,
+          so that the machine is never oversubscribed."
+       - "For calculators that can be told how many cores to use, the value is handed
+          down explicitly: ORCA subprocesses receive a `%pal nprocs <threads> end` block,
+          and `mlip` (fmlip-relay) servers are started with `--max-threads <threads>`.
+          Other calculators (internal ones, `xtb`, `generic` scripts) instead inherit the
+          cores per job via `OMP_NUM_THREADS`."
 
    - comm: "`chrg`, `charge`"
      descript: >
@@ -190,6 +235,79 @@ calclevel:
        Specify as *string*. Available options are:
      vals:
        - "`engrad` - the *.engrad* format used by e.g. xtb and ORCA."
+
+   - key: orca_cmd
+     descript: >
+       Path to (or name of) the ORCA executable used for `method = "orca"` levels.
+       Specify as a *string*. Since ORCA requires the full path for its MPI startup,
+       an absolute path is recommended.
+
+   - key: orca_input
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       ORCA simple-input (`!`) line, given as a *string*, from which CREST assembles the
+       complete ORCA input for each call &mdash; no template file needed.
+       Example: `orca_input = "! r2scan-3c def2/J TightSCF DefGrid3"`.
+       Any runtype keyword (`Opt`, `Freq`, `MD`, `SP`, ...) and any `PAL`*n* keyword are
+       stripped, `EnGrad` is appended, and the `%pal`/`%maxcore` blocks are written from
+       `threads` and `orca_memory`. Mutually exclusive with `orca_template`.
+
+   - key: orca_template
+     descript: >
+       An ORCA input file (*string*) that is used as a template: CREST reuses all of its
+       method/basis/grid settings and only replaces the coordinate block for each call.
+       If `threads` is set for the level, existing `%pal` blocks and `PAL`*n* keywords in
+       the template are removed and replaced by CREST's own `%pal nprocs <threads> end`;
+       likewise `%maxcore` is replaced if `orca_memory` is given.
+       Mutually exclusive with `orca_input`.
+
+   - comm: "`orca_memory`,<br>`orca_maxcore`"
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       ORCA `%maxcore` value, *i.e.*, the memory **per core** in MB. Specify as an
+       *integer*. Total memory of the ORCA job is thus roughly
+       `orca_memory` &times; `threads`.
+
+   - key: spin_polarized
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Activate spin-polarized (open-shell) treatment for tblite-based methods.
+       Specify as *boolean* (`true`/`false`).
+       Must be combined with `uhf > 0` to define the spin state.
+
+   - key: efield
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Apply a homogeneous external electric field to tblite single-points and
+       optimizations. Specify as a *list of three reals* `[Ex, Ey, Ez]` in V/Å.
+       Example: `efield = [0.0, 0.0, 0.05]`
+
+   - key: ceh_guess
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Use CEH (Charge Extended Hückel) partial charges as the initial guess before
+       the first tblite or GFN-FF call.
+       Specify as *boolean* (`true`/`false`).
+
+#   - key: modelpath
+#     descript: >
+#       <span class='label label-green'>CREST 3.1</span>
+#       Path to the ML potential model file when `method = "mace-off"` is selected.
+#       Specify as a *string*.
+#
+#   - key: modelsize
+#     descript: >
+#       <span class='label label-green'>CREST 3.1</span>
+#       Size variant of the ML potential model when `method = "mace-off"` is selected.
+#       Specify as a *string* (e.g. `"medium"`).
+#
+#   - comm: "`penalty`, `rmsdbias`"
+#     descript: >
+#       <span class='label label-green'>CREST 3.1</span>
+#       Attach a static RMSD-based repulsive bias potential to this calculator level.
+#       The argument is a *list of reals* `[kpush, alpha]`, where *kpush* is the
+#       Gaussian penalty height and *alpha* is the width. Reference structures are
+#       read from the file named by `rmsdbias` (or `penalty`).
 
 
 
@@ -251,6 +369,16 @@ dynamics:
        Set the hydrogen mass in **amu**. The argument is specified as a *real*.
        Increasing the hydrogen mass helps the simulation to run more stable.
 
+   - key: thermostat
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Select the thermostat algorithm. Specify as a *string*.
+     vals:
+       - "`berendsen` - Berendsen velocity rescaling [default]"
+       - "`langevin` - Langevin stochastic thermostat (friction + random noise)"
+       - "`csvr`,`bdp` - Bussi–Donadio–Parrinello canonical thermostat
+          (correct NVT ensemble distribution)"
+
 
 
 metadynamics:
@@ -304,3 +432,110 @@ cregen:
      descript: >
        Try to determine nuclear equivalencies from the ensemble, e.g. for NMR applications.
        Specify as *boolean*
+
+
+
+basinhopping:
+
+   - key: temperature
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Metropolis MC acceptance temperature in **K**. Specify as a *real*.
+
+   - key: steps
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Number of Monte Carlo iterations. Specify as an *integer*.
+
+   - key: stepsize
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Dihedral angle perturbation step size in degrees. Specify as a *real*.
+
+   - key: seed
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Random number generator seed for reproducible runs. Specify as an *integer*.
+
+
+ttconf:
+
+   - key: preset
+     descript: >
+       <span class='label label-green'>CREST 3.1</span>
+       Apply a named preset as a *string*: `fast` (rank 2, 2 sweeps),
+       `normal` (rank 3, 8 sweeps, the default) or `accurate` (rank 6, 6 sweeps).
+       Other keys in this block override the preset.
+
+   - comm: "`rank`, `r`"
+     descript: >
+       TT rank *r*. Specify as an *integer*. Default: `3`.
+
+   - comm: "`sweeps`, `s`"
+     descript: >
+       Number of TT-cross sweeps *s*. Specify as an *integer*. Default: `8`.
+
+   - comm: "`grid`, `ngrid`"
+     descript: >
+       Number of dihedral grid points (spacing = 360/*n* degrees).
+       Specify as an *integer*. Default: `6`.
+
+   - key: ninit
+     descript: >
+       Number of random initial tail seeds. Specify as an *integer*. Default: `3`.
+
+   - key: ewin
+     descript: >
+       Conformer energy window in kcal/mol. Specify as a *real*. Default: `6.0`.
+
+   - comm: "`kt`, `temperature`"
+     descript: >
+       Maxvol energy→weight temperature in kcal/mol. Specify as a *real*. Default: `6.0`.
+
+   - comm: "`bruteforce`, `oracle`"
+     descript: >
+       If `true`, use the exhaustive brute-force oracle instead of the TT-cross
+       sweep. Specify as a *boolean* (`true`/`false`). Default: `false`.
+
+   - comm: "`sp`, `singlepoint`, `sponly`"
+     descript: >
+       If `true`, evaluate singlepoints only; no geometry optimization anywhere
+       in the run. Specify as a *boolean* (`true`/`false`). Default: `false`.
+
+   - comm: "`cache`, `ecache`"
+     descript: >
+       Energy cache on/off. Specify as a *boolean* (`true`/`false`);
+       `false` is equivalent to the `-ttnocache` flag. Default: `true`.
+
+   - key: ringsample
+     descript: >
+       If `true`, sample ring conformations as additional TT sites
+       (equivalent to `-ttrings`). Specify as a *boolean*. Default: `false`.
+
+   - key: ringbonds
+     descript: >
+       If `true`, in-ring bonds may become TT variables (equivalent to
+       `-ttringbonds`). Specify as a *boolean*. Default: `false`.
+
+   - comm: "`ringmethod`, `ringsampler`"
+     descript: >
+       Ring-conformation generator as a *string*: `mtd` (GFN-FF metadynamics on
+       an isolated ring cut-out) or `template`. The `mtd` generator is a drop-in
+       replacement for the ring handling of the original method. Default: `mtd`.
+
+   - key: seed
+     descript: >
+       RNG seed for a reproducible run. Specify as an *integer*;
+       a value `< 0` (the default, −1) makes the run non-deterministic.
+
+   - comm: "`bonds`, `userbonds`"
+     descript: >
+       **TOML-only, no CLI form.** User-defined set of rotatable bonds that
+       become the TT variables, given as an *array* of atom pairs. Each entry is
+       `[A, B]`, or `[A, B, npoints]` to override the global `grid` for that
+       bond; a single flat pair `[A, B]` is also accepted. Specifying `bonds`
+       **replaces** the automatic bond selection entirely; the auto-detected
+       bonds are then shown as `user-excl` in the dihedral table. A listed pair
+       must be a rotatable bond in the Z-matrix (either atom order); a pair that
+       is not is warned about and ignored. Example:
+       `bonds = [[1, 2], [3, 4, 12]]`.

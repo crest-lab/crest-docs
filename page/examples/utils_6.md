@@ -1,9 +1,9 @@
 ---
 layout: default
 title: xTB Nanoreactor
-parent: Utility Tools
+parent: "Specialized Runtypes"
 grand_parent: "Examples and Guides"
-nav_order: 6
+nav_order: 4
 toc: false
 summary: "How to prepare a xTB nanoreactor calculation with CREST."
 permalink: /page/examples/utilities/utils_6.html

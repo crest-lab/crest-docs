@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Topology Check
-parent: Utility Tools
+parent: "Other"
 grand_parent: "Examples and Guides"
-nav_order: 3
+nav_order: 1
 toc: false
 summary: "Checking the molecular topology with CREST."
 permalink: /page/examples/utilities/utils_3.html

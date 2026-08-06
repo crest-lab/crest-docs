@@ -1,8 +1,9 @@
 ---
 layout: default
 title: QCG Examples
-parent: "Examples and Guides"
-nav_order: 8
+parent: "Specialized Runtypes"
+grand_parent: "Examples and Guides"
+nav_order: 1
 has_children: true
 permalink: /page/examples/qcg
 summary: "A collection of examples for the QCG subprogram."

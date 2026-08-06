@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Ensemble Optimization
-parent: Utility Tools
+parent: "Standard Runtypes"
 grand_parent: "Examples and Guides"
-nav_order: 1
+nav_order: 4
 toc: false
 summary: "An example on how te (re-)optimize ensembles with CREST."
 permalink: /page/examples/utilities/utils_1.html
@@ -33,12 +33,29 @@ Note, that for demonstration purposes the *highest* energy structure was placed 
  <!-- Tab links -->
 <div class="tab card">
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-1', 'tab-id-1')" id="open-1">{{ site.data.icons.code }} <code>command</code></button>
+  <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-toml', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input.toml</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-2', 'tab-id-1')">{{ site.data.icons.codefile }} <code>input-ensemble.xyz</code></button>
   <button class="tablinks tab-id-1" onclick="openTabId(event, 'tab-1-3', 'tab-id-1')">{{ site.data.icons.checkfile }}  <code>crest_ensemble.xyz</code></button>
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
+{% include command.html cmd="crest input.toml" %}
+<b>OR</b> use
 {% include command.html cmd="crest <span class='nt'>--mdopt</span> input-ensemble.xyz" %}
+</div>
+<div id="tab-1-toml" class="tabcontent tab-id-1" style="font-size:10px">
+{% capture toml_mdopt %}
+# This is a CREST input file
+input          = "struc.xyz"
+input_ensemble = "input-ensemble.xyz"
+runtype        = "mdopt"
+threads        = 4
+
+[calculation]
+[[calculation.level]]
+method = "gfn2"
+{% endcapture %}
+{% include codecell.html content=toml_mdopt %}
 </div>
 <div id="tab-1-2" class="tabcontent tab-id-1" style="text-align:justify">
 {% capture file_1 %}
@@ -268,13 +285,11 @@ As can be seen, the output ensemble `crest_ensemble.xyz` contains only two struc
 
 ## Singlepoint energy calculations along ensemble files
 
-While there is no dedicated function for singlepoint energy calculations in the same way
-as `--mdopt` or `--screen`, this still can be done via the `--for` command.
-The respective command call would be
+Singlepoint energy calculations on all structures in an ensemble can be performed with the `--ensemblesp` command (also available as `-mdsp`).
 {: .text-justify }
 
 ```bash
-crest -for input-ensemble.xyz --prop singlepoint
+crest --ensemblesp input-ensemble.xyz
 ```
 
 The output ensemble will be sorted with CREGEN, but also the unsorted ensemble just containing the singlepoint energies is available.

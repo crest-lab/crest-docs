@@ -421,7 +421,7 @@ cregen:
    - key: ethr
      descript: >
        Set an energy threshold for distinguishing two conformers.
-       Specify as *real* in Angstroem. Default: 0.05
+       Specify as *real* in kcal/mol. Default: 0.05
 
    - key: bthr
      descript: >

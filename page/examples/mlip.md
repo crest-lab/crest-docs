@@ -330,12 +330,12 @@ The general rules for the per-level `threads` reservation (idle-core warnings, i
 For quick setups without writing a TOML file, two ML potentials are available directly on the command line via the `-mlip` flag:
 {: .text-justify }
 
-{% include command.html cmd="crest struc.xyz -mlip uma" %}
+{% include command.html cmd="crest struc.xyz --opt -mlip uma" %}
 
 selects the UMA foundation model with the `omol` task, and
 {: .text-justify }
 
-{% include command.html cmd="crest struc.xyz -mlip maceoff" %}
+{% include command.html cmd="crest struc.xyz --opt -mlip maceoff" %}
 
 selects the MACE-OFF23 (medium) organic force field.
 For finer control (model size, task, device, custom checkpoints), use the TOML `[[calculation.level]]` block as shown in the examples above.

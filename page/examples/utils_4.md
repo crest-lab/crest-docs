@@ -29,7 +29,7 @@ All that is required is the molecular input structure (for identification of rot
 {: .text-justify }
 
 An example is shown for the thymine molecule below.
-The `vibspectrum` file must simply be present in the same directory and is read automatically.
+The frequencies are read from the file given after `--thermo`, or from a `vibspectrum` file in the same directory.
 
 {% include image.html file="utils-example-4-1.png" alt="Thymine input structure" caption="Input structure of the thymine molecule used to obtain the vibrational frequencies." max-width=200 %}
 
@@ -43,8 +43,8 @@ The `vibspectrum` file must simply be present in the same directory and is read 
 </div>
 <!-- Tab content -->
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
-{% include command.html cmd="crest <span class='nt'>--thermo</span> struc.xyz" %}
-{% include note.html content="The <code>vibspectrum</code> file must be present <i>in the same directory</i> and is not explicitly specified via the command line!" %}
+{% include command.html cmd="crest struc.xyz <span class='nt'>--thermo</span> vibspectrum" %}
+{% include note.html content="The file after <code>--thermo</code> holds the frequencies. If it is omitted, a <code>vibspectrum</code> file <i>in the same directory</i> is used." %}
 </div>
 <div id="tab-1-2" class="tabcontent tab-id-1" style="text-align:justify">
 {% capture inputfile %}

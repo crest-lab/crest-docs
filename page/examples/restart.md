@@ -74,7 +74,7 @@ We use the alanineglycine molecule from the
 The search is started as usual:
 {: .text-justify }
 
-{% include command.html cmd="crest struc.xyz --gfn2 --alpb h2o -T 4 > crest.out" %}
+{% include command.html cmd="crest struc.xyz --imtdgc --gfn2 --alpb h2o -T 4 > crest.out" %}
 
 Assume the job is killed during the third metadynamics iteration.
 The working directory then contains the backup ensembles of the completed iterations
@@ -90,7 +90,7 @@ $ ls
 To resume, simply issue the **same command again** in the **same directory**:
 {: .text-justify }
 
-{% include command.html cmd="crest struc.xyz --gfn2 --alpb h2o -T 4 >> crest.out" %}
+{% include command.html cmd="crest struc.xyz --imtdgc --gfn2 --alpb h2o -T 4 >> crest.out" %}
 
 CREST detects the checkpoint and reports it right after the header:
 {: .text-justify }
@@ -124,7 +124,7 @@ change the results of a completed run, but it can be turned off entirely with
 `--norestart`:
 {: .text-justify }
 
-{% include command.html cmd="crest struc.xyz --gfn2 --alpb h2o -T 4 --norestart" %}
+{% include command.html cmd="crest struc.xyz --imtdgc --gfn2 --alpb h2o -T 4 --norestart" %}
 
 With this flag no `crest.restart` file is written, and an existing one is ignored.
 Use it if you deliberately want to start a fresh search in a directory that still contains

@@ -311,6 +311,10 @@ early error instead of a silent misconfiguration.
 
 The CLI argument parser was refactored to track processed arguments explicitly, which
 prevents double-processing and yields cleaner errors for unrecognized flags.
+CREST no longer falls back to an iMTD-GC search when no runtype is given:
+`crest struc.xyz` alone now stops and lists the available runtypes, so a search has to be
+requested with `--imtdgc` (or `runtype = "imtd-gc"`).
+The search-mode flags `--quick`, `--squick`, `--mquick` and `--nci` imply iMTD-GC.
 {: .text-justify }
 
 ---
@@ -461,7 +465,7 @@ The examples in `examples/expl-<#>/` were reworked and extended:
 | **2** | geometry optimization | 1-propanol |
 | **3** | optimization + Hessian (vibrational frequencies) | 1-propanol |
 | **4** | standalone MD simulation | 1-propanol |
-| **5** | default iMTD-GC conformer search | 1-propanol |
+| **5** | standard iMTD-GC conformer search | 1-propanol |
 | **6** | two-level conformer search (GFN2//GFN-FF) | 1-propanol |
 | **7** | iMTD-GC with ALPB implicit solvation (GFN2) | 1-propanol |
 | **8** | quick iMTD-GC conformer search (with `-finalhess`) | 1-propanol |

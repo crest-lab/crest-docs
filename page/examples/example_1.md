@@ -21,7 +21,7 @@ permalink: /page/examples/example_1.html
 
 ## Standard Conformational Search (iMTD-GC)
 
-The default application of CREST is the [iMTD-GC workflow]({{site.baseurl}}/page/overview/workflows.html#imtd-gc-algorithm). 
+The standard application of CREST is the [iMTD-GC workflow]({{site.baseurl}}/page/overview/workflows.html#imtd-gc-algorithm), selected with `--imtdgc`. 
 In the following, a standard production run with this workflow is shown for the alanineglycine molecule.
 {: .text-justify }
 
@@ -44,7 +44,7 @@ Assuming further that our initial input structure (atomic coordinates, here in Ã
 <div id="command" class="tabcontent tab-1-1" style="text-align:justify">
  {% include command.html cmd="crest input.toml" %}   
 <b>OR</b> use
-{% include command.html cmd="crest struc.xyz --gfn2 --gbsa h2o -T 4" %}
+{% include command.html cmd="crest struc.xyz --imtdgc --gfn2 --gbsa h2o -T 4" %}
 <span markdown="span">
 These commands need to be executed from the command line. In the first case, settings are provided entirely via a separate `input.toml` file (CREST >= 3.0), while the second version is the standard CMD version.
 Here, `--gfn2` specifies   the usage of the SQM level GFN2-xTB, `--gbsa h2o` implements 

@@ -107,10 +107,12 @@ runtype:
       consisting out of a metadynamics approach and genetic structure crossing. 
       This workflow is **deprecated**.
     
-  - comm: "`--v2i`, `--v3`, `--itmdgc`"
+  - comm: "`--imtdgc`, `--v3`, `--v2i`"
     type: iMTD-GC sampling
     descript: >
-      Iterative version of the MTD-GC workflow, which is the [default] runtype of CREST.
+      Iterative version of the MTD-GC workflow, the standard conformational search of CREST.
+      There is no default runtype, so it has to be selected explicitly;
+      `--quick`, `--squick`, `--mquick` and `--nci` select it implicitly.
     url:
       text: See here.
       link: /page/overview/workflows.html#imtd-gc-algorithm

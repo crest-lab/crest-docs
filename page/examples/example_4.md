@@ -69,7 +69,7 @@ The input files and the CREST command are given as
 <div id="tab-1-1" class="tabcontent tab-id-1" style="text-align:justify">
 {% include command.html cmd="crest input.toml" %}
 <b>OR</b> use
-{% include command.html cmd="crest struc.xyz <span class='nt'>--cinp</span> constraints.inp" %}
+{% include command.html cmd="crest struc.xyz <span class='nt'>--imtdgc</span> <span class='nt'>--cinp</span> constraints.inp" %}
 </div>
 <div id="tab-1-toml" class="tabcontent tab-id-1" style="font-size:10px">
 {% capture toml_input %}
@@ -170,7 +170,7 @@ The calculation looks like this:
 <div id="tab-2-1" class="tabcontent tab-id-2" style="text-align:justify">
 {% include command.html cmd="crest input.toml" %}
 <b>OR</b> use
-{% include command.html cmd="crest fictional.xyz <span class='nt'>--freeze</span> 1-26 <span class='nt'>--subrmsd</span>" %}
+{% include command.html cmd="crest fictional.xyz <span class='nt'>--imtdgc</span> <span class='nt'>--freeze</span> 1-26 <span class='nt'>--subrmsd</span>" %}
 <span markdown="span">
 The `constraints.inp` tab shows an alternative approach using `--cinp` that is useful when
 **additional bond, angle, or dihedral constraints** are needed on top of the frozen atoms.
@@ -288,7 +288,7 @@ This option can be invoked with the `--cbonds` command (or its variants, see [**
 {: .text-justify }
 
 ```bash
-crest struc.xyz --cbonds
+crest struc.xyz --imtdgc --cbonds
 ```
 
 The only drawback here is, that the information whether an interatomic distance corresponds to a covalent bond is approximated from an empirical topology set up from atomic coordination numbers.

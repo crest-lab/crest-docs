@@ -259,7 +259,7 @@ common point groups.
 ### 12. Thermochemistry enhancements
 
 - **Truhlar quasi-RRHO treatment.** The Truhlar (2011) frequency cutoff model is available as
-  an alternative to the Grimme quasi-RRHO approach, selectable through the `emodel` keyword.
+  an alternative to the Grimme quasi-RRHO approach, selectable with `entropy_model = "truhlar"` in the `[thermo]` block.
   Modes below `sthr` are treated as free rotors, avoiding the divergence of the harmonic
   entropy at zero frequency.
 - **ORCA Hessian reader.** ORCA `.hess` files are parsed directly for frequencies and, on

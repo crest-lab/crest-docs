@@ -53,11 +53,11 @@ qcggrow:
 
   - cmd: --chrg <INT>
     descript: >
-      Set the charge for the solute and creates .CHRG file.
+      Set the charge for the solute.
 
   - cmd: --uhf <INT>
     descript: >
-      Set the number of unpaired electrons for the solute and creates .UHF file.
+      Set the number of unpaired electrons for the solute.
 
   - cmd: --wscal <REAL>
     descript: >

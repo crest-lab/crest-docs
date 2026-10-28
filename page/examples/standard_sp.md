@@ -147,7 +147,7 @@ can be given directly instead, with `--mult <2S+1>`, which is stored internally 
 `uhf = 2S+1-1`.
 {: .text-justify }
 
-{% include important.html content="Both flags also write the hidden files <code>.CHRG</code> and <code>.uhf</code> into the working directory, and those are picked up again by any later run started there. When comparing settings, use a separate directory per run, otherwise a stale <code>.uhf</code> silently overrides the next calculation." %}
+{% include important.html content="Charge and spin apply to the current run only. CREST 3.1 neither writes nor reads the hidden files <code>.CHRG</code> and <code>.UHF</code> (only the <code>-legacy</code> mode still writes them for its <code>xtb</code> calls); a leftover file from an older version only triggers a warning." %}
 
 ---
 

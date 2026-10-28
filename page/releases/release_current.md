@@ -288,6 +288,12 @@ refines the final structures with GFN2-xTB, while `crest mol.xyz --gxtb//gfnff -
 samples at GFN-FF and re-ranks all structures with g-xTB singlepoints during the search.
 Method tokens are validated against the known method list, so an unknown token raises an
 early error instead of a silent misconfiguration.
+Charge, spin and implicit solvation given on the command line (`--chrg`, `--uhf`, `--alpb`,
+`--gbsa`) apply to both levels, independent of the flag order.
+If one of the two methods has no implicit solvation in CREST (g-xTB via the `xtb` binary,
+ORCA, MLIPs), CREST stops instead of running that level in the gas phase.
+`--rerank` and `--reopt` can be added to a composite method, whereas `--refine` stops with an
+error because the composite flag already defines the second level.
 {: .text-justify }
 
 [Read the composite calculator guide {{ site.data.icons.aright }}]({{site.baseurl}}/page/examples/composite.html){: .btn .btn-blue }
@@ -315,6 +321,16 @@ CREST no longer falls back to an iMTD-GC search when no runtype is given:
 `crest struc.xyz` alone now stops and lists the available runtypes, so a search has to be
 requested with `--imtdgc` (or `runtype = "imtd-gc"`).
 The search-mode flags `--quick`, `--squick`, `--mquick` and `--nci` imply iMTD-GC.
+{: .text-justify }
+
+Command-line settings now combine with a TOML input file in a defined way.
+With a single `[[calculation.level]]`, `--chrg`, `--uhf`/`--mult`, `--alpb`/`--gbsa` and a
+method flag override that level; a method flag keeps the charge, spin and solvent of the TOML
+level unless they are also given on the command line.
+With two or more levels these flags are ambiguous, since the levels may differ in charge,
+spin or solvent, and CREST stops with an error.
+`--chrg` and `--uhf` no longer write the hidden files `.CHRG` and `.UHF`, which CREST has not
+read since version 3.0.2 (only the `-legacy` mode still writes them for its `xtb` calls).
 {: .text-justify }
 
 ---

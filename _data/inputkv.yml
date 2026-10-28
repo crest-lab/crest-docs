@@ -426,7 +426,7 @@ cregen:
    - key: bthr
      descript: >
        Set a rotational constant threshold for distinguishing two conformers.
-       Specify as *real* in MHz. Default: 0.01
+       Specify as *real*, a relative deviation (0.01 = 1%). Default: 0.01
 
    - comm: "`eqv`, `nmr`"
      descript: >

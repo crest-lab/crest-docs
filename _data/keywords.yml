@@ -507,10 +507,10 @@ confsettings:
   - cmd: --noreftopo
     anchor: noreftopo
     descript: >
-      Turn off **only the initial** topology check prior to the conformational search.
-      Do not confuse with 
+      Alias of `--notopo`: turns off the topology checks, both the initial one prior to
+      the conformational search and the one in CREGEN.
     url:
-       text: "`--notopo` <i class='fa-solid fa-triangle-exclamation'></i>"
+       text: "`--notopo`"
        link: /page/documentation/keywords.html#notopo
 
   - comm: "`--noopt`,`--nopreopt`"
@@ -649,13 +649,14 @@ sortingsettings:
   - cmd: --notopo [atomlist]
     anchor: notopo
     descript: >
-      Turn off the topology checks in CREGEN for structures in the ensemble.
+      Turn off the topology checks, both the initial check of the input structure
+      and the one in CREGEN for structures in the ensemble.
       The optional `[atomlist]` argument can be used to select specific atoms
       that should be ignored in the topology checks.
       For the `atomlist` format see the [**Input Formats**](coords.html#atomlists) section.
-      Do not confuse with
+      Same as
     url:
-      text: "`--noreftopo` <i class='fa-solid fa-triangle-exclamation'></i>"
+      text: "`--noreftopo`"
       link: "/page/documentation/keywords.html#noreftopo"
 
   - comm: "`--inversion <auto|on|off>`"

@@ -64,7 +64,7 @@ of atoms which are used in the metadynamics simulation.
 <div id="p1-tab-1-1" class="tabcontent p1-grp-1" style="text-align:justify">
 {% include command.html cmd="crest input.toml" %}
 <b>OR</b> use
-{% include command.html cmd='crest coord <span class="nt">--cinp</span> constraints.inp <span class="nt">--gbsa</span> methanol' %}
+{% include command.html cmd='crest coord <span class="nt">--imtdgc</span> <span class="nt">--cinp</span> constraints.inp <span class="nt">--gbsa</span> methanol' %}
 </div>
 <div id="p1-tab-1-toml" class="tabcontent p1-grp-1" style="font-size:10px">
 {% capture toml_pub1 %}
@@ -305,7 +305,7 @@ Results in 52 conformers within an energy window of 6 kcal/mol.
 <div id="p2-tab-2-1" class="tabcontent p2-grp-2" style="text-align:justify">
 {% include command.html cmd="crest input.toml" %}
 <b>OR</b> use
-{% include command.html cmd='crest coord <span class="nt">--gbsa</span> methanol <span class="nt">--ewin</span> 10' %}
+{% include command.html cmd='crest coord <span class="nt">--imtdgc</span> <span class="nt">--gbsa</span> methanol <span class="nt">--ewin</span> 10' %}
 </div>
 <div id="p2-tab-2-toml" class="tabcontent p2-grp-2" style="font-size:10px">
 {% capture toml_pub2b %}
@@ -416,7 +416,7 @@ The SHAKE constraint is turned off (`--shake 0`), the timestep is reduced to 1 f
 <div id="p3-tab-1-1" class="tabcontent p3-grp-1" style="text-align:justify">
 {% include command.html cmd="crest input.toml" %}
 <b>OR</b> use
-{% include command.html cmd='crest coord <span class="nt">--subrmsd</span> <span class="nt">--shake</span> 0 <span class="nt">--tstep</span> 1 <span class="nt">--cinp</span> constraints.inp' %}
+{% include command.html cmd='crest coord <span class="nt">--imtdgc</span> <span class="nt">--subrmsd</span> <span class="nt">--shake</span> 0 <span class="nt">--tstep</span> 1 <span class="nt">--cinp</span> constraints.inp' %}
 </div>
 <div id="p3-tab-1-toml" class="tabcontent p3-grp-1" style="font-size:10px">
 {% capture toml_pub3 %}

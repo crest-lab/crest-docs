@@ -319,8 +319,8 @@ H       2.029202     -1.457008     -0.719998
 </div>
 {% include defaulttab.html id="open2" %}
 
-The resulting files are the usual CREGEN output: `crest_conformers.xyz` (one structure
-per group), `crest_rotamers.xyz` (all structures), and `crest.energies`.
+The run writes `crest_ensemble.xyz` (one structure per group, energy-sorted),
+`crest_best.xyz`, `crest.energies` and `cre_members` (the group of each structure).
 {: .text-justify }
 
 {% include tip.html content="The energies used for the sorting are read from the comment lines of the ensemble file. In the example above they are absent, so all structures are treated as energetically degenerate and the grouping is purely geometrical." %}

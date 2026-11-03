@@ -28,7 +28,11 @@ It is a refactoring release rather than a rewrite: the calculator, optimizer and
 infrastructure introduced with [CREST 3.0](release_old.html) stays in place, but it gains
 a new search algorithm, three new calculator backends, a permutation-invariant ensemble
 comparison, and a considerably reworked build system.
+QCG, molecular docking, MSREACT and the pKa tools now run on the same calculator layer and no
+longer call the `xtb` binary, except in the `-legacy` mode.
 {: .text-justify }
+
+{% include important.html content="<code>crest struc.xyz</code> without a runtype no longer starts an iMTD-GC conformer search. It stops and lists the available runtypes, so a search has to be requested explicitly with <code>--imtdgc</code> (or <code>runtype = &quot;imtd-gc&quot;</code>). The search-mode flags <code>--quick</code>, <code>--squick</code>, <code>--mquick</code> and <code>--nci</code> still imply iMTD-GC." %}
 
 The sections most relevant for everyday use come first.
 {: .text-justify }
@@ -138,7 +142,24 @@ restarting it for every single point.
 
 ---
 
-### 5. Method-independent implicit solvation via ddX
+### 5. ORCA levels without a template file
+
+In CREST 3.0 an ORCA level needed a complete ORCA input template. It can now be set up from a
+few keys of a `[[calculation.level]]` block:
+{: .text-justify }
+
+- `orca_input` takes the ORCA simple-input line. CREST removes runtype and `PAL` keywords,
+  appends `EnGrad`, and writes the `%pal` and `%maxcore` blocks itself.
+- The per-level `threads` key sets the number of cores of one ORCA call, and `orca_memory` its
+  `%maxcore` value. CREST only runs as many ORCA calls in parallel as fit into the global
+  thread count.
+- `--orca <template> <exe>` sets up a single ORCA level from the command line.
+
+[Read the ORCA guide {{ site.data.icons.aright }}]({{site.baseurl}}/page/examples/orca.html){: .btn .btn-blue }
+
+---
+
+### 6. Method-independent implicit solvation via ddX
 
 The [**ddX** {{ site.data.icons.github }}](https://github.com/ddsolvation/ddX) continuum
 solvation library is added as a submodule and wired into a new solvation calculator. Unlike
@@ -167,7 +188,7 @@ The charge model of the standalone electrostatics component is selected with `ee
 
 ---
 
-### 6. Spin-polarized calculations
+### 7. Spin-polarized calculations
 
 GFN2-xTB and related tblite methods can be run open-shell (spin-polarized). The wavefunction
 is allocated with `nspin = 2` and a `spin_polarization` container built from the tblite spin
@@ -185,7 +206,7 @@ calculation summary reports `Spin-polarization : yes`.
 
 ---
 
-### 7. External electric field for tblite
+### 8. External electric field for tblite
 
 A static external electric field can be applied to tblite single-points and optimizations,
 either as the TOML key `efield = [0.0, 0.0, 0.05]` (V/Å, *x*/*y*/*z* components) within a
@@ -194,7 +215,7 @@ either as the TOML key `efield = [0.0, 0.0, 0.05]` (V/Å, *x*/*y*/*z* components
 
 ---
 
-### 8. Extended XYZ (extxyz) format support
+### 9. Extended XYZ (extxyz) format support
 
 A complete reader and writer for the ASE-compatible **extxyz** format is added to the
 molecule I/O layer:
@@ -213,7 +234,25 @@ molecule I/O layer:
 
 ---
 
-### 9. CREGEN refactor and improved output
+### 10. Periodic structures with a fixed cell
+
+A structure whose extxyz comment line carries a `Lattice` entry is treated as a periodic system
+with a fixed cell. The cell is kept through optimizations, MD/MTD, conformer searches and
+ensemble sorting, and GFN-FF and tblite levels evaluate the structure under periodic boundary
+conditions.
+{: .text-justify }
+
+- Coordination numbers and the GFN-FF topology use the minimum-image convention.
+- MD and MTD remove only the overall translation, since a rotation is not defined against a
+  fixed cell. Trajectories are written in extxyz format so that they keep the lattice.
+- CREGEN detects duplicate periodic structures with the alignment-free fingerprint of
+  Pracht, Morgan and Wales, *J. Chem. Phys.* **2023**, *159*, 064801, and RMSDs
+  are evaluated under the minimum-image convention without a rotational fit.
+- The genetic crossing step of iMTD-GC is disabled for periodic input.
+
+---
+
+### 11. CREGEN refactor and improved output
 
 The conformer ranking and filtering code was reorganized substantially:
 {: .text-justify }
@@ -228,7 +267,7 @@ The conformer ranking and filtering code was reorganized substantially:
 
 ---
 
-### 10. Redesigned restart / checkpoint system
+### 12. Redesigned restart / checkpoint system
 
 The previous restart mechanism kept full ensemble snapshots in memory, which was fragile and
 memory-intensive. It is replaced by a lightweight file-based checkpoint:
@@ -245,7 +284,7 @@ memory-intensive. It is replaced by a lightweight file-based checkpoint:
 
 ---
 
-### 11. Symmetry detection ported from C to Fortran
+### 13. Symmetry detection ported from C to Fortran
 
 The symmetry detection backend, originally Patchkovskii's C code from 1996/2003, was ported
 to a native Fortran module. The C version wrote to shared memory, which made OpenMP-parallel
@@ -256,7 +295,7 @@ common point groups.
 
 ---
 
-### 12. Thermochemistry enhancements
+### 14. Thermochemistry enhancements
 
 - **Truhlar quasi-RRHO treatment.** The Truhlar (2011) frequency cutoff model is available as
   an alternative to the Grimme quasi-RRHO approach, selectable with `entropy_model = "truhlar"` in the `[thermo]` block.
@@ -270,7 +309,7 @@ common point groups.
 
 ---
 
-### 13. Composite (hybrid) method syntax
+### 15. Composite (hybrid) method syntax
 
 A new parser recognizes composite method strings that combine a fast workhorse method with a
 higher-level quality method in a single argument:
@@ -300,7 +339,7 @@ error because the composite flag already defines the second level.
 
 ---
 
-### 14. New CLI and TOML keywords
+### 16. New CLI and TOML keywords
 
 | Keyword / flag | Effect |
 |---|---|
@@ -309,6 +348,8 @@ error because the composite flag already defines the second level.
 | `--imtdgc` | alias for `--v3`, the iMTD-GC run mode |
 | `--norestart` | disable the checkpoint-based restart of conformer searches |
 | `--sort <ENSEMBLE> isort` | invoke the iRMSD-aware sorter |
+| `--dock` / `runtype = "dock"` | standalone aISS docking of two molecules, replacing `xtb dock` |
+| `--orca <template> <exe>` | single ORCA level from the command line |
 | `-spinpol` / `spin_polarized` | open-shell spin-polarized tblite calculation |
 | `-mult <2S+1>` | spin multiplicity, stored internally as `uhf = 2S+1-1` |
 | `efield` (TOML) | external electric field vector for tblite |
@@ -335,24 +376,30 @@ read since version 3.0.2 (only the `-legacy` mode still writes them for its `xtb
 
 ---
 
-### 15. QCG refactor
+### 17. QCG and docking without the `xtb` binary
 
-The quantum cluster growth tool was moved onto the internal calculator layer:
+The aISS docking of `xtb` is ported into CREST, and the quantum cluster growth tool now runs
+entirely on the internal calculator layer:
 {: .text-justify }
 
-- The legacy `zmolecule` type is replaced by a polymorphic `coord_qcg` type extending the
-  standard `coord`.
-- Single-points and optimizations dispatch through the standard `engrad` interface instead of
-  writing `xtb` input files by hand.
-- The deprecated `xtbiff` implementation is removed.
-- QCG frequency calculations are wired through the same thermochemistry module as the rest of
-  CREST, and the module structure was reorganized.
+- QCG docks, optimizes and computes frequencies through the CREST calculators and no longer
+  needs the `xtb` binary. The deprecated `xtbiff` implementation is removed.
+- `crest A.xyz --dock B.xyz` (or `runtype = "dock"` with a `[dock]` block) runs a standalone
+  docking that replaces `xtb dock`. It accepts the `xtb dock` options and the xtb-style
+  `$wall`, `$fix`, `$directed` and `$constrain` input (see `crest --help dock`).
+- The solvation free energy from `-gsolv` uses consistent energy levels for solute, solvent
+  monomer and clusters, and the final GFN2 optimization is the default again. For a charged
+  solute, the solvent monomer and clusters are computed neutral.
+- MSREACT, the pKa and acid/base tools (`-pka`, `-ab`) and the nanoreactor fragment
+  reoptimization also run through the calculator, in memory and in parallel.
+- The stereoisomerization tool (`-isomerize`) still depends on `xtb` and is only available in
+  the `-legacy` mode.
 
-{% include warning.html content="QCG still requires <code>xtb</code> (version 6.7.1 or newer) for access to the aISS docking method." %}
+{% include note.html content="The in-process aISS docking requires a build with tblite. With <code>-legacy</code>, QCG and the other tools fall back to <code>xtb</code> system calls (version 6.7.1 or newer)." %}
 
 ---
 
-### 16. New MD thermostats
+### 18. New MD thermostats
 
 Two thermostats join the existing Berendsen thermostat in the MD module:
 {: .text-justify }
@@ -369,7 +416,7 @@ velocity and thermostat steps. Berendsen remains the default.
 
 ---
 
-### 17. Peak memory reporting
+### 19. Peak memory reporting
 
 The final timing and resource printout now includes the process peak resident set size,
 obtained through a small cross-platform C helper built on `getrusage`.
@@ -379,7 +426,7 @@ obtained through a small cross-platform C helper built on `getrusage`.
 
 ---
 
-### 18. Output file naming
+### 20. Output file naming
 
 Two output files were renamed to carry explicit extensions, which makes them recognizable to
 external viewers and matches the convention used for the other trajectory and ensemble
@@ -393,7 +440,7 @@ outputs:
 
 ---
 
-### 19. Build system updates
+### 21. Build system updates
 
 **Meson.** Full Meson support is restored, including static builds with GNU and Intel LLVM
 (`ifx`/`icx`) compilers. `meson_options.txt` is restructured with documented options for
@@ -414,7 +461,9 @@ updated:
 | Submodule | Version |
 |---|---|
 | `tblite` | 0.7.0 |
-| `gfnff` | 0.2.0 |
+| `gfnff` | 0.3.1 |
+| `gfn0` | 0.1.1 |
+| `lwoniom` | 0.0.2 |
 | `dftd4` | 4.2.0 |
 | `s-dftd3` | 1.4.0 |
 | `multicharge` | 0.5.0 |
@@ -430,7 +479,7 @@ updated:
 
 ---
 
-### 20. Post-search re-ranking and re-optimization
+### 22. Post-search re-ranking and re-optimization
 
 Two standalone post-processing flags apply a higher level of theory to a finished ensemble
 without re-running the search:
@@ -446,7 +495,7 @@ such as `--finalhess`.
 
 ---
 
-### 21. Ensemble Hessians and free-energy ranking
+### 23. Ensemble Hessians and free-energy ranking
 
 Two flags provide Hessian-based thermochemistry over conformer ensembles:
 {: .text-justify }
@@ -460,7 +509,7 @@ Two flags provide Hessian-based thermochemistry over conformer ensembles:
 
 ---
 
-### 22. New protonation protocols active by default
+### 24. New protonation protocols active by default
 
 The redesigned protonation, deprotonation and tautomerization protocols, previously gated
 behind an experimental flag, are now the default for `--protonate`, `--deprotonate` and
@@ -469,7 +518,7 @@ behind an experimental flag, are now the default for `--protonate`, `--deprotona
 
 ---
 
-### 23. Revised shipped examples
+### 25. Revised shipped examples
 
 The examples in `examples/expl-<#>/` were reworked and extended:
 {: .text-justify }
@@ -495,5 +544,8 @@ The examples in `examples/expl-<#>/` were reworked and extended:
 | **16** | fmlip-relay, optimization with an LJ potential | Ar<sub>4</sub> cluster |
 | **17** | fmlip-relay, optimization with FairChem UMA | caffeine |
 | **18** | fmlip-relay, optimization with MACE-OFF23 | caffeine |
+| **19** | implicit-solvation add-on (ddX/EEQ-BC) on a GFN2 parent | 1-propanol |
+| **20** | ORCA as energy+gradient backend, geometry optimization | n-pentane |
+| **21** | ONIOM embedding (GFN2 head group in GFN-FF), optimization + frequencies | 1-propanol |
 
 {% include note.html content="Examples 16 to 18 require a local <code>fmlip-relay</code> installation, and additionally the <code>uma</code>/<code>fairchem</code> or <code>mace</code> extras." %}

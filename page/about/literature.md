@@ -38,6 +38,8 @@ This is a collection of various works that focus on CREST and `xtb`.
 
 - **MC-ONIOM*n*:** Wesołowski, P.A.; Wales, D.J.; Pracht, P.; *Multilevel Framework for Analysis of Protein Folding Involving Disulfide Bond Formation*, *J. Phys. Chem. B*, **2024**, *128*, 3145–3156. [DOI: 10.1021/acs.jpcb.4c00104](https://doi.org/10.1021/acs.jpcb.4c00104)
 
+- **Alkyl Substituent Sampling:** Rindt, L.S.; Pracht, P.; *Adaptive Substructure Sampling for Molecules with Flexible Alkyl Substituents*, *J. Chem. Theory Comput.*, **2026**. [DOI: 10.1021/acs.jctc.6c01611](https://doi.org/10.1021/acs.jctc.6c01611)
+
 ---
 
 ## GFN*n*-xTB Methods

@@ -350,6 +350,7 @@ error because the composite flag already defines the second level.
 | `--sort <ENSEMBLE> isort` | invoke the iRMSD-aware sorter |
 | `--dock` / `runtype = "dock"` | standalone aISS docking of two molecules, replacing `xtb dock` |
 | `--orca <template> <exe>` | single ORCA level from the command line |
+| `--alkylize [full]` | substructure sampling with detached alkyl side chains, [Rindt and Pracht, *J. Chem. Theory Comput.* **2026**](https://doi.org/10.1021/acs.jctc.6c01611) |
 | `-spinpol` / `spin_polarized` | open-shell spin-polarized tblite calculation |
 | `-mult <2S+1>` | spin multiplicity, stored internally as `uhf = 2S+1-1` |
 | `efield` (TOML) | external electric field vector for tblite |

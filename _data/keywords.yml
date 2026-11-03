@@ -801,12 +801,16 @@ standalonetools:
       link: /page/documentation/keywords.html#pca-clustering-options
 
   - cmd: "--alkylize"
-    type: Alkyl group substitution
+    type: Alkyl substituent sampling
     descript: >
       <span class='label label-green'>CREST 3.1</span>
-      Substitute a selected functional group in the input structure with an alkyl
-      chain. Functional groups are classified automatically from connectivity.
-      Additional arguments `full` or `sample` control enumeration depth.
+      Substructure sampling for molecules with flexible alkyl substituents.
+      The alkyl side chains are detected from the connectivity, detached from the molecular
+      core and replaced by capped surrogate groups, so that the subsystems are sampled
+      independently and the full ensemble is reconstructed from the fragment ensembles.
+      By default (`simple`) each alkyl chain is taken in its extended, linear conformation
+      without sampling; `full` (or `sample`) samples every fragment separately.
+      See [JCTC, 2026](https://doi.org/10.1021/acs.jctc.6c01611).
 
   - cmd: --splitfile <FILE> [from] [to]
     type: Ensemble file splitting
